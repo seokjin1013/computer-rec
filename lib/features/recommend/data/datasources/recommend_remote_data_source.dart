@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:clean_architecture_flutter/features/recommend/domain/usecases/is_exist_account.dart';
+import '../../domain/usecases/is_exist_account.dart';
 import 'package:http/http.dart' as http;
 import '../models/computer_item_model.dart';
 
@@ -35,7 +35,7 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
   @override
   Future<bool> isExistAccount(String id, String pw) async {
     final response = await client.get(
-      Uri.parse('http://175.196.11.206:8080/newuser/login/$id/$pw'),
+      Uri.parse('http://175.196.11.206:8080/user/$id/$pw'),
       headers: {
         'Content-Type': 'application/json',
       },

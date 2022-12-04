@@ -1,4 +1,4 @@
-import 'package:clean_architecture_flutter/features/recommend/presentation/pages/signin_page.dart';
+import 'features/recommend/presentation/pages/signin_page.dart';
 import 'package:flutter/material.dart';
 import 'injection_container.dart' as di;
 

@@ -1,4 +1,4 @@
-import 'package:clean_architecture_flutter/features/recommend/presentation/provider/signup_state.dart';
+import 'signup_state.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
