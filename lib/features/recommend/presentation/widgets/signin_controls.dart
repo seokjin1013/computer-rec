@@ -85,7 +85,7 @@ class _SigninControlsState extends State<SigninControls> {
     if (formKey.currentState!.validate()) {
       UserInfo userInfo = sl();
       userInfo.setInfo(id, pw);
-      BlocProvider.of<SigninBloc>(context).add(CheckExistAccount(id, pw));
+      BlocProvider.of<SigninBloc>(context).add(QueryLogin(id, pw));
     } else {
       if (idInvalid) {
         idFocusNode.requestFocus();

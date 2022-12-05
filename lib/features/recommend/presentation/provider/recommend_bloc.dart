@@ -1,20 +1,14 @@
 import '../../domain/usecases/is_exist_account.dart';
-import 'signin_event.dart';
-import 'signin_state.dart';
-import 'package:dartz/dartz.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'recommend_event.dart';
+import 'recommend_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 
 import '../../../../core/error/failures.dart';
 
-class RecommendBloc extends Bloc<SigninEvent, SigninState> {
+class RecommendBloc extends Bloc<RecommendEvent, RecommendState> {
   final IsExistAccount isExistAccount;
   RecommendBloc({required this.isExistAccount}) : super(Empty()) {
-    on<CheckExistAccount>((event, emit) async {
+    on<QueryLogin>((event, emit) async {
       final String id = event.id;
       final String pw = event.pw;
       emit(Loading());

@@ -1,15 +1,17 @@
+export 'recommend_bloc.dart';
+import 'package:clean_architecture_flutter/core/utility/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-abstract class SigninState extends Equatable {
+abstract class RecommendState extends Equatable {
   @override
   List<Object> get props => [];
 }
 
-class Empty extends SigninState {}
+class Empty extends RecommendState {}
 
-class Loading extends SigninState {}
+class Loading extends RecommendState {}
 
-class Loaded extends SigninState {
+class Loaded extends RecommendState {
   final bool isExist;
 
   Loaded({required this.isExist});
@@ -18,7 +20,7 @@ class Loaded extends SigninState {
   List<Object> get props => [isExist];
 }
 
-class Error extends SigninState {
+class Error extends RecommendState {
   final String message;
 
   Error({required this.message});
