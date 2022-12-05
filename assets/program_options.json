@@ -1,0 +1,44 @@
+{
+    "게임": [
+        [
+            "배틀그라운드",
+            "assets/logo_battlegrounds.png"
+        ],
+        [
+            "리그오브레전드",
+            "assets/logo_league_of_legends.png"
+        ]
+    ],
+    "그래픽": [
+        [
+            "포토샵",
+            "assets/logo_photoshop.png"
+        ],
+        [
+            "클립스튜디오",
+            "assets/logo_clip_studio.png"
+        ],
+        [
+            "블렌더",
+            "assets/logo_blender.png"
+        ],
+        [
+            "마야",
+            "assets/logo_maya.png"
+        ]
+    ],
+    "프로그래밍": [
+        [
+            "비쥬얼스튜디오",
+            "assets/logo_visual_studio.png"
+        ],
+        [
+            "안드로이드스튜디오",
+            "assets/logo_android_studio.png"
+        ],
+        [
+            "인텔리제이",
+            "assets/logo_intellij.png"
+        ]
+    ]
+}

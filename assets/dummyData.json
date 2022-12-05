@@ -1,0 +1,1572 @@
+[
+    {
+        "partsModel": {
+            "cpu": {
+                "name": "인텔 코어i5-12세대 12400F (엘더레이크)",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "273980"
+            },
+            "vga": {
+                "name": "MSI 지포스 GTX 1650 벤투스 S OC D5 4GB",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "233980"
+            },
+            "ram": {
+                "name": "삼성전자 DDR4-3200 (8GB)",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "31690"
+            },
+            "mb": {
+                "name": "MSI PRO H610M-G DDR4",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "122000"
+            },
+            "ssd": {
+                "name": "키오시아 EXCERIA (240GB)",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "36890"
+            },
+            "ccase": {
+                "name": "마이크로닉스 Master M60 메쉬 (화이트)",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "51490"
+            },
+            "power": {
+                "name": "AONE STORM 500LF",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "39000"
+            },
+            "cooler": {
+                "name": "PCCOOLER PALADIN 400 ARGB",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "35720"
+            }
+        },
+        "recommendInfo": {
+            "CPU 제조사": {
+                "AMD": true,
+                "Intel": false
+            },
+            "그래픽카드 제조사": {
+                "AMD": false,
+                "Intel": false
+            },
+            "그래픽카드 브랜드": {
+                "gigabyte": false,
+                "asus": false,
+                "emtek": false,
+                "waycos": false,
+                "zotac": false,
+                "colorful": false,
+                "galax": false
+            },
+            "cost": {
+                "min": 100000,
+                "max": 1000000
+            }
+        },
+        "fitness": {
+            "cpu": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "vga": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "ram": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "mb": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "ssd": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "ccase": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "power": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "cooler": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            }
+        }
+    },
+    {
+        "partsModel": {
+            "cpu": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "vga": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "ram": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "mb": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "ssd": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "ccase": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "power": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "cooler": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            }
+        },
+        "recommendInfo": {
+            "CPU 제조사": {
+                "AMD": true,
+                "Intel": false
+            },
+            "그래픽카드 제조사": {
+                "AMD": false,
+                "Intel": false
+            },
+            "그래픽카드 브랜드": {
+                "gigabyte": false,
+                "asus": false,
+                "emtek": false,
+                "waycos": false,
+                "zotac": false,
+                "colorful": false,
+                "galax": false
+            },
+            "cost": {
+                "min": 100000,
+                "max": 1000000
+            }
+        },
+        "fitness": {
+            "cpu": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "vga": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "ram": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "mb": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "ssd": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "ccase": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "power": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "cooler": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            }
+        }
+    },
+    {
+        "partsModel": {
+            "cpu": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "vga": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "ram": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "mb": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "ssd": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "ccase": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "power": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "cooler": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            }
+        },
+        "recommendInfo": {
+            "CPU 제조사": {
+                "AMD": true,
+                "Intel": false
+            },
+            "그래픽카드 제조사": {
+                "AMD": false,
+                "Intel": false
+            },
+            "그래픽카드 브랜드": {
+                "gigabyte": false,
+                "asus": false,
+                "emtek": false,
+                "waycos": false,
+                "zotac": false,
+                "colorful": false,
+                "galax": false
+            },
+            "cost": {
+                "min": 100000,
+                "max": 1000000
+            }
+        },
+        "fitness": {
+            "cpu": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "vga": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "ram": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "mb": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "ssd": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "ccase": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "power": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "cooler": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            }
+        }
+    },
+    {
+        "partsModel": {
+            "cpu": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "vga": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "ram": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "mb": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "ssd": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "ccase": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "power": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "cooler": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            }
+        },
+        "recommendInfo": {
+            "CPU 제조사": {
+                "AMD": true,
+                "Intel": false
+            },
+            "그래픽카드 제조사": {
+                "AMD": false,
+                "Intel": false
+            },
+            "그래픽카드 브랜드": {
+                "gigabyte": false,
+                "asus": false,
+                "emtek": false,
+                "waycos": false,
+                "zotac": false,
+                "colorful": false,
+                "galax": false
+            },
+            "cost": {
+                "min": 100000,
+                "max": 1000000
+            }
+        },
+        "fitness": {
+            "cpu": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "vga": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "ram": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "mb": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "ssd": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "ccase": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "power": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "cooler": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            }
+        }
+    },
+    {
+        "partsModel": {
+            "cpu": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "vga": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "ram": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "mb": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "ssd": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "ccase": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "power": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "cooler": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            }
+        },
+        "recommendInfo": {
+            "CPU 제조사": {
+                "AMD": true,
+                "Intel": false
+            },
+            "그래픽카드 제조사": {
+                "AMD": false,
+                "Intel": false
+            },
+            "그래픽카드 브랜드": {
+                "gigabyte": false,
+                "asus": false,
+                "emtek": false,
+                "waycos": false,
+                "zotac": false,
+                "colorful": false,
+                "galax": false
+            },
+            "cost": {
+                "min": 100000,
+                "max": 1000000
+            }
+        },
+        "fitness": {
+            "cpu": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "vga": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "ram": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "mb": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "ssd": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "ccase": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "power": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "cooler": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            }
+        }
+    },
+    {
+        "partsModel": {
+            "cpu": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "vga": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "ram": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "mb": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "ssd": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "ccase": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "power": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "cooler": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            }
+        },
+        "recommendInfo": {
+            "CPU 제조사": {
+                "AMD": true,
+                "Intel": false
+            },
+            "그래픽카드 제조사": {
+                "AMD": false,
+                "Intel": false
+            },
+            "그래픽카드 브랜드": {
+                "gigabyte": false,
+                "asus": false,
+                "emtek": false,
+                "waycos": false,
+                "zotac": false,
+                "colorful": false,
+                "galax": false
+            },
+            "cost": {
+                "min": 100000,
+                "max": 1000000
+            }
+        },
+        "fitness": {
+            "cpu": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "vga": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "ram": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "mb": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "ssd": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "ccase": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "power": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "cooler": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            }
+        }
+    },
+    {
+        "partsModel": {
+            "cpu": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "vga": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "ram": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "mb": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "ssd": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "ccase": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "power": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "cooler": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            }
+        },
+        "recommendInfo": {
+            "CPU 제조사": {
+                "AMD": true,
+                "Intel": false
+            },
+            "그래픽카드 제조사": {
+                "AMD": false,
+                "Intel": false
+            },
+            "그래픽카드 브랜드": {
+                "gigabyte": false,
+                "asus": false,
+                "emtek": false,
+                "waycos": false,
+                "zotac": false,
+                "colorful": false,
+                "galax": false
+            },
+            "cost": {
+                "min": 100000,
+                "max": 1000000
+            }
+        },
+        "fitness": {
+            "cpu": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "vga": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "ram": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "mb": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "ssd": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "ccase": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "power": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "cooler": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            }
+        }
+    },
+    {
+        "partsModel": {
+            "cpu": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "vga": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "ram": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "mb": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "ssd": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "ccase": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "power": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "cooler": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            }
+        },
+        "recommendInfo": {
+            "CPU 제조사": {
+                "AMD": true,
+                "Intel": false
+            },
+            "그래픽카드 제조사": {
+                "AMD": false,
+                "Intel": false
+            },
+            "그래픽카드 브랜드": {
+                "gigabyte": false,
+                "asus": false,
+                "emtek": false,
+                "waycos": false,
+                "zotac": false,
+                "colorful": false,
+                "galax": false
+            },
+            "cost": {
+                "min": 100000,
+                "max": 1000000
+            }
+        },
+        "fitness": {
+            "cpu": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "vga": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "ram": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "mb": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "ssd": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "ccase": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "power": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "cooler": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            }
+        }
+    },
+    {
+        "partsModel": {
+            "cpu": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "vga": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "ram": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "mb": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "ssd": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "ccase": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "power": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "cooler": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            }
+        },
+        "recommendInfo": {
+            "CPU 제조사": {
+                "AMD": true,
+                "Intel": false
+            },
+            "그래픽카드 제조사": {
+                "AMD": false,
+                "Intel": false
+            },
+            "그래픽카드 브랜드": {
+                "gigabyte": false,
+                "asus": false,
+                "emtek": false,
+                "waycos": false,
+                "zotac": false,
+                "colorful": false,
+                "galax": false
+            },
+            "cost": {
+                "min": 100000,
+                "max": 1000000
+            }
+        },
+        "fitness": {
+            "cpu": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "vga": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "ram": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "mb": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "ssd": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "ccase": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "power": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "cooler": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            }
+        }
+    },
+    {
+        "partsModel": {
+            "cpu": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "vga": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "ram": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "mb": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "ssd": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "ccase": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "power": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            },
+            "cooler": {
+                "name": "완전 멋진 cpu",
+                "link": "https://naver.com",
+                "image": "https://img.danawa.com/prod_img/500000/211/741/img/16741211_1.jpg?shrink=330:330&_v=20220530142319",
+                "cost": "10000"
+            }
+        },
+        "recommendInfo": {
+            "CPU 제조사": {
+                "AMD": true,
+                "Intel": false
+            },
+            "그래픽카드 제조사": {
+                "AMD": false,
+                "Intel": false
+            },
+            "그래픽카드 브랜드": {
+                "gigabyte": false,
+                "asus": false,
+                "emtek": false,
+                "waycos": false,
+                "zotac": false,
+                "colorful": false,
+                "galax": false
+            },
+            "cost": {
+                "min": 100000,
+                "max": 1000000
+            }
+        },
+        "fitness": {
+            "cpu": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "vga": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "ram": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "mb": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "ssd": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "ccase": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "power": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            },
+            "cooler": {
+                "cpu": "100",
+                "vga": "100",
+                "ram": "100",
+                "mb": "100",
+                "ssd": "100",
+                "ccase": "100",
+                "power": "100",
+                "cooler": "100"
+            }
+        }
+    }
+]

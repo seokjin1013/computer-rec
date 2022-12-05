@@ -1,6 +1,7 @@
+import 'package:clean_architecture_flutter/features/recommend/presentation/pages/menu_page.dart';
 import 'package:clean_architecture_flutter/features/recommend/presentation/widgets/progress_dialog_widget.dart';
 
-import 'signup_page.dart';
+import '../../../../core/user/user_info.dart';
 import '../provider/signin_bloc.dart';
 import '../widgets/signin_controls.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +50,7 @@ class SigninPage extends StatelessWidget {
       if (state.isExist) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const SignupPage()),
+          MaterialPageRoute(builder: (context) => const MenuPage()),
         );
       }
     }

@@ -1,3 +1,5 @@
+import '../../../../core/user/user_info.dart';
+import '../../../../injection_container.dart';
 import '../provider/signin_bloc.dart';
 import '../provider/signin_event.dart';
 import '../provider/signin_state.dart';
@@ -81,6 +83,8 @@ class _SigninControlsState extends State<SigninControls> {
   void queryLogin() {
     formKey.currentState!.save();
     if (formKey.currentState!.validate()) {
+      UserInfo userInfo = sl();
+      userInfo.setInfo(id, pw);
       BlocProvider.of<SigninBloc>(context).add(CheckExistAccount(id, pw));
     } else {
       if (idInvalid) {

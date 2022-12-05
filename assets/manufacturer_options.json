@@ -1,0 +1,52 @@
+{
+    "CPU 제조사": [
+        [
+            "AMD",
+            "assets/logo_amd.png"
+        ],
+        [
+            "Intel",
+            "assets/logo_intel.png"
+        ]
+    ],
+    "그래픽카드 제조사": [
+        [
+            "AMD",
+            "assets/logo_amd.png"
+        ],
+        [
+            "Intel",
+            "assets/logo_intel.png"
+        ]
+    ],
+    "그래픽카드 브랜드": [
+        [
+            "gigabyte",
+            "assets/logo_gigabyte.png"
+        ],
+        [
+            "asus",
+            "assets/logo_asus.png"
+        ],
+        [
+            "emtek",
+            "assets/logo_emtek.png"
+        ],
+        [
+            "waycos",
+            "assets/logo_waycos.png"
+        ],
+        [
+            "zotac",
+            "assets/logo_zotac.png"
+        ],
+        [
+            "colorful",
+            "assets/logo_colorful.png"
+        ],
+        [
+            "galax",
+            "assets/logo_galax.png"
+        ]
+    ]
+}

@@ -1,3 +1,5 @@
+import 'package:clean_architecture_flutter/core/user/user_info.dart';
+
 import 'features/recommend/data/datasources/recommend_remote_data_source.dart';
 import 'features/recommend/data/repositories/recommend_repository_impl.dart';
 import 'features/recommend/domain/repositories/recommend_repository.dart';
@@ -10,13 +12,10 @@ import 'package:get_it/get_it.dart';
 import 'core/network/network_info.dart';
 import 'package:http/http.dart' as http;
 
-import 'features/recommend/presentation/provider/signup_provider.dart';
-
 final sl = GetIt.instance;
 
 Future<void> init() async {
   sl.registerFactory(() => SigninBloc(isExistAccount: sl()));
-  sl.registerFactory(() => SignupProvider(createNewAccount: sl()));
   sl.registerLazySingleton(() => IsExistAccount(sl()));
   sl.registerLazySingleton(() => CreateNewAccount(sl()));
   sl.registerLazySingleton<RecommendRepository>(() => RecommendRepositoryImpl(
@@ -28,4 +27,5 @@ Future<void> init() async {
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
   sl.registerLazySingleton(() => http.Client());
   sl.registerLazySingleton(() => Connectivity());
+  sl.registerLazySingleton(() => UserInfo());
 }
