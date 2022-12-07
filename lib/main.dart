@@ -17,8 +17,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: '컴퓨터 견적 추천 시스템',
       theme: ThemeData(
+        fontFamily: 'GMarketSans',
         brightness: Brightness.dark,
-        indicatorColor: Colors.purpleAccent[700]!,
+        primarySwatch: Colors.grey,
+        appBarTheme: AppBarTheme(
+          iconTheme: IconThemeData(color: Colors.black),
+          color: Colors.deepPurple,
+        ),
       ),
       home: const MainPage(),
     );

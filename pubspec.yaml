@@ -24,6 +24,8 @@ dependencies:
   http: ^0.13.5
   # Local cache
   shared_preferences: ^2.0.15
+  json_serializable: ^6.5.4
+  json_annotation: ^4.7.0
 
 dev_dependencies:
   flutter_test:
@@ -35,3 +37,22 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
+  
+  fonts:
+    - family: NotoSans
+      fonts:
+        - asset: fonts/NotoSans-Regular.ttf
+        - asset: fonts/NotoSans-Italic.ttf
+          style: italic
+        - asset: fonts/NotoSans-Bold.ttf
+          weight: 700
+    - family: GMarketSans
+      fonts:
+        - asset: fonts/GmarketSansTTFMedium.ttf
+        - asset: fonts/GmarketSansTTFBold.ttf
+          weight: 700
+    - family: Pretendard
+      fonts:
+        - asset: fonts/Pretendard-Regular.ttf
+        - asset: fonts/Pretendard-Bold.ttf
+          weight: 700

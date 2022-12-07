@@ -15,10 +15,124 @@ class RecommendRepositoryImpl implements RecommendRepository {
       {required this.remoteDataSource, required this.networkInfo});
 
   @override
-  Future<Either<Failure, ComputerItem>> getComputerItem(int id) async {
+  Future<Either<Failure, ComputerCPU>> getComputerCPU(int id) async {
     if (await networkInfo.isConnected) {
       try {
-        final remoteComputerItem = await remoteDataSource.getComputerItem(id);
+        final remoteComputerItem = await remoteDataSource.getComputerCPU(id);
+        return Right(remoteComputerItem);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, ComputerVGA>> getComputerVGA(int id) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final remoteComputerItem = await remoteDataSource.getComputerVGA(id);
+        return Right(remoteComputerItem);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, ComputerRAM>> getComputerRAM(int id) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final remoteComputerItem = await remoteDataSource.getComputerRAM(id);
+        return Right(remoteComputerItem);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, ComputerMainBoard>> getComputerMainBoard(
+      int id) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final remoteComputerItem =
+            await remoteDataSource.getComputerMainBoard(id);
+        return Right(remoteComputerItem);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, ComputerSSD>> getComputerSSD(int id) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final remoteComputerItem = await remoteDataSource.getComputerSSD(id);
+        return Right(remoteComputerItem);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, ComputerHDD>> getComputerHDD(int id) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final remoteComputerItem = await remoteDataSource.getComputerHDD(id);
+        return Right(remoteComputerItem);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, ComputerCooler>> getComputerCooler(int id) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final remoteComputerItem = await remoteDataSource.getComputerCooler(id);
+        return Right(remoteComputerItem);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, ComputerPower>> getComputerPower(int id) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final remoteComputerItem = await remoteDataSource.getComputerPower(id);
+        return Right(remoteComputerItem);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, ComputerCase>> getComputerCase(int id) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final remoteComputerItem = await remoteDataSource.getComputerCase(id);
         return Right(remoteComputerItem);
       } on ServerException {
         return Left(ServerFailure());
@@ -43,10 +157,10 @@ class RecommendRepositoryImpl implements RecommendRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> createNewAccount(String id, String pw) async {
+  Future<Either<Failure, bool>> postNewAccount(String id, String pw) async {
     if (await networkInfo.isConnected) {
       try {
-        final isCreated = await remoteDataSource.createNewAccount(id, pw);
+        final isCreated = await remoteDataSource.postNewAccount(id, pw);
         return Right(isCreated);
       } on ServerException {
         return Left(ServerFailure());
