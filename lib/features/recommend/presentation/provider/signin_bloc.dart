@@ -1,9 +1,9 @@
-import '../../domain/usecases/is_exist_account.dart';
-import 'signin_event.dart';
-import 'signin_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/error/failures.dart';
+import '../../domain/usecases/is_exist_account.dart';
+import 'signin_event.dart';
+import 'signin_state.dart';
 
 class SigninBloc extends Bloc<SigninEvent, SigninState> {
   final IsExistAccount isExistAccount;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+
 import '../widgets/menu_card_widget.dart';
 import 'recommend_page.dart';
-import 'package:provider/provider.dart';
 
 class MenuWayPage extends StatelessWidget {
   const MenuWayPage({super.key});

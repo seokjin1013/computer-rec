@@ -1,10 +1,7 @@
 import 'dart:convert';
 
-import 'package:clean_architecture_flutter/features/recommend/domain/entities/computer_item.dart';
-import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_item.dart';
+import '../../domain/usecases/get_computer_item.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import '../../../../injection_container.dart';
 import 'package:http/http.dart' as http;
@@ -26,7 +23,7 @@ class MainPage extends StatelessWidget {
                     int start = 1100000;
                     int end = 1500000;
                     String cpu = '인텔';
-                    int purpose = 2;
+                    // int purpose = 2;
                     final response = await client.get(
                       Uri.parse(
                           'http://175.196.11.206:8080/combine/$start/$end/$cpu'),

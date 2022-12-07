@@ -1,5 +1,4 @@
 export 'recommend_bloc.dart';
-import 'package:clean_architecture_flutter/core/utility/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class RecommendState extends Equatable {

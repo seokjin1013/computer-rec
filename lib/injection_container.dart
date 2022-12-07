@@ -1,6 +1,5 @@
-import 'package:clean_architecture_flutter/core/user/user_info.dart';
-import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_combine_by_price.dart';
-import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_item.dart';
+import 'core/user/user_info.dart';
+import 'features/recommend/domain/usecases/get_computer_item.dart';
 
 import 'features/recommend/data/datasources/recommend_remote_data_source.dart';
 import 'features/recommend/data/repositories/recommend_repository_impl.dart';

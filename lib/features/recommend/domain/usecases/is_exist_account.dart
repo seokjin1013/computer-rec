@@ -10,7 +10,7 @@ class IsExistAccount {
   IsExistAccount(this.recommendRepository);
 
   Future<Either<Failure, bool>> call(String id, String pw) async {
-    if (kDebugMode) return Right(true);
+    if (kDebugMode) return const Right(true);
     return await recommendRepository.isExistAccount(id, pw);
   }
 }

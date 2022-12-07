@@ -1,6 +1,5 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+
 import '../../domain/entities/recommend_list.dart';
 import 'menu_card_widget.dart';
 

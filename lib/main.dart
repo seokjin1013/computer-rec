@@ -1,6 +1,6 @@
-import 'features/recommend/presentation/pages/main_page.dart';
-import 'features/recommend/presentation/pages/signin_page.dart';
 import 'package:flutter/material.dart';
+
+import 'features/recommend/presentation/pages/main_page.dart';
 import 'injection_container.dart' as di;
 
 void main() async {

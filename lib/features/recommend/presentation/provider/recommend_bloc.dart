@@ -1,9 +1,9 @@
-import '../../domain/usecases/is_exist_account.dart';
-import 'recommend_event.dart';
-import 'recommend_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/error/failures.dart';
+import '../../domain/usecases/is_exist_account.dart';
+import 'recommend_event.dart';
+import 'recommend_state.dart';
 
 class RecommendBloc extends Bloc<RecommendEvent, RecommendState> {
   final IsExistAccount isExistAccount;

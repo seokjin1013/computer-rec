@@ -1,7 +1,4 @@
-import 'package:clean_architecture_flutter/features/recommend/presentation/pages/menu_page.dart';
-import 'package:clean_architecture_flutter/features/recommend/presentation/widgets/progress_dialog_widget.dart';
-
-import '../../../../core/user/user_info.dart';
+import 'menu_page.dart';
 import '../provider/signin_bloc.dart';
 import '../widgets/signin_controls.dart';
 import 'package:flutter/material.dart';
