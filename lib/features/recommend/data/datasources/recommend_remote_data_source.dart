@@ -6,6 +6,7 @@ import '../../../../core/error/exceptions.dart';
 import '../models/computer_item_model.dart';
 
 abstract class RecommendRemoteDataSource {
+  Future<List<int>> getComputerCPUIdBestRange(int start, int end);
   Future<ComputerCPUModel> getComputerCPU(int id);
   Future<ComputerVGAModel> getComputerVGA(int id);
   Future<ComputerRAMModel> getComputerRAM(int id);
@@ -23,6 +24,21 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
   final http.Client client;
 
   RecommendRemoteDataSourceImpl({required this.client});
+
+  @override
+  Future<List<int>> getComputerCPUIdBestRange(int start, int end) async {
+    final response = await client.get(
+      Uri.parse('http://175.196.11.206:8080/cpu/model/best/$start/$end'),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    );
+    if (response.statusCode == 200) {
+      final List<int> ids = json.decode(utf8.decode(response.bodyBytes));
+      return ids;
+    }
+    throw ServerException();
+  }
 
   @override
   Future<ComputerCPUModel> getComputerCPU(int id) async {

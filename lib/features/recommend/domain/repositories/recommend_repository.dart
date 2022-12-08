@@ -4,6 +4,8 @@ import '../../../../core/error/failures.dart';
 import '../entities/computer_item.dart';
 
 abstract class RecommendRepository {
+  Future<Either<Failure, List<int>>> getComputerCPUIdBestRange(
+      int start, int end);
   Future<Either<Failure, ComputerCPU>> getComputerCPU(int id);
   Future<Either<Failure, ComputerVGA>> getComputerVGA(int id);
   Future<Either<Failure, ComputerRAM>> getComputerRAM(int id);

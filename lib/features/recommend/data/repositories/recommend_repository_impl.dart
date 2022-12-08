@@ -15,6 +15,22 @@ class RecommendRepositoryImpl implements RecommendRepository {
       {required this.remoteDataSource, required this.networkInfo});
 
   @override
+  Future<Either<Failure, List<int>>> getComputerCPUIdBestRange(
+      int start, int end) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final remoteComputerItem =
+            await remoteDataSource.getComputerCPUIdBestRange(start, end);
+        return Right(remoteComputerItem);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
   Future<Either<Failure, ComputerCPU>> getComputerCPU(int id) async {
     if (await networkInfo.isConnected) {
       try {

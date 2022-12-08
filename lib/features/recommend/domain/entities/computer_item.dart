@@ -12,6 +12,8 @@ class ComputerItem {
   final String shopLink;
   final String shopLogo;
   final String shopName;
+  final double reviewScore;
+  final int numHit;
 
   const ComputerItem(
       {required this.id,
@@ -26,7 +28,9 @@ class ComputerItem {
       required this.totalScore,
       required this.shopLink,
       required this.shopLogo,
-      required this.shopName});
+      required this.shopName,
+      this.reviewScore = 0.0,
+      this.numHit = 0});
 }
 
 class ComputerCPU extends ComputerItem {
@@ -60,7 +64,9 @@ class ComputerCPU extends ComputerItem {
       required super.totalScore,
       required super.shopLink,
       required super.shopLogo,
-      required super.shopName});
+      required super.shopName,
+      super.reviewScore = 0.0,
+      super.numHit = 0});
 }
 
 class ComputerVGA extends ComputerItem {
