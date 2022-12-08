@@ -1,29 +1,19 @@
-export 'recommend_bloc.dart';
 import 'package:equatable/equatable.dart';
 
-abstract class MainState extends Equatable {
-  @override
-  List<Object> get props => [];
+abstract class GetComputerCPUBestIdState {}
+
+class Loading extends GetComputerCPUBestIdState {
+  Loading();
 }
 
-class Empty extends MainState {}
-
-class Loading extends MainState {}
-
-class Loaded extends MainState {
-  final List<int> ids;
+class Loaded extends GetComputerCPUBestIdState {
+  final int ids;
 
   Loaded({required this.ids});
-
-  @override
-  List<Object> get props => [ids];
 }
 
-class Error extends MainState {
+class Error extends GetComputerCPUBestIdState {
   final String message;
 
   Error({required this.message});
-
-  @override
-  List<Object> get props => [message];
 }

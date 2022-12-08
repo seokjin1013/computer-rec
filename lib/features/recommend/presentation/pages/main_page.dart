@@ -1,8 +1,11 @@
 import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_item.dart';
 import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_item_best_range.dart';
 import 'package:clean_architecture_flutter/features/recommend/presentation/provider/main_bloc.dart';
+import 'package:clean_architecture_flutter/features/recommend/presentation/provider/main_provider.dart';
+import 'package:clean_architecture_flutter/features/recommend/presentation/widgets/computer_item_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../injection_container.dart';
 import '../provider/main_state.dart';
@@ -22,21 +25,21 @@ class MainPage extends StatelessWidget {
         ],
       ),
       // body: Container(),
+      // body: buildBody(context),
       body: buildBody(context),
     );
   }
 
-  BlocProvider<MainBloc> buildBody(BuildContext context) {
-    return BlocProvider(
-      create: ((context) => sl<MainBloc>()),
-      child: BlocListener<MainBloc, MainState>(
-        listener: blocListener,
-        child: Center(),
-      ),
+  ChangeNotifierProvider buildBody(BuildContext context) {
+    return ChangeNotifierProvider.value(
+      value: sl(),
+      child: buildContent(context),
     );
   }
 
-  void blocListener(context, state) {
-    if (state is Loaded) {}
+  Widget buildContent(BuildContext context) {
+    final vmRead = context.read<MainProvider>();
+    final result = vmRead.getComputerCPUBestId(1);
+    return ComputerItemDisplay(computerItem: 
   }
 }
