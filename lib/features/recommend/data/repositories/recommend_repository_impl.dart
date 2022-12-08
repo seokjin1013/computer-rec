@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/exceptions.dart';
@@ -22,11 +24,11 @@ class RecommendRepositoryImpl implements RecommendRepository {
         final remoteComputerItem =
             await remoteDataSource.getComputerCPUIdBestRange(start, end);
         return Right(remoteComputerItem);
-      } on ServerException {
-        return Left(ServerFailure());
+      } on ServerException catch (e) {
+        return Left(ServerFailure(errorCode: e.errorCode));
       }
     } else {
-      return Left(ServerFailure());
+      return Left(ConnectionFailure());
     }
   }
 
@@ -36,11 +38,11 @@ class RecommendRepositoryImpl implements RecommendRepository {
       try {
         final remoteComputerItem = await remoteDataSource.getComputerCPU(id);
         return Right(remoteComputerItem);
-      } on ServerException {
-        return Left(ServerFailure());
+      } on ServerException catch (e) {
+        return Left(ServerFailure(errorCode: e.errorCode));
       }
     } else {
-      return Left(ServerFailure());
+      return Left(ConnectionFailure());
     }
   }
 
@@ -50,11 +52,11 @@ class RecommendRepositoryImpl implements RecommendRepository {
       try {
         final remoteComputerItem = await remoteDataSource.getComputerVGA(id);
         return Right(remoteComputerItem);
-      } on ServerException {
-        return Left(ServerFailure());
+      } on ServerException catch (e) {
+        return Left(ServerFailure(errorCode: e.errorCode));
       }
     } else {
-      return Left(ServerFailure());
+      return Left(ConnectionFailure());
     }
   }
 
@@ -64,11 +66,11 @@ class RecommendRepositoryImpl implements RecommendRepository {
       try {
         final remoteComputerItem = await remoteDataSource.getComputerRAM(id);
         return Right(remoteComputerItem);
-      } on ServerException {
-        return Left(ServerFailure());
+      } on ServerException catch (e) {
+        return Left(ServerFailure(errorCode: e.errorCode));
       }
     } else {
-      return Left(ServerFailure());
+      return Left(ConnectionFailure());
     }
   }
 
@@ -80,11 +82,11 @@ class RecommendRepositoryImpl implements RecommendRepository {
         final remoteComputerItem =
             await remoteDataSource.getComputerMainBoard(id);
         return Right(remoteComputerItem);
-      } on ServerException {
-        return Left(ServerFailure());
+      } on ServerException catch (e) {
+        return Left(ServerFailure(errorCode: e.errorCode));
       }
     } else {
-      return Left(ServerFailure());
+      return Left(ConnectionFailure());
     }
   }
 
@@ -94,11 +96,11 @@ class RecommendRepositoryImpl implements RecommendRepository {
       try {
         final remoteComputerItem = await remoteDataSource.getComputerSSD(id);
         return Right(remoteComputerItem);
-      } on ServerException {
-        return Left(ServerFailure());
+      } on ServerException catch (e) {
+        return Left(ServerFailure(errorCode: e.errorCode));
       }
     } else {
-      return Left(ServerFailure());
+      return Left(ConnectionFailure());
     }
   }
 
@@ -108,11 +110,11 @@ class RecommendRepositoryImpl implements RecommendRepository {
       try {
         final remoteComputerItem = await remoteDataSource.getComputerHDD(id);
         return Right(remoteComputerItem);
-      } on ServerException {
-        return Left(ServerFailure());
+      } on ServerException catch (e) {
+        return Left(ServerFailure(errorCode: e.errorCode));
       }
     } else {
-      return Left(ServerFailure());
+      return Left(ConnectionFailure());
     }
   }
 
@@ -122,11 +124,11 @@ class RecommendRepositoryImpl implements RecommendRepository {
       try {
         final remoteComputerItem = await remoteDataSource.getComputerCooler(id);
         return Right(remoteComputerItem);
-      } on ServerException {
-        return Left(ServerFailure());
+      } on ServerException catch (e) {
+        return Left(ServerFailure(errorCode: e.errorCode));
       }
     } else {
-      return Left(ServerFailure());
+      return Left(ConnectionFailure());
     }
   }
 
@@ -136,11 +138,11 @@ class RecommendRepositoryImpl implements RecommendRepository {
       try {
         final remoteComputerItem = await remoteDataSource.getComputerPower(id);
         return Right(remoteComputerItem);
-      } on ServerException {
-        return Left(ServerFailure());
+      } on ServerException catch (e) {
+        return Left(ServerFailure(errorCode: e.errorCode));
       }
     } else {
-      return Left(ServerFailure());
+      return Left(ConnectionFailure());
     }
   }
 
@@ -150,11 +152,11 @@ class RecommendRepositoryImpl implements RecommendRepository {
       try {
         final remoteComputerItem = await remoteDataSource.getComputerCase(id);
         return Right(remoteComputerItem);
-      } on ServerException {
-        return Left(ServerFailure());
+      } on ServerException catch (e) {
+        return Left(ServerFailure(errorCode: e.errorCode));
       }
     } else {
-      return Left(ServerFailure());
+      return Left(ConnectionFailure());
     }
   }
 
@@ -164,11 +166,11 @@ class RecommendRepositoryImpl implements RecommendRepository {
       try {
         final isExist = await remoteDataSource.isExistAccount(id, pw);
         return Right(isExist);
-      } on ServerException {
-        return Left(ServerFailure());
+      } on ServerException catch (e) {
+        return Left(ServerFailure(errorCode: e.errorCode));
       }
     } else {
-      return Left(ServerFailure());
+      return Left(ConnectionFailure());
     }
   }
 
@@ -178,11 +180,11 @@ class RecommendRepositoryImpl implements RecommendRepository {
       try {
         final isCreated = await remoteDataSource.postNewAccount(id, pw);
         return Right(isCreated);
-      } on ServerException {
-        return Left(ServerFailure());
+      } on ServerException catch (e) {
+        return Left(ServerFailure(errorCode: e.errorCode));
       }
     } else {
-      return Left(ServerFailure());
+      return Left(ConnectionFailure());
     }
   }
 }

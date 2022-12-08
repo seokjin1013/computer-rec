@@ -34,10 +34,10 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
       },
     );
     if (response.statusCode == 200) {
-      final List<int> ids = json.decode(utf8.decode(response.bodyBytes));
-      return ids;
+      final List<dynamic> ids = json.decode(utf8.decode(response.bodyBytes));
+      return ids.cast<int>();
     }
-    throw ServerException();
+    throw ServerException(response.statusCode);
   }
 
   @override
@@ -67,7 +67,7 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
           json.decode(utf8.decode(response.bodyBytes));
       return ComputerCPUModel.fromJson(_getFactorizedMap(map, renamingMap));
     }
-    throw ServerException();
+    throw ServerException(response.statusCode);
   }
 
   @override
@@ -100,7 +100,7 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
           json.decode(utf8.decode(response.bodyBytes));
       return ComputerVGAModel.fromJson(_getFactorizedMap(map, renamingMap));
     }
-    throw ServerException();
+    throw ServerException(response.statusCode);
   }
 
   @override
@@ -127,7 +127,7 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
           json.decode(utf8.decode(response.bodyBytes));
       return ComputerRAMModel.fromJson(_getFactorizedMap(map, renamingMap));
     }
-    throw ServerException();
+    throw ServerException(response.statusCode);
   }
 
   @override
@@ -158,7 +158,7 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
       return ComputerMainBoardModel.fromJson(
           _getFactorizedMap(map, renamingMap));
     }
-    throw ServerException();
+    throw ServerException(response.statusCode);
   }
 
   @override
@@ -184,7 +184,7 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
           json.decode(utf8.decode(response.bodyBytes));
       return ComputerSSDModel.fromJson(_getFactorizedMap(map, renamingMap));
     }
-    throw ServerException();
+    throw ServerException(response.statusCode);
   }
 
   @override
@@ -210,7 +210,7 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
           json.decode(utf8.decode(response.bodyBytes));
       return ComputerHDDModel.fromJson(_getFactorizedMap(map, renamingMap));
     }
-    throw ServerException();
+    throw ServerException(response.statusCode);
   }
 
   @override
@@ -236,7 +236,7 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
           json.decode(utf8.decode(response.bodyBytes));
       return ComputerCoolerModel.fromJson(_getFactorizedMap(map, renamingMap));
     }
-    throw ServerException();
+    throw ServerException(response.statusCode);
   }
 
   @override
@@ -263,7 +263,7 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
           json.decode(utf8.decode(response.bodyBytes));
       return ComputerPowerModel.fromJson(_getFactorizedMap(map, renamingMap));
     }
-    throw ServerException();
+    throw ServerException(response.statusCode);
   }
 
   @override
@@ -294,7 +294,7 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
           json.decode(utf8.decode(response.bodyBytes));
       return ComputerCaseModel.fromJson(_getFactorizedMap(map, renamingMap));
     }
-    throw ServerException();
+    throw ServerException(response.statusCode);
   }
 
   Map<String, dynamic> _getFactorizedMap(
@@ -324,7 +324,7 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
     if (response.statusCode == 200) {
       return response.body == '1';
     }
-    throw ServerException();
+    throw ServerException(response.statusCode);
   }
 
   @override
@@ -339,6 +339,6 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
     if (response.statusCode == 200) {
       return response.body == '1';
     }
-    throw ServerException();
+    throw ServerException(response.statusCode);
   }
 }

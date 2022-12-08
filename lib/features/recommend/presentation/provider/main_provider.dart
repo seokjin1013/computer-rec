@@ -1,5 +1,6 @@
-import 'package:clean_architecture_flutter/features/recommend/presentation/provider/main_state.dart';
+import 'package:clean_architecture_flutter/features/recommend/domain/entities/computer_item.dart';
 import 'package:dartz/dartz.dart';
+import 'package:clean_architecture_flutter/core/utility/dartz_x.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,16 +14,13 @@ class MainProvider with ChangeNotifier {
 
   MainProvider(this.getComputerCPUIdBestRange, this.getComputerCPU);
 
-  final Map<int, Future<int>> computerCPUBestId = {};
-
-  Future<int> getComputerCPUBestId(int index) async {
-    computerCPUBestId.putIfAbsent(index, () async {
-      Either<Failure, List<int>> result = await getComputerCPUIdBestRange(index, index);
-      GetComputerCPUBestIdState state = result.fold((failure) => Error(message: '서버와의 연결이 끊어졌습니다.'), (r) => r[0]);
-      return value;
-    });
-    if ()) {
-      return computerCPUBestId[index]!;
+  Future<Either<Failure, ComputerCPU>> getComputerCPUBest(int index) async {
+    Either<Failure, List<int>> result =
+        await getComputerCPUIdBestRange(index, index);
+    if (result.isLeft()) {
+      return Left(result.asLeft());
     }
+    int id = result.asRight().first;
+    return getComputerCPU(id);
   }
 }

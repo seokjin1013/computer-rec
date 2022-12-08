@@ -7,9 +7,7 @@ import 'features/recommend/domain/repositories/recommend_repository.dart';
 import 'features/recommend/domain/usecases/get_computer_item_best_range.dart';
 import 'features/recommend/domain/usecases/post_new_account.dart';
 import 'features/recommend/domain/usecases/is_exist_account.dart';
-import 'features/recommend/presentation/provider/main_bloc.dart';
 import 'features/recommend/presentation/provider/main_provider.dart';
-import 'features/recommend/presentation/provider/signin_bloc.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get_it/get_it.dart';
 
@@ -19,8 +17,6 @@ import 'package:http/http.dart' as http;
 final sl = GetIt.instance;
 
 Future<void> init() async {
-  sl.registerFactory(() => SigninBloc(isExistAccount: sl()));
-  sl.registerFactory(() => MainBloc(getComputerCPUIdBestRange: sl()));
   sl.registerFactory(() => MainProvider(sl(), sl()));
   sl.registerLazySingleton(() => GetComputerCPUIdBestRange(sl()));
   sl.registerLazySingleton(() => GetComputerCPU(sl()));
