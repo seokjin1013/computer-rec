@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
+import '../../../../core/utility/string.dart';
+
 class ComputerItemDisplay2 extends StatelessWidget {
   final ComputerItem computerItem;
   const ComputerItemDisplay2({required this.computerItem, super.key});
@@ -43,18 +45,18 @@ class ComputerItemDisplay2 extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                          '${_getCommaSeperatedPrice(computerItem.price.toString())}원',
+                          '${getCommaSeperatedPrice(computerItem.price.toString())}원',
                           style: Theme.of(context).textTheme.headline5),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                          '⭐ ${computerItem.reviewScore.toStringAsPrecision(2)} / 5.0',
+                          '⭐ ${computerItem.score.toStringAsPrecision(2)} / 5.0',
                           style: Theme.of(context).textTheme.headline6),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text('🔍 ${computerItem.numHit}',
+                      child: Text('🔍 ${computerItem.hits}',
                           style: Theme.of(context).textTheme.headline6),
                     ),
                   ],
@@ -76,17 +78,6 @@ class ComputerItemDisplay2 extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  String _getCommaSeperatedPrice(String value) {
-    String s = '';
-    for (int i = 0; i < value.length; ++i) {
-      if ((value.length - i) % 3 == 0 && i != 0) {
-        s += ',';
-      }
-      s += value[i];
-    }
-    return s;
   }
 }
 

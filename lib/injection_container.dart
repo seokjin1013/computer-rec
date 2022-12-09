@@ -1,4 +1,8 @@
+import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_item_hit%20copy.dart';
+import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_item_hit.dart';
 import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_milestone.dart';
+import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_recommend_output.dart';
+import 'package:clean_architecture_flutter/features/recommend/presentation/provider/recommend_input_provider.dart';
 
 import 'core/user/user_info.dart';
 import 'features/recommend/domain/usecases/get_computer_item.dart';
@@ -16,11 +20,19 @@ import 'package:get_it/get_it.dart';
 import 'core/network/network_info.dart';
 import 'package:http/http.dart' as http;
 
+import 'features/recommend/presentation/provider/recommend_output_provider.dart';
+
 final sl = GetIt.instance;
 
 Future<void> init() async {
   sl.registerFactory(() => MainProvider(sl(), sl(), sl()));
+  sl.registerFactory(() => RecommendInputProvider());
+  sl.registerFactory(() => RecommendOutputProvider(
+      sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl()));
+  sl.registerLazySingleton(() => GetBottleneckCPUVGA(sl()));
+  sl.registerLazySingleton(() => GetRecommendOutput(sl()));
   sl.registerLazySingleton(() => GetMilestone(sl()));
+  sl.registerLazySingleton(() => GetComputerCPUIdHit(sl()));
   sl.registerLazySingleton(() => GetComputerCPUIdBestRange(sl()));
   sl.registerLazySingleton(() => GetComputerCPU(sl()));
   sl.registerLazySingleton(() => GetComputerVGA(sl()));

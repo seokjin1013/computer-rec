@@ -1,11 +1,18 @@
 import 'package:clean_architecture_flutter/features/recommend/domain/entities/milestone.dart';
+import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_item_hit%20copy.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/failures.dart';
+import '../entities/computer_combine.dart';
 import '../entities/computer_item.dart';
+import '../entities/recommend_input_list.dart';
 
 abstract class RecommendRepository {
+  Future<Either<Failure, double>> getBottleneckCPUVGA(int cpuId, int vgaId);
+  Future<Either<Failure, List<RecommendOutput>>> getRecommendOutput(
+      RecommendInput recommendInput);
   Future<Either<Failure, Milestone>> getMilestone();
+  Future<Either<Failure, int>> getComputerCPUIdHit(int rank);
   Future<Either<Failure, List<int>>> getComputerCPUIdBestRange(
       int start, int end);
   Future<Either<Failure, ComputerCPU>> getComputerCPU(int id);

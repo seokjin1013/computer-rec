@@ -1,12 +1,16 @@
 import 'dart:math';
 
 import 'package:clean_architecture_flutter/features/recommend/domain/entities/milestone.dart';
+import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_item_hit%20copy.dart';
+import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_recommend_output.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/network/network_info.dart';
+import '../../domain/entities/computer_combine.dart';
 import '../../domain/entities/computer_item.dart';
+import '../../domain/entities/recommend_input_list.dart';
 import '../../domain/repositories/recommend_repository.dart';
 import '../datasources/recommend_remote_data_source.dart';
 
@@ -18,11 +22,58 @@ class RecommendRepositoryImpl implements RecommendRepository {
       {required this.remoteDataSource, required this.networkInfo});
 
   @override
+  Future<Either<Failure, double>> getBottleneckCPUVGA(
+      int cpuId, int vgaId) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final recommendOutputs =
+            await remoteDataSource.getBottleneckCPUVGA(cpuId, vgaId);
+        return Right(recommendOutputs);
+      } on ServerException catch (e) {
+        return Left(ServerFailure(errorCode: e.errorCode));
+      }
+    } else {
+      return Left(ConnectionFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<RecommendOutput>>> getRecommendOutput(
+      RecommendInput recommendInput) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final recommendOutputs =
+            await remoteDataSource.getRecommendOutput(recommendInput);
+        return Right(recommendOutputs);
+      } on ServerException catch (e) {
+        return Left(ServerFailure(errorCode: e.errorCode));
+      }
+    } else {
+      return Left(ConnectionFailure());
+    }
+  }
+
+  @override
   Future<Either<Failure, Milestone>> getMilestone() async {
     if (await networkInfo.isConnected) {
       try {
-        final remoteComputerItem = await remoteDataSource.getMilestone();
-        return Right(remoteComputerItem);
+        final milestone = await remoteDataSource.getMilestone();
+        return Right(milestone);
+      } on ServerException catch (e) {
+        return Left(ServerFailure(errorCode: e.errorCode));
+      }
+    } else {
+      return Left(ConnectionFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, int>> getComputerCPUIdHit(int rank) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final computerCPUHitId =
+            await remoteDataSource.getComputerCPUIdHit(rank);
+        return Right(computerCPUHitId);
       } on ServerException catch (e) {
         return Left(ServerFailure(errorCode: e.errorCode));
       }
@@ -36,9 +87,9 @@ class RecommendRepositoryImpl implements RecommendRepository {
       int start, int end) async {
     if (await networkInfo.isConnected) {
       try {
-        final remoteComputerItem =
+        final computerCPUBestId =
             await remoteDataSource.getComputerCPUIdBestRange(start, end);
-        return Right(remoteComputerItem);
+        return Right(computerCPUBestId);
       } on ServerException catch (e) {
         return Left(ServerFailure(errorCode: e.errorCode));
       }

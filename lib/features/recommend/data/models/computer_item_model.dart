@@ -27,8 +27,7 @@ class ComputerCPUModel extends ComputerCPU {
     required super.shopLink,
     required super.shopLogo,
     required super.shopName,
-    super.reviewScore = 0.0,
-    super.numHit = 0,
+    super.hits = 0,
   });
 
   factory ComputerCPUModel.fromJson(Map<String, dynamic> json) =>

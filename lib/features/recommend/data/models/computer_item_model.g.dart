@@ -28,8 +28,7 @@ ComputerCPUModel _$ComputerCPUModelFromJson(Map<String, dynamic> json) =>
       shopLink: json['shopLink'] as String,
       shopLogo: json['shopLogo'] as String,
       shopName: json['shopName'] as String,
-      reviewScore: (json['reviewScore'] as num?)?.toDouble() ?? 0.0,
-      numHit: json['numHit'] as int? ?? 0,
+      hits: json['hits'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$ComputerCPUModelToJson(ComputerCPUModel instance) =>
@@ -48,8 +47,7 @@ Map<String, dynamic> _$ComputerCPUModelToJson(ComputerCPUModel instance) =>
       'shopLogo': instance.shopLogo,
       'shopName': instance.shopName,
       'manufacturer': instance.manufacturer,
-      'reviewScore': instance.reviewScore,
-      'numHit': instance.numHit,
+      'hits': instance.hits,
       'socket': instance.socket,
       'tcp': instance.tcp,
       'maxClock': instance.maxClock,

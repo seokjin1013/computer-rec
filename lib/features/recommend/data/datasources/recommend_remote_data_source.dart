@@ -1,14 +1,23 @@
 import 'dart:convert';
 
+import 'package:clean_architecture_flutter/features/recommend/data/models/computer_combine_model.dart';
 import 'package:clean_architecture_flutter/features/recommend/data/models/milestone_model.dart';
+import 'package:clean_architecture_flutter/features/recommend/domain/entities/computer_combine.dart';
 import 'package:clean_architecture_flutter/features/recommend/domain/entities/milestone.dart';
+import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_item_hit%20copy.dart';
+import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_recommend_output.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../../core/error/exceptions.dart';
+import '../../domain/entities/recommend_input_list.dart';
 import '../models/computer_item_model.dart';
 
 abstract class RecommendRemoteDataSource {
+  Future<double> getBottleneckCPUVGA(int cpuId, int vgaId);
+  Future<List<RecommendOutputModel>> getRecommendOutput(
+      RecommendInput recommendInput);
   Future<MilestoneModel> getMilestone();
+  Future<int> getComputerCPUIdHit(int rank);
   Future<List<int>> getComputerCPUIdBestRange(int start, int end);
   Future<ComputerCPUModel> getComputerCPU(int id);
   Future<ComputerVGAModel> getComputerVGA(int id);
@@ -29,6 +38,80 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
   RecommendRemoteDataSourceImpl({required this.client});
 
   @override
+  Future<double> getBottleneckCPUVGA(int cpuId, int vgaId) async {
+    final response = await client.get(
+      Uri.parse('http://175.196.11.206:8080/bottleneck/model/$cpuId/$vgaId'),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    );
+    if (response.statusCode == 200) {
+      String result = response.body;
+      result = result.substring(0, result.length - 1);
+      return double.tryParse(result)!;
+    }
+    throw ServerException(response.statusCode);
+  }
+
+  @override
+  Future<List<RecommendOutputModel>> getRecommendOutput(
+      RecommendInput recommendInput) async {
+    int start = recommendInput.priceLow;
+    int end = recommendInput.priceHigh;
+    String cpu = '';
+    if (recommendInput.priorIntelCPU && recommendInput.priorAMDCPU) {
+      cpu = 'ANY';
+    } else if (recommendInput.priorIntelCPU) {
+      cpu = '인텔';
+    } else if (recommendInput.priorAMDCPU) {
+      cpu = 'AMD';
+    }
+
+    final response = await client.get(
+      Uri.parse('http://175.196.11.206:8080/combine/$start/$end/$cpu'),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    );
+    if (response.statusCode == 200) {
+      final List<dynamic> outputs =
+          json.decode(utf8.decode(response.bodyBytes));
+      final List<RecommendOutputModel> recommendOutputModels = [];
+      Map<String, String> renamingMap = {
+        'cpu_id': 'cpuId',
+        'gpu_id': 'vgaId',
+        'ram_id': 'ramId',
+        'mainboard_id': 'mainboardId',
+        'ssd_id': 'ssdId',
+        'hdd_id': 'hddId',
+        'cooler_id': 'coolerId',
+        'power_id': 'powerId',
+        'case_id': 'caseId',
+        'cpu_count': 'numCpu',
+        'gpu_count': 'numVga',
+        'ram_count': 'numRam',
+        'mainboard_count': 'numMainboard',
+        'ssd_count': 'numSsd',
+        'hdd_count': 'numHdd',
+        'cooler_count': 'numCooler',
+        'power_count': 'numPower',
+        'case_count': 'numCase',
+        'total_price': 'totalPrice',
+        'total_link': 'totalLink',
+      };
+      for (Map<String, dynamic> map in outputs) {
+        final Map<String, dynamic> renamedMap = {
+          for (MapEntry<String, dynamic> e in map.entries)
+            renamingMap[e.key] ?? e.key: e.value
+        };
+        recommendOutputModels.add(RecommendOutputModel.fromJson(renamedMap));
+      }
+      return recommendOutputModels;
+    }
+    throw ServerException(response.statusCode);
+  }
+
+  @override
   Future<MilestoneModel> getMilestone() async {
     final response = await client.get(
       Uri.parse('http://175.196.11.206:8080/milestone'),
@@ -38,6 +121,21 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
     );
     if (response.statusCode == 200) {
       return MilestoneModel.fromJson(json.decode(response.body));
+    }
+    throw ServerException(response.statusCode);
+  }
+
+  @override
+  Future<int> getComputerCPUIdHit(int rank) async {
+    final response = await client.get(
+      Uri.parse('http://175.196.11.206:8080/cpu/hits/$rank'),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    );
+    if (response.statusCode == 200) {
+      final List<dynamic> ids = json.decode(utf8.decode(response.bodyBytes));
+      return ids.cast<int>().first;
     }
     throw ServerException(response.statusCode);
   }

@@ -43,12 +43,12 @@ class ComputerItemDisplay extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(computerItem.reviewScore.toString(),
+                  child: Text(computerItem.score.toString(),
                       style: Theme.of(context).textTheme.headline6),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(computerItem.numHit.toString(),
+                  child: Text(computerItem.hits.toString(),
                       style: Theme.of(context).textTheme.headline6),
                 ),
               ],
