@@ -20,6 +20,11 @@ class MyApp extends StatelessWidget {
         fontFamily: 'GMarketSans',
         brightness: Brightness.dark,
         primarySwatch: Colors.grey,
+        textTheme: const TextTheme(
+          headline4: TextStyle(color: Color(0xFFFAFAFA)),
+          headline5: TextStyle(color: Color(0xFFEFEFEF)),
+          headline6: TextStyle(color: Color(0xFFE8E8E8)),
+        ),
         appBarTheme: const AppBarTheme(
           iconTheme: IconThemeData(color: Colors.black),
           color: Colors.deepPurple,

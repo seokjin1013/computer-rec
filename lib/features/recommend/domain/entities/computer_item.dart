@@ -12,6 +12,7 @@ class ComputerItem {
   final String shopLink;
   final String shopLogo;
   final String shopName;
+  final String manufacturer;
   final double reviewScore;
   final int numHit;
 
@@ -29,12 +30,12 @@ class ComputerItem {
       required this.shopLink,
       required this.shopLogo,
       required this.shopName,
+      required this.manufacturer,
       this.reviewScore = 0.0,
       this.numHit = 0});
 }
 
 class ComputerCPU extends ComputerItem {
-  final String manufacturer;
   final String socket;
   final String tcp;
   final String maxClock;
@@ -44,8 +45,7 @@ class ComputerCPU extends ComputerItem {
   // final String memoryClock;
 
   ComputerCPU(
-      {required this.manufacturer,
-      required this.socket,
+      {required this.socket,
       required this.tcp,
       required this.maxClock,
       required this.numCore,
@@ -65,12 +65,12 @@ class ComputerCPU extends ComputerItem {
       required super.shopLink,
       required super.shopLogo,
       required super.shopName,
+      required super.manufacturer,
       super.reviewScore = 0.0,
       super.numHit = 0});
 }
 
 class ComputerVGA extends ComputerItem {
-  final String manufacturer;
   final String chipsetManufacturer;
   final String memoryCapacity;
   final String hdmi;
@@ -84,8 +84,7 @@ class ComputerVGA extends ComputerItem {
   final int totalRank;
 
   ComputerVGA(
-      {required this.manufacturer,
-      required this.chipsetManufacturer,
+      {required this.chipsetManufacturer,
       required this.memoryCapacity,
       required this.hdmi,
       required this.displayPort,
@@ -108,19 +107,18 @@ class ComputerVGA extends ComputerItem {
       required super.totalScore,
       required super.shopLink,
       required super.shopLogo,
-      required super.shopName});
+      required super.shopName,
+      required super.manufacturer});
 }
 
 class ComputerRAM extends ComputerItem {
-  final String manufacturer;
   final String useDevice;
   // final String category;
   final String memoryCapacity;
   // final String clock;
 
   ComputerRAM(
-      {required this.manufacturer,
-      required this.useDevice,
+      {required this.useDevice,
       // required this.category,
       required this.memoryCapacity,
       // required this.clock,
@@ -136,11 +134,11 @@ class ComputerRAM extends ComputerItem {
       required super.totalScore,
       required super.shopLink,
       required super.shopLogo,
-      required super.shopName});
+      required super.shopName,
+      required super.manufacturer});
 }
 
 class ComputerMainBoard extends ComputerItem {
-  final String manufacturer;
   final String category;
   // final String cpuSocket;
   final String detailChipset;
@@ -151,8 +149,7 @@ class ComputerMainBoard extends ComputerItem {
   // final String isM2;
 
   ComputerMainBoard(
-      {required this.manufacturer,
-      required this.category,
+      {required this.category,
       // required this.cpuSocket,
       required this.detailChipset,
       required this.formFactor,
@@ -172,17 +169,17 @@ class ComputerMainBoard extends ComputerItem {
       required super.totalScore,
       required super.shopLink,
       required super.shopLogo,
-      required super.shopName});
+      required super.shopName,
+      required super.manufacturer});
 }
 
 class ComputerSSD extends ComputerItem {
-  final String manufacturer;
   // final String category;
   final String formFactor;
   // final String memoryCapacity;
 
   ComputerSSD(
-      {required this.manufacturer,
+      {
       // required this.category,
       required this.formFactor,
       // required this.memoryCapacity,
@@ -198,17 +195,16 @@ class ComputerSSD extends ComputerItem {
       required super.totalScore,
       required super.shopLink,
       required super.shopLogo,
-      required super.shopName});
+      required super.shopName,
+      required super.manufacturer});
 }
 
 class ComputerHDD extends ComputerItem {
-  final String manufacturer;
   final String category;
   // final String memoryCapacity;
 
   ComputerHDD(
-      {required this.manufacturer,
-      required this.category,
+      {required this.category,
       // required this.memoryCapacity,
       required super.id,
       required super.price,
@@ -222,17 +218,16 @@ class ComputerHDD extends ComputerItem {
       required super.totalScore,
       required super.shopLink,
       required super.shopLogo,
-      required super.shopName});
+      required super.shopName,
+      required super.manufacturer});
 }
 
 class ComputerCooler extends ComputerItem {
-  final String manufacturer;
   final String coolingType;
   // final String fanSize;
 
   ComputerCooler(
-      {required this.manufacturer,
-      required this.coolingType,
+      {required this.coolingType,
       // required this.fanSize,
       required super.id,
       required super.price,
@@ -246,19 +241,18 @@ class ComputerCooler extends ComputerItem {
       required super.totalScore,
       required super.shopLink,
       required super.shopLogo,
-      required super.shopName});
+      required super.shopName,
+      required super.manufacturer});
 }
 
 class ComputerPower extends ComputerItem {
-  final String manufacturer;
   final String category;
   // final String staticPower;
   final String is80Plus;
   // final String cableConnection;
 
   ComputerPower(
-      {required this.manufacturer,
-      required this.category,
+      {required this.category,
       // required this.staticPower,
       required this.is80Plus,
       // required this.cableConnection,
@@ -274,11 +268,11 @@ class ComputerPower extends ComputerItem {
       required super.totalScore,
       required super.shopLink,
       required super.shopLogo,
-      required super.shopName});
+      required super.shopName,
+      required super.manufacturer});
 }
 
 class ComputerCase extends ComputerItem {
-  final String manufacturer;
   final String category;
   final String size;
   final String supportPowerType;
@@ -291,8 +285,7 @@ class ComputerCase extends ComputerItem {
   // final String forwardRadiator;
 
   ComputerCase(
-      {required this.manufacturer,
-      required this.category,
+      {required this.category,
       required this.size,
       required this.supportPowerType,
       required this.width,
@@ -314,5 +307,6 @@ class ComputerCase extends ComputerItem {
       required super.totalScore,
       required super.shopLink,
       required super.shopLogo,
-      required super.shopName});
+      required super.shopName,
+      required super.manufacturer});
 }

@@ -1,3 +1,5 @@
+import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_milestone.dart';
+
 import 'core/user/user_info.dart';
 import 'features/recommend/domain/usecases/get_computer_item.dart';
 
@@ -17,7 +19,8 @@ import 'package:http/http.dart' as http;
 final sl = GetIt.instance;
 
 Future<void> init() async {
-  sl.registerFactory(() => MainProvider(sl(), sl()));
+  sl.registerFactory(() => MainProvider(sl(), sl(), sl()));
+  sl.registerLazySingleton(() => GetMilestone(sl()));
   sl.registerLazySingleton(() => GetComputerCPUIdBestRange(sl()));
   sl.registerLazySingleton(() => GetComputerCPU(sl()));
   sl.registerLazySingleton(() => GetComputerVGA(sl()));

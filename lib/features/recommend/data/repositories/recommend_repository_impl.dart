@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:clean_architecture_flutter/features/recommend/domain/entities/milestone.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/exceptions.dart';
@@ -15,6 +16,20 @@ class RecommendRepositoryImpl implements RecommendRepository {
 
   RecommendRepositoryImpl(
       {required this.remoteDataSource, required this.networkInfo});
+
+  @override
+  Future<Either<Failure, Milestone>> getMilestone() async {
+    if (await networkInfo.isConnected) {
+      try {
+        final remoteComputerItem = await remoteDataSource.getMilestone();
+        return Right(remoteComputerItem);
+      } on ServerException catch (e) {
+        return Left(ServerFailure(errorCode: e.errorCode));
+      }
+    } else {
+      return Left(ConnectionFailure());
+    }
+  }
 
   @override
   Future<Either<Failure, List<int>>> getComputerCPUIdBestRange(

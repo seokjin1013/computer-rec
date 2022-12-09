@@ -1,11 +1,14 @@
 import 'dart:convert';
 
+import 'package:clean_architecture_flutter/features/recommend/data/models/milestone_model.dart';
+import 'package:clean_architecture_flutter/features/recommend/domain/entities/milestone.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../../core/error/exceptions.dart';
 import '../models/computer_item_model.dart';
 
 abstract class RecommendRemoteDataSource {
+  Future<MilestoneModel> getMilestone();
   Future<List<int>> getComputerCPUIdBestRange(int start, int end);
   Future<ComputerCPUModel> getComputerCPU(int id);
   Future<ComputerVGAModel> getComputerVGA(int id);
@@ -24,6 +27,20 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
   final http.Client client;
 
   RecommendRemoteDataSourceImpl({required this.client});
+
+  @override
+  Future<MilestoneModel> getMilestone() async {
+    final response = await client.get(
+      Uri.parse('http://175.196.11.206:8080/milestone'),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    );
+    if (response.statusCode == 200) {
+      return MilestoneModel.fromJson(json.decode(response.body));
+    }
+    throw ServerException(response.statusCode);
+  }
 
   @override
   Future<List<int>> getComputerCPUIdBestRange(int start, int end) async {
