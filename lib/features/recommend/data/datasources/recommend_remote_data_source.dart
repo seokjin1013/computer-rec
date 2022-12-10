@@ -93,7 +93,7 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
     }
 
     final response = await client.get(
-      Uri.parse('http://175.196.11.206:8080/combine/$start/$end/$cpu'),
+      Uri.parse('http://175.196.11.206:8080/combine/csv/$start/$end/$cpu'),
       headers: {
         'Content-Type': 'application/json',
       },

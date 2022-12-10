@@ -9,6 +9,7 @@ import '../entities/program_fit.dart';
 import '../entities/recommend_input.dart';
 
 abstract class RecommendRepository {
+  Future<String> getTodayTip(int num);
   Future<Either<Failure, List<ProgramFit>>> getComputerProgramFit(
       int vgaId, int purpose);
   Future<Either<Failure, double>> getBottleneckCPUVGA(int cpuId, int vgaId);

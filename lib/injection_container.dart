@@ -3,9 +3,11 @@ import 'package:clean_architecture_flutter/features/recommend/domain/usecases/ge
 import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_program_fit.dart';
 import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_milestone.dart';
 import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_recommend_output.dart';
+import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_today_tip.dart';
 import 'package:clean_architecture_flutter/features/recommend/presentation/provider/recommend_input_provider.dart';
 
 import 'core/user/user_info.dart';
+import 'features/recommend/data/datasources/recommend_local_data_source.dart';
 import 'features/recommend/domain/usecases/get_computer_item.dart';
 
 import 'features/recommend/data/datasources/recommend_remote_data_source.dart';
@@ -26,10 +28,11 @@ import 'features/recommend/presentation/provider/recommend_output_provider.dart'
 final sl = GetIt.instance;
 
 Future<void> init() async {
-  sl.registerFactory(() => MainProvider(sl(), sl(), sl()));
+  sl.registerFactory(() => MainProvider(sl(), sl(), sl(), sl()));
   sl.registerFactory(() => RecommendInputProvider());
   sl.registerFactory(() => RecommendOutputProvider(
       sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl()));
+  sl.registerLazySingleton(() => GetTodayTip(sl()));
   sl.registerLazySingleton(() => GetComputerProgramFit(sl()));
   sl.registerLazySingleton(() => GetBottleneckCPUVGA(sl()));
   sl.registerLazySingleton(() => GetRecommendOutput(sl()));
@@ -49,8 +52,11 @@ Future<void> init() async {
   sl.registerLazySingleton(() => PostNewAccount(sl()));
   sl.registerLazySingleton<RecommendRepository>(() => RecommendRepositoryImpl(
         networkInfo: sl(),
+        localDataSource: sl(),
         remoteDataSource: sl(),
       ));
+  sl.registerLazySingleton<RecommendLocalDataSource>(
+      () => RecommendLocalDataSourceImpl());
   sl.registerLazySingleton<RecommendRemoteDataSource>(
       () => RecommendRemoteDataSourceImpl(client: sl()));
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));

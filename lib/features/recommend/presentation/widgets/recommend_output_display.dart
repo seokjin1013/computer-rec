@@ -5,6 +5,7 @@ import 'package:clean_architecture_flutter/features/recommend/presentation/widge
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../domain/entities/recommend_input.dart';
 import '../provider/recommend_output_provider.dart';
@@ -64,10 +65,12 @@ class RecommendOutputDisplay extends StatelessWidget {
       future: vmRead.bottleneck[vmWatch.viewIndex],
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          return snapshot.data!.fold(
-            (l) => Container(),
-            (r) => BottleneckChart(100 - r),
-          );
+          return snapshot.data!.fold((l) => Container(), (r) {
+            if (100 - r == 0) {
+              return const NoBottleneckChart();
+            }
+            return BottleneckChart(100 - r);
+          });
         }
         return Container();
       },
@@ -130,6 +133,42 @@ class RecommendOutputDisplay extends StatelessWidget {
               child: Text('견적서', style: Theme.of(context).textTheme.headline4),
             ),
             buildPartsList(context),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: () => showDialog<String>(
+                      context: context,
+                      builder: ((context) => buildMallDialog(context)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text('구매링크',
+                          style: Theme.of(context).textTheme.headline4),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      final messenger = ScaffoldMessenger.of(context);
+                      messenger.showSnackBar(const SnackBar(
+                        duration: Duration(seconds: 1),
+                        content: Text('견적 정보가 저장되었습니다.'),
+                      ));
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text('저장하기',
+                          style: Theme.of(context).textTheme.headline4),
+                    ),
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),
@@ -190,6 +229,36 @@ class RecommendOutputDisplay extends StatelessWidget {
       ]),
     );
   }
+
+  Widget buildMallDialog(BuildContext context) {
+    return AlertDialog(
+      title: const Text('외부 웹사이트 구매페이지를 여시겠습니까?'),
+      content: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('샵다나와 구매페이지'),
+            SizedBox(
+              width: 600,
+              child: Text(
+                recommendOutput.totalLink,
+                overflow: TextOverflow.fade,
+              ),
+            ),
+          ],
+        ),
+      ),
+      actions: <Widget>[
+        TextButton(
+          child: const Text('열기'),
+          onPressed: () {
+            launchUrl(Uri.parse(recommendOutput.totalLink));
+            Navigator.of(context).pop();
+          },
+        ),
+      ],
+    );
+  }
 }
 
 class BottleneckChart extends StatelessWidget {
@@ -222,6 +291,39 @@ class BottleneckChart extends StatelessWidget {
       ],
       animationDuration: 2000,
       enableLoadingAnimation: true,
+    );
+  }
+}
+
+class NoBottleneckChart extends StatelessWidget {
+  const NoBottleneckChart({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        SfRadialGauge(
+          axes: <RadialAxis>[
+            RadialAxis(
+              startAngle: 180,
+              canScaleToFit: true,
+              endAngle: 0,
+              interval: 10,
+              useRangeColorForAxis: true,
+            ),
+          ],
+        ),
+        const Positioned.fill(
+          child: ColoredBox(
+            color: Color(0x88000000),
+          ),
+        ),
+        Text(
+          'GPU가 없습니다.',
+          style: Theme.of(context).textTheme.headline6,
+        ),
+      ],
     );
   }
 }

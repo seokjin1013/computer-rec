@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:clean_architecture_flutter/features/recommend/domain/entities/milestone.dart';
 import 'package:clean_architecture_flutter/features/recommend/presentation/pages/recommend_input_page.dart';
 import 'package:clean_architecture_flutter/features/recommend/presentation/provider/main_provider.dart';
@@ -52,7 +54,6 @@ class MainPage extends StatelessWidget {
         buildMilestone(context),
         buildTodayTip(context),
         buildRecentHotCPUList(context),
-        // SizedBox(height: 1000, child: TextThemeAllDisplay()),
       ],
     );
   }
@@ -75,9 +76,23 @@ class MainPage extends StatelessWidget {
   }
 
   Widget buildTodayTip(BuildContext context) {
-    return Center(
-      child: Text('💡오늘의 팁\n이러쿵저러쿵!',
-          style: Theme.of(context).textTheme.headline4),
+    final vmRead = context.read<MainProvider>();
+    int randomNumber = Random().nextInt(16);
+    randomNumber = 0;
+    Future<String> tip = vmRead.getTodayTip(randomNumber);
+    return FutureBuilder(
+      future: tip,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          return Center(
+            child: Text('💡오늘의 팁\n${snapshot.data}',
+                style: Theme.of(context).textTheme.headline4),
+          );
+        }
+        return Center(
+          child: Text('💡오늘의 팁', style: Theme.of(context).textTheme.headline4),
+        );
+      },
     );
   }
 

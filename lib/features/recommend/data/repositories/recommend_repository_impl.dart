@@ -13,14 +13,23 @@ import '../../domain/entities/computer_item.dart';
 import '../../domain/entities/program_fit.dart';
 import '../../domain/entities/recommend_input.dart';
 import '../../domain/repositories/recommend_repository.dart';
+import '../datasources/recommend_local_data_source.dart';
 import '../datasources/recommend_remote_data_source.dart';
 
 class RecommendRepositoryImpl implements RecommendRepository {
+  final RecommendLocalDataSource localDataSource;
   final RecommendRemoteDataSource remoteDataSource;
   final NetworkInfo networkInfo;
 
   RecommendRepositoryImpl(
-      {required this.remoteDataSource, required this.networkInfo});
+      {required this.localDataSource,
+      required this.remoteDataSource,
+      required this.networkInfo});
+
+  @override
+  Future<String> getTodayTip(int num) async {
+    return localDataSource.getTodayTip(num);
+  }
 
   @override
   Future<Either<Failure, List<ProgramFit>>> getComputerProgramFit(

@@ -26,11 +26,11 @@ class MyApp extends StatelessWidget {
     RecommendInput recommendInput = RecommendInput(
       priorIntelCPU: true,
       priorAMDCPU: false,
-      priceLow: 1000000,
-      priceHigh: 2000000,
+      priceLow: 500000,
+      priceHigh: 700000,
       purpose: 2,
     );
-    GetComputerRAM getComputerItem = sl();
+    GetComputerCooler getComputerItem = sl();
     return MaterialApp(
       title: '컴퓨터 견적 추천 시스템',
       theme: ThemeData(
@@ -53,7 +53,18 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
+      // home: RecommendOutputPage(recommendInput: recommendInput),
       home: const MainPage(),
+      // home: FutureBuilder(
+      //   future: getComputerItem(14705225),
+      //   builder: (context, snapshot) {
+      //     if (snapshot.connectionState == ConnectionState.done) {
+      //       return snapshot.data!.fold((l) => Container(),
+      //           (r) => ComputerItemDisplay2(computerItem: r));
+      //     }
+      //     return CircularProgressIndicator();
+      //   },
+      // ),
     );
   }
 }
