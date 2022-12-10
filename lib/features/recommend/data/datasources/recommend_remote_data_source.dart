@@ -98,7 +98,6 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
         'Content-Type': 'application/json',
       },
     );
-    print('http://175.196.11.206:8080/combine/$start/$end/$cpu');
     if (response.statusCode == 200) {
       final List<dynamic> outputs =
           json.decode(utf8.decode(response.bodyBytes));

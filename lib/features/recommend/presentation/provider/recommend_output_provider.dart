@@ -69,17 +69,33 @@ class RecommendOutputProvider with ChangeNotifier {
       if (value.isRight()) {
         List<RecommendOutput> r = value.asRight();
         for (int i = 0; i < r.length; ++i) {
-          cpu.add(getComputerCPU(r[i].cpuId));
-          vga.add(getComputerVGA(r[i].vgaId));
-          ram.add(getComputerRAM(r[i].ramId));
-          mainboard.add(getComputerMainBoard(r[i].mainboardId));
-          ssd.add(getComputerSSD(r[i].ssdId));
+          cpu.add(r[i].numCpu > 0
+              ? getComputerCPU(r[i].cpuId)
+              : Future.value(Right(NoCPU())));
+          vga.add(r[i].numVga > 0
+              ? getComputerVGA(r[i].vgaId)
+              : Future.value(Right(NoVGA())));
+          ram.add(r[i].numRam > 0
+              ? getComputerRAM(r[i].ramId)
+              : Future.value(Right(NoRAM())));
+          mainboard.add(r[i].numMainboard > 0
+              ? getComputerMainBoard(r[i].mainboardId)
+              : Future.value(Right(NoMainBoard())));
+          ssd.add(r[i].numSsd > 0
+              ? getComputerSSD(r[i].ssdId)
+              : Future.value(Right(NoSSD())));
           hdd.add(r[i].numHdd > 0
               ? getComputerHDD(r[i].hddId)
               : Future.value(Right(NoHDD())));
-          cooler.add(getComputerCooler(r[i].coolerId));
-          power.add(getComputerPower(r[i].powerId));
-          ccase.add(getComputerCase(r[i].caseId));
+          cooler.add(r[i].numCooler > 0
+              ? getComputerCooler(r[i].coolerId)
+              : Future.value(Right(NoCooler())));
+          power.add(r[i].numPower > 0
+              ? getComputerPower(r[i].powerId)
+              : Future.value(Right(NoPower())));
+          ccase.add(r[i].numCase > 0
+              ? getComputerCase(r[i].caseId)
+              : Future.value(Right(NoCase())));
           bottleneck.add(Future.wait([cpu.last, vga.last]).then((value) {
             if (value[0].isLeft()) {
               return Left(value[0].asLeft());

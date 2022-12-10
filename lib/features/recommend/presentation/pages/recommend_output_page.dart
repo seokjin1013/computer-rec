@@ -42,19 +42,21 @@ class RecommendOutputPage extends StatelessWidget {
       future: vmRead.results,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          return snapshot.data!.fold(
-            (l) => Container(),
-            (r) => Row(
+          return snapshot.data!.fold((l) => Container(), (r) {
+            if (r.length == 0) {
+              return Center(child: Text('조건을 만족하는 견적서가 없습니다.'));
+            }
+            return Row(
               children: [
                 RecommendOutputListDisplay(),
                 Expanded(
                   child: RecommendOutputDisplay(r[vmRead.viewIndex]),
                 ),
               ],
-            ),
-          );
+            );
+          });
         }
-        return CircularProgressIndicator();
+        return Center(child: CircularProgressIndicator());
       },
     );
   }
