@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 import '../../domain/entities/recommend_output.dart';
 
 part 'computer_combine_model.g.dart';

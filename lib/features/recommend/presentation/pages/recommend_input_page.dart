@@ -1,10 +1,10 @@
-import 'package:clean_architecture_flutter/features/recommend/domain/entities/milestone.dart';
-import 'package:clean_architecture_flutter/features/recommend/presentation/pages/recommend_output_page.dart';
-import 'package:clean_architecture_flutter/features/recommend/presentation/provider/main_provider.dart';
-import 'package:clean_architecture_flutter/features/recommend/presentation/widgets/computer_item_display.dart';
-import 'package:clean_architecture_flutter/features/recommend/presentation/widgets/computer_item_display2.dart';
-import 'package:clean_architecture_flutter/features/recommend/presentation/widgets/milestone_display.dart';
-import 'package:clean_architecture_flutter/features/recommend/presentation/widgets/selection_card.dart';
+import '../../domain/entities/milestone.dart';
+import 'recommend_output_page.dart';
+import '../provider/main_provider.dart';
+import '../widgets/computer_item_display.dart';
+import '../widgets/computer_item_display2.dart';
+import '../widgets/milestone_display.dart';
+import '../widgets/selection_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

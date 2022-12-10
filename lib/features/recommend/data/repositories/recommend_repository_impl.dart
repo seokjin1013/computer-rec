@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import 'package:clean_architecture_flutter/features/recommend/domain/entities/milestone.dart';
-import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_item_hit%20copy.dart';
-import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_recommend_output.dart';
+import '../../domain/entities/milestone.dart';
+import '../../domain/usecases/get_computer_item_hit%20copy.dart';
+import '../../domain/usecases/get_recommend_output.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/exceptions.dart';

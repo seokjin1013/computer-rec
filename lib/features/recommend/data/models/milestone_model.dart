@@ -1,4 +1,4 @@
-import 'package:clean_architecture_flutter/features/recommend/domain/entities/milestone.dart';
+import '../../domain/entities/milestone.dart';
 import 'package:json_annotation/json_annotation.dart';
 import '../../domain/entities/computer_item.dart';
 

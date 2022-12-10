@@ -1,12 +1,12 @@
-import 'package:clean_architecture_flutter/features/recommend/domain/entities/computer_item.dart';
-import 'package:clean_architecture_flutter/features/recommend/domain/entities/no_item.dart';
-import 'package:clean_architecture_flutter/features/recommend/domain/entities/program_fit.dart';
-import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_item_hit%20copy.dart';
-import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_program_fit.dart';
-import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_milestone.dart';
-import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_recommend_output.dart';
+import '../../domain/entities/computer_item.dart';
+import '../../domain/entities/no_item.dart';
+import '../../domain/entities/program_fit.dart';
+import '../../domain/usecases/get_computer_item_hit%20copy.dart';
+import '../../domain/usecases/get_computer_program_fit.dart';
+import '../../domain/usecases/get_milestone.dart';
+import '../../domain/usecases/get_recommend_output.dart';
 import 'package:dartz/dartz.dart';
-import 'package:clean_architecture_flutter/core/utility/dartz_x.dart';
+import '../../../../core/utility/dartz_x.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

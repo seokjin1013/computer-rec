@@ -1,10 +1,10 @@
-import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_item_hit%20copy.dart';
-import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_item_hit.dart';
-import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_program_fit.dart';
-import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_milestone.dart';
-import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_recommend_output.dart';
-import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_today_tip.dart';
-import 'package:clean_architecture_flutter/features/recommend/presentation/provider/recommend_input_provider.dart';
+import 'features/recommend/domain/usecases/get_computer_item_hit%20copy.dart';
+import 'features/recommend/domain/usecases/get_computer_item_hit.dart';
+import 'features/recommend/domain/usecases/get_computer_program_fit.dart';
+import 'features/recommend/domain/usecases/get_milestone.dart';
+import 'features/recommend/domain/usecases/get_recommend_output.dart';
+import 'features/recommend/domain/usecases/get_today_tip.dart';
+import 'features/recommend/presentation/provider/recommend_input_provider.dart';
 
 import 'core/user/user_info.dart';
 import 'features/recommend/data/datasources/recommend_local_data_source.dart';

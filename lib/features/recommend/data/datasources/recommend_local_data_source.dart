@@ -1,12 +1,12 @@
 import 'dart:convert';
 
-import 'package:clean_architecture_flutter/features/recommend/data/models/computer_combine_model.dart';
-import 'package:clean_architecture_flutter/features/recommend/data/models/milestone_model.dart';
-import 'package:clean_architecture_flutter/features/recommend/domain/entities/recommend_output.dart';
-import 'package:clean_architecture_flutter/features/recommend/domain/entities/milestone.dart';
-import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_item_hit%20copy.dart';
-import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_program_fit.dart';
-import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_recommend_output.dart';
+import '../models/computer_combine_model.dart';
+import '../models/milestone_model.dart';
+import '../../domain/entities/recommend_output.dart';
+import '../../domain/entities/milestone.dart';
+import '../../domain/usecases/get_computer_item_hit%20copy.dart';
+import '../../domain/usecases/get_computer_program_fit.dart';
+import '../../domain/usecases/get_recommend_output.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 

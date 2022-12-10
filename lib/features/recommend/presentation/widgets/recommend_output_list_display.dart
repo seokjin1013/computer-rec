@@ -1,5 +1,5 @@
-import 'package:clean_architecture_flutter/features/recommend/presentation/provider/recommend_output_provider.dart';
-import 'package:clean_architecture_flutter/features/recommend/presentation/widgets/selection_card.dart';
+import '../provider/recommend_output_provider.dart';
+import 'selection_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -9,7 +9,7 @@ import '../../../../core/utility/string.dart';
 import '../../domain/entities/recommend_output.dart';
 import '../../domain/entities/computer_item.dart';
 import '../../../../core/error/failures.dart';
-import 'package:clean_architecture_flutter/core/utility/dartz_x.dart';
+import '../../../../core/utility/dartz_x.dart';
 
 import '../pages/main_page.dart';
 

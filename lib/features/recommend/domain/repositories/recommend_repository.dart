@@ -1,5 +1,5 @@
-import 'package:clean_architecture_flutter/features/recommend/domain/entities/milestone.dart';
-import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_item_hit%20copy.dart';
+import '../entities/milestone.dart';
+import '../usecases/get_computer_item_hit%20copy.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/failures.dart';

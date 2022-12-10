@@ -1,7 +1,7 @@
-import 'package:clean_architecture_flutter/features/recommend/domain/entities/computer_item.dart';
-import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_milestone.dart';
+import '../../domain/entities/computer_item.dart';
+import '../../domain/usecases/get_milestone.dart';
 import 'package:dartz/dartz.dart';
-import 'package:clean_architecture_flutter/core/utility/dartz_x.dart';
+import '../../../../core/utility/dartz_x.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

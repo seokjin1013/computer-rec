@@ -1,7 +1,7 @@
-import 'package:clean_architecture_flutter/features/recommend/domain/entities/recommend_output.dart';
-import 'package:clean_architecture_flutter/features/recommend/domain/entities/program_fit.dart';
-import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_program_fit.dart';
-import 'package:clean_architecture_flutter/features/recommend/presentation/widgets/computer_item_display3.dart';
+import '../../domain/entities/recommend_output.dart';
+import '../../domain/entities/program_fit.dart';
+import '../../domain/usecases/get_computer_program_fit.dart';
+import 'computer_item_display3.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';

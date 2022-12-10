@@ -1,11 +1,11 @@
-import 'package:clean_architecture_flutter/features/recommend/domain/entities/recommend_output.dart';
-import 'package:clean_architecture_flutter/features/recommend/domain/entities/recommend_input.dart';
-import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_item.dart';
-import 'package:clean_architecture_flutter/features/recommend/presentation/pages/recommend_input_page.dart';
-import 'package:clean_architecture_flutter/features/recommend/presentation/pages/recommend_output_page.dart';
-import 'package:clean_architecture_flutter/features/recommend/presentation/widgets/computer_item_display.dart';
-import 'package:clean_architecture_flutter/features/recommend/presentation/widgets/computer_item_display2.dart';
-import 'package:clean_architecture_flutter/features/recommend/presentation/widgets/computer_item_display3.dart';
+import 'features/recommend/domain/entities/recommend_output.dart';
+import 'features/recommend/domain/entities/recommend_input.dart';
+import 'features/recommend/domain/usecases/get_computer_item.dart';
+import 'features/recommend/presentation/pages/recommend_input_page.dart';
+import 'features/recommend/presentation/pages/recommend_output_page.dart';
+import 'features/recommend/presentation/widgets/computer_item_display.dart';
+import 'features/recommend/presentation/widgets/computer_item_display2.dart';
+import 'features/recommend/presentation/widgets/computer_item_display3.dart';
 import 'package:flutter/material.dart';
 
 import 'features/recommend/presentation/pages/main_page.dart';

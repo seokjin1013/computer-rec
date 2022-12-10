@@ -1,4 +1,4 @@
-import 'package:clean_architecture_flutter/features/recommend/domain/entities/recommend_output.dart';
+import '../entities/recommend_output.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/failures.dart';
