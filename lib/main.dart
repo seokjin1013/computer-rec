@@ -1,5 +1,5 @@
-import 'package:clean_architecture_flutter/features/recommend/domain/entities/computer_combine.dart';
-import 'package:clean_architecture_flutter/features/recommend/domain/entities/recommend_input_list.dart';
+import 'package:clean_architecture_flutter/features/recommend/domain/entities/recommend_output.dart';
+import 'package:clean_architecture_flutter/features/recommend/domain/entities/recommend_input.dart';
 import 'package:clean_architecture_flutter/features/recommend/presentation/pages/recommend_input_page.dart';
 import 'package:clean_architecture_flutter/features/recommend/presentation/pages/recommend_output_page.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     RecommendInput recommendInput = RecommendInput(
       priorIntelCPU: true,
+      priorAMDCPU: false,
       priceLow: 1000000,
       priceHigh: 2000000,
       purpose: 2,
@@ -46,8 +47,8 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      // home: RecommendOutputPage(recommendInput: recommendInput),
-      home: const MainPage(),
+      home: RecommendOutputPage(recommendInput: recommendInput),
+      // home: const MainPage(),
     );
   }
 }

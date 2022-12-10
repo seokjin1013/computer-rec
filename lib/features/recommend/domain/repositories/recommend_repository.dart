@@ -3,10 +3,10 @@ import 'package:clean_architecture_flutter/features/recommend/domain/usecases/ge
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/failures.dart';
-import '../entities/computer_combine.dart';
+import '../entities/recommend_output.dart';
 import '../entities/computer_item.dart';
 import '../entities/program_fit.dart';
-import '../entities/recommend_input_list.dart';
+import '../entities/recommend_input.dart';
 
 abstract class RecommendRepository {
   Future<Either<Failure, List<ProgramFit>>> getComputerProgramFit(

@@ -8,10 +8,10 @@ import 'package:dartz/dartz.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/network/network_info.dart';
-import '../../domain/entities/computer_combine.dart';
+import '../../domain/entities/recommend_output.dart';
 import '../../domain/entities/computer_item.dart';
 import '../../domain/entities/program_fit.dart';
-import '../../domain/entities/recommend_input_list.dart';
+import '../../domain/entities/recommend_input.dart';
 import '../../domain/repositories/recommend_repository.dart';
 import '../datasources/recommend_remote_data_source.dart';
 

@@ -1,4 +1,4 @@
-import 'package:clean_architecture_flutter/features/recommend/domain/entities/recommend_input_list.dart';
+import 'package:clean_architecture_flutter/features/recommend/domain/entities/recommend_input.dart';
 import 'package:clean_architecture_flutter/features/recommend/presentation/widgets/recommend_output_display.dart';
 import 'package:clean_architecture_flutter/features/recommend/presentation/widgets/recommend_output_list_display.dart';
 import 'package:flutter/material.dart';

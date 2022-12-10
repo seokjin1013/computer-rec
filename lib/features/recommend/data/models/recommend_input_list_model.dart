@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import '../../domain/entities/recommend_input_list.dart';
+import '../../domain/entities/recommend_input.dart';
 
 part 'recommend_input_list_model.g.dart';
 

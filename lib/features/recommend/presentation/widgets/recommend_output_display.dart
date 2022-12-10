@@ -1,4 +1,4 @@
-import 'package:clean_architecture_flutter/features/recommend/domain/entities/computer_combine.dart';
+import 'package:clean_architecture_flutter/features/recommend/domain/entities/recommend_output.dart';
 import 'package:clean_architecture_flutter/features/recommend/domain/entities/program_fit.dart';
 import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_program_fit.dart';
 import 'package:clean_architecture_flutter/features/recommend/presentation/widgets/computer_item_display3.dart';
@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
-import '../../domain/entities/recommend_input_list.dart';
+import '../../domain/entities/recommend_input.dart';
 import '../provider/recommend_output_provider.dart';
 
 class RecommendOutputDisplay extends StatelessWidget {
@@ -45,7 +45,11 @@ class RecommendOutputDisplay extends StatelessWidget {
       child: Card(
         child: Column(
           children: [
-            Text('CPU-GPU 호환성', style: Theme.of(context).textTheme.headline4),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text('CPU-GPU 호환성',
+                  style: Theme.of(context).textTheme.headline4),
+            ),
             Expanded(child: buildBottleneckChart(context)),
           ],
         ),
@@ -76,7 +80,10 @@ class RecommendOutputDisplay extends StatelessWidget {
       child: Card(
         child: Column(
           children: [
-            Text('적합도', style: Theme.of(context).textTheme.headline4),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text('적합도', style: Theme.of(context).textTheme.headline4),
+            ),
             buildProgramFitList(context),
           ],
         ),
@@ -118,7 +125,10 @@ class RecommendOutputDisplay extends StatelessWidget {
       child: Card(
         child: Column(
           children: [
-            Text('견적서', style: Theme.of(context).textTheme.headline4),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text('견적서', style: Theme.of(context).textTheme.headline4),
+            ),
             buildPartsList(context),
           ],
         ),

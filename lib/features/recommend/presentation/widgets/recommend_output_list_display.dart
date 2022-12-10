@@ -6,7 +6,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/utility/string.dart';
-import '../../domain/entities/computer_combine.dart';
+import '../../domain/entities/recommend_output.dart';
 import '../../domain/entities/computer_item.dart';
 import '../../../../core/error/failures.dart';
 import 'package:clean_architecture_flutter/core/utility/dartz_x.dart';

@@ -6,10 +6,10 @@ class RecommendInput {
   int priceHigh; // ex) 9999999
 
   RecommendInput({
-    this.priorIntelCPU = false,
-    this.priorAMDCPU = false,
-    this.purpose = 0,
-    this.priceLow = 0,
-    this.priceHigh = 0,
+    this.priorIntelCPU = true,
+    this.priorAMDCPU = true,
+    this.purpose = 1,
+    this.priceLow = 500000,
+    this.priceHigh = 700000,
   });
 }

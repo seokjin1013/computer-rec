@@ -11,8 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/error/failures.dart';
-import '../../domain/entities/computer_combine.dart';
-import '../../domain/entities/recommend_input_list.dart';
+import '../../domain/entities/recommend_output.dart';
+import '../../domain/entities/recommend_input.dart';
 import '../../domain/usecases/get_computer_item.dart';
 
 class RecommendOutputProvider with ChangeNotifier {

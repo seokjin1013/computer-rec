@@ -8,11 +8,11 @@ part of 'recommend_input_list_model.dart';
 
 RecommendInputModel _$RecommendInputModelFromJson(Map<String, dynamic> json) =>
     RecommendInputModel(
-      priorIntelCPU: json['priorIntelCPU'] as bool? ?? false,
-      priorAMDCPU: json['priorAMDCPU'] as bool? ?? false,
-      purpose: json['purpose'] as int? ?? 0,
-      priceLow: json['priceLow'] as int? ?? 0,
-      priceHigh: json['priceHigh'] as int? ?? 0,
+      priorIntelCPU: json['priorIntelCPU'] as bool? ?? true,
+      priorAMDCPU: json['priorAMDCPU'] as bool? ?? true,
+      purpose: json['purpose'] as int? ?? 1,
+      priceLow: json['priceLow'] as int? ?? 500000,
+      priceHigh: json['priceHigh'] as int? ?? 700000,
     );
 
 Map<String, dynamic> _$RecommendInputModelToJson(

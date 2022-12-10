@@ -72,20 +72,28 @@ class RecommendInputPage extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: SelectionCard(
-                  onTap: () {},
-                  image: Image.asset('logo_intel.png'),
-                  text:
-                      Text('인텔', style: Theme.of(context).textTheme.headline5),
+                child: buildSelectionCard(
+                  context,
+                  () => context
+                      .read<RecommendInputProvider>()
+                      .togglePriorIntelCPU(),
+                  context.select<RecommendInputProvider, bool>(
+                      (value) => value.priorIntelCPU),
+                  Image.asset('logo_intel.png'),
+                  Text('인텔', style: Theme.of(context).textTheme.headline5),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: SelectionCard(
-                  onTap: () {},
-                  image: Image.asset('logo_amd.png'),
-                  text:
-                      Text('AMD', style: Theme.of(context).textTheme.headline5),
+                child: buildSelectionCard(
+                  context,
+                  () => context
+                      .read<RecommendInputProvider>()
+                      .togglePriorAMDCPU(),
+                  context.select<RecommendInputProvider, bool>(
+                      (value) => value.priorAMDCPU),
+                  Image.asset('logo_amd.png'),
+                  Text('AMD', style: Theme.of(context).textTheme.headline5),
                 ),
               ),
             ],
@@ -117,29 +125,35 @@ class RecommendInputPage extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: SelectionCard(
-                  onTap: () {},
-                  image: Image.asset('logo_intel.png'),
-                  text:
-                      Text('사무용', style: Theme.of(context).textTheme.headline5),
+                child: buildSelectionCard(
+                  context,
+                  () => context.read<RecommendInputProvider>().setPurpose(1),
+                  context.select<RecommendInputProvider, bool>(
+                      (value) => value.purpose == 1),
+                  Image.asset('logo_intel.png'),
+                  Text('사무용', style: Theme.of(context).textTheme.headline5),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: SelectionCard(
-                  onTap: () {},
-                  image: Image.asset('logo_amd.png'),
-                  text:
-                      Text('게임용', style: Theme.of(context).textTheme.headline5),
+                child: buildSelectionCard(
+                  context,
+                  () => context.read<RecommendInputProvider>().setPurpose(2),
+                  context.select<RecommendInputProvider, bool>(
+                      (value) => value.purpose == 2),
+                  Image.asset('logo_amd.png'),
+                  Text('게임용', style: Theme.of(context).textTheme.headline5),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: SelectionCard(
-                  onTap: () {},
-                  image: Image.asset('logo_amd.png'),
-                  text: Text('그래픽용',
-                      style: Theme.of(context).textTheme.headline5),
+                child: buildSelectionCard(
+                  context,
+                  () => context.read<RecommendInputProvider>().setPurpose(3),
+                  context.select<RecommendInputProvider, bool>(
+                      (value) => value.purpose == 3),
+                  Image.asset('logo_amd.png'),
+                  Text('그래픽용', style: Theme.of(context).textTheme.headline5),
                 ),
               ),
             ],
@@ -150,7 +164,7 @@ class RecommendInputPage extends StatelessWidget {
   }
 
   Widget buildPriceSelection(BuildContext context) {
-    List<int> priceRange = [50, 70, 90, 110, 130, 150, 200, 250];
+    List<int> priceRange = [50, 70, 90, 110, 130, 150, 200, 250, 10000];
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(0),
@@ -173,19 +187,71 @@ class RecommendInputPage extends StatelessWidget {
               direction: Axis.horizontal,
               alignment: WrapAlignment.center,
               children: [
-                for (int i = 0; i < priceRange.length; ++i)
+                for (int i = 0; i < priceRange.length - 1; ++i)
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: SelectionCard(
-                      onTap: () {},
-                      text: Text(
-                          i < priceRange.length - 1
+                    child: buildSelectionCard(
+                      context,
+                      () => context.read<RecommendInputProvider>().setPrice(
+                          priceRange[i] * 10000, priceRange[i + 1] * 10000),
+                      context.select<RecommendInputProvider, bool>((value) =>
+                          value.priceLow / 10000 == priceRange[i] &&
+                          value.priceHigh / 10000 == priceRange[i + 1]),
+                      null,
+                      Text(
+                          i < priceRange.length - 2
                               ? '${priceRange[i]} - ${priceRange[i + 1]}만 원'
                               : '${priceRange[i]} 만 원 이상',
                           style: Theme.of(context).textTheme.headline4),
                     ),
                   ),
               ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildSelectionCard(BuildContext context, VoidCallback onTap, bool isOn,
+      Widget? image, Widget? text) {
+    return Card(
+      color: isOn
+          ? Theme.of(context).colorScheme.onPrimary
+          : Theme.of(context).cardColor,
+      elevation: 10,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Stack(
+        children: [
+          SizedBox(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (image != null)
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: image,
+                    ),
+                  ),
+                if (text != null)
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: text,
+                  ),
+              ],
+            ),
+          ),
+          Positioned.fill(
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(12),
+                onTap: onTap,
+              ),
             ),
           ),
         ],
