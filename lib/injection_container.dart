@@ -1,5 +1,6 @@
 import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_item_hit%20copy.dart';
 import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_item_hit.dart';
+import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_program_fit.dart';
 import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_milestone.dart';
 import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_recommend_output.dart';
 import 'package:clean_architecture_flutter/features/recommend/presentation/provider/recommend_input_provider.dart';
@@ -28,7 +29,8 @@ Future<void> init() async {
   sl.registerFactory(() => MainProvider(sl(), sl(), sl()));
   sl.registerFactory(() => RecommendInputProvider());
   sl.registerFactory(() => RecommendOutputProvider(
-      sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl()));
+      sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl()));
+  sl.registerLazySingleton(() => GetComputerProgramFit(sl()));
   sl.registerLazySingleton(() => GetBottleneckCPUVGA(sl()));
   sl.registerLazySingleton(() => GetRecommendOutput(sl()));
   sl.registerLazySingleton(() => GetMilestone(sl()));

@@ -17,7 +17,8 @@ class _MilestoneDisplayState extends State<MilestoneDisplay> {
   Widget build(BuildContext context) {
     return Center(
       heightFactor: 6,
-      child: Text('지금까지 N명의 유저가\nN개의 조합을 맞췄어요.',
+      child: Text(
+          '지금까지 ${widget.milestone.numUser}명의 유저가\n${widget.milestone.numUser}개의 조합을 맞췄어요.',
           style: Theme.of(context).textTheme.headline2),
     );
   }

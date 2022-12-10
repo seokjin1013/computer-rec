@@ -39,11 +39,11 @@ class RecommendOutputPage extends StatelessWidget {
     final vmRead = context.read<RecommendOutputProvider>();
     vmRead.setRecommendOutputList(recommendInput);
     return FutureBuilder(
-      future: vmRead.resultsReady,
+      future: vmRead.results,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          return vmRead.results.fold(
-            (l) => RecommendOutputListErrorDisplay(message: l.message),
+          return snapshot.data!.fold(
+            (l) => Container(),
             (r) => Row(
               children: [
                 RecommendOutputListDisplay(),
@@ -54,7 +54,7 @@ class RecommendOutputPage extends StatelessWidget {
             ),
           );
         }
-        return const RecommendOutputListLoadingDisplay();
+        return CircularProgressIndicator();
       },
     );
   }

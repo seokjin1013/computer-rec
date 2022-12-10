@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
       priorIntelCPU: true,
       priceLow: 1000000,
       priceHigh: 2000000,
+      purpose: 2,
     );
     return MaterialApp(
       title: '컴퓨터 견적 추천 시스템',
@@ -45,8 +46,8 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: RecommendOutputPage(recommendInput: recommendInput),
-      // home: const MainPage(),
+      // home: RecommendOutputPage(recommendInput: recommendInput),
+      home: const MainPage(),
     );
   }
 }

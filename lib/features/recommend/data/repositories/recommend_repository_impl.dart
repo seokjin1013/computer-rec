@@ -10,6 +10,7 @@ import '../../../../core/error/failures.dart';
 import '../../../../core/network/network_info.dart';
 import '../../domain/entities/computer_combine.dart';
 import '../../domain/entities/computer_item.dart';
+import '../../domain/entities/program_fit.dart';
 import '../../domain/entities/recommend_input_list.dart';
 import '../../domain/repositories/recommend_repository.dart';
 import '../datasources/recommend_remote_data_source.dart';
@@ -20,6 +21,22 @@ class RecommendRepositoryImpl implements RecommendRepository {
 
   RecommendRepositoryImpl(
       {required this.remoteDataSource, required this.networkInfo});
+
+  @override
+  Future<Either<Failure, List<ProgramFit>>> getComputerProgramFit(
+      int vgaId, int purpose) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final recommendOutputs =
+            await remoteDataSource.getComputerProgramFit(vgaId, purpose);
+        return Right(recommendOutputs);
+      } on ServerException catch (e) {
+        return Left(ServerFailure(errorCode: e.errorCode));
+      }
+    } else {
+      return Left(ConnectionFailure());
+    }
+  }
 
   @override
   Future<Either<Failure, double>> getBottleneckCPUVGA(

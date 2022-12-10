@@ -5,14 +5,18 @@ import 'package:clean_architecture_flutter/features/recommend/data/models/milest
 import 'package:clean_architecture_flutter/features/recommend/domain/entities/computer_combine.dart';
 import 'package:clean_architecture_flutter/features/recommend/domain/entities/milestone.dart';
 import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_item_hit%20copy.dart';
+import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_program_fit.dart';
 import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_recommend_output.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../../core/error/exceptions.dart';
+import '../../domain/entities/program_fit.dart';
 import '../../domain/entities/recommend_input_list.dart';
 import '../models/computer_item_model.dart';
+import '../models/program_fit_model.dart';
 
 abstract class RecommendRemoteDataSource {
+  Future<List<ProgramFitModel>> getComputerProgramFit(int vgaId, int purpose);
   Future<double> getBottleneckCPUVGA(int cpuId, int vgaId);
   Future<List<RecommendOutputModel>> getRecommendOutput(
       RecommendInput recommendInput);
@@ -36,6 +40,27 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
   final http.Client client;
 
   RecommendRemoteDataSourceImpl({required this.client});
+
+  @override
+  Future<List<ProgramFitModel>> getComputerProgramFit(
+      int vgaId, int purpose) async {
+    final response = await client.get(
+      Uri.parse('http://175.196.11.206:8080/combine/rate/$vgaId/$purpose'),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    );
+    if (response.statusCode == 200) {
+      final List<dynamic> outputs =
+          json.decode(utf8.decode(response.bodyBytes));
+      final List<ProgramFitModel> programFitModels = [];
+      for (Map<String, dynamic> map in outputs) {
+        programFitModels.add(ProgramFitModel.fromJson(map));
+      }
+      return programFitModels;
+    }
+    throw ServerException(response.statusCode);
+  }
 
   @override
   Future<double> getBottleneckCPUVGA(int cpuId, int vgaId) async {
@@ -114,13 +139,22 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
   @override
   Future<MilestoneModel> getMilestone() async {
     final response = await client.get(
-      Uri.parse('http://175.196.11.206:8080/milestone'),
+      Uri.parse('http://175.196.11.206:8080/combine/total'),
       headers: {
         'Content-Type': 'application/json',
       },
     );
+    Map<String, String> renamingMap = {
+      'user': 'numUser',
+      'count': 'numUsage',
+    };
     if (response.statusCode == 200) {
-      return MilestoneModel.fromJson(json.decode(response.body));
+      final Map<String, dynamic> map = json.decode(response.body);
+      final Map<String, dynamic> renamedMap = {
+        for (MapEntry<String, dynamic> e in map.entries)
+          renamingMap[e.key] ?? e.key: e.value
+      };
+      return MilestoneModel.fromJson(renamedMap);
     }
     throw ServerException(response.statusCode);
   }
@@ -134,8 +168,8 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
       },
     );
     if (response.statusCode == 200) {
-      final List<dynamic> ids = json.decode(utf8.decode(response.bodyBytes));
-      return ids.cast<int>().first;
+      final int id = json.decode(response.body);
+      return id;
     }
     throw ServerException(response.statusCode);
   }

@@ -18,7 +18,6 @@ class RecommendOutputListDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final vmRead = context.read<RecommendOutputProvider>();
     return Card(
       color: const Color(0xFF2E3945),
       elevation: 10,
@@ -27,97 +26,42 @@ class RecommendOutputListDisplay extends StatelessWidget {
       ),
       child: SizedBox(
         width: 500,
-        child: ListView(
-          children: [
-            for (int i = 0; i < vmRead.results.asRight().length; ++i)
-              buildRecommendOutputListTile(context, i),
-          ],
-        ),
+        child: buildListView(context),
       ),
+    );
+  }
+
+  Widget buildListView(BuildContext context) {
+    final vmRead = context.read<RecommendOutputProvider>();
+    return FutureBuilder(
+      future: vmRead.results,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          return snapshot.data!.fold(
+            (l) => Container(),
+            (r) => ListView(
+              children: [
+                for (int i = 0; i < r.length; ++i)
+                  buildRecommendOutputListTile(context, i),
+              ],
+            ),
+          );
+        }
+        return CircularProgressIndicator();
+      },
     );
   }
 
   Widget buildRecommendOutputListTile(BuildContext context, int index) {
     final vmRead = context.read<RecommendOutputProvider>();
-    final titleList = ['Best', '2nd', '3rd', '4th', '5th'];
-    return FutureBuilder(
-      future: Future.wait(
-          [vmRead.ccaseReady[index], vmRead.bottleneckReady[index]]),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          final computerCase = snapshot.data![0];
-          final title = titleList[index];
-          final totalPrice = recommendOutput.totalPrice;
-          final bottleneck = snapshot.data![1];
-          if (computerCase.isLeft()) {
-            return RecommendOutputListTileErrorDisplay(
-                message: computerCase.asLeft().message);
-          }
-          if (bottleneck.isLeft()) {
-            return RecommendOutputListTileErrorDisplay(
-                message: bottleneck.asLeft().message);
-          }
-          return RecommendOutputListTileDisplay(
-            representativeItem: computerCase.asRight() as ComputerItem,
-            title: title,
-            totalPrice: totalPrice,
-            bottleneck: bottleneck.asRight() as double,
-            index: index,
-          );
-        }
-        return RecommendOutputListTileLoadingDisplay();
-      },
-    );
-  }
-}
-
-class RecommendOutputListLoadingDisplay extends StatelessWidget {
-  const RecommendOutputListLoadingDisplay({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return CircularProgressIndicator();
-  }
-}
-
-class RecommendOutputListErrorDisplay extends StatelessWidget {
-  final String message;
-  const RecommendOutputListErrorDisplay(
-      {this.message = '정보를 불러올 수 없습니다.', super.key});
-  @override
-  Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () {},
-      child: Text(message),
-    );
-  }
-}
-
-class RecommendOutputListTileDisplay extends StatelessWidget {
-  final ComputerItem representativeItem;
-  final String title;
-  final int totalPrice;
-  final double bottleneck;
-  final int index;
-  const RecommendOutputListTileDisplay(
-      {required this.representativeItem,
-      required this.title,
-      required this.totalPrice,
-      required this.bottleneck,
-      required this.index,
-      super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final vmRead = context.read<RecommendOutputProvider>();
     final vmWatch = context.watch<RecommendOutputProvider>();
-    final isOn = vmWatch.viewIndex == index;
+    final titleList = ['Best', '2nd', '3rd', '4th', '5th'];
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: SizedBox(
-        height: 200,
+        height: 180,
         child: Card(
-          color: isOn
+          color: vmWatch.viewIndex == index
               ? Theme.of(context).colorScheme.onPrimary
               : Theme.of(context).cardColor,
           elevation: 10,
@@ -134,27 +78,25 @@ class RecommendOutputListTileDisplay extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
-                        child: Image.network(representativeItem.image),
+                        child: buildImage(context, index),
                       ),
                     ),
                     Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(title,
+                          child: Text(titleList[index],
                               style: Theme.of(context).textTheme.headline5),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                              '${getCommaSeperatedPrice(totalPrice.toString())}원',
-                              style: Theme.of(context).textTheme.headline4),
+                          child: buildTotalPrice(context, index),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text('병목률 $bottleneck%',
-                              style: Theme.of(context).textTheme.headline5),
+                          child: buildBottleneck(context, index),
                         ),
                       ],
                     ),
@@ -178,26 +120,54 @@ class RecommendOutputListTileDisplay extends StatelessWidget {
       ),
     );
   }
-}
 
-class RecommendOutputListTileLoadingDisplay extends StatelessWidget {
-  const RecommendOutputListTileLoadingDisplay({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return CircularProgressIndicator();
+  Widget buildImage(BuildContext context, int index) {
+    final vmRead = context.read<RecommendOutputProvider>();
+    return FutureBuilder(
+      future: vmRead.ccase[index],
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          return snapshot.data!.fold(
+            (l) => Container(),
+            (r) => Image.network(r.image),
+          );
+        }
+        return CircularProgressIndicator();
+      },
+    );
   }
-}
 
-class RecommendOutputListTileErrorDisplay extends StatelessWidget {
-  final String message;
-  const RecommendOutputListTileErrorDisplay(
-      {this.message = '정보를 불러올 수 없습니다.', super.key});
-  @override
-  Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () {},
-      child: Text(message),
+  Widget buildTotalPrice(BuildContext context, int index) {
+    final vmRead = context.read<RecommendOutputProvider>();
+    return FutureBuilder(
+      future: vmRead.results,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          return snapshot.data!.fold(
+            (l) => Container(),
+            (r) => Text(
+                '${getCommaSeperatedPrice(r[index].totalPrice.toString())}원',
+                style: Theme.of(context).textTheme.headline4),
+          );
+        }
+        return CircularProgressIndicator();
+      },
+    );
+  }
+
+  Widget buildBottleneck(BuildContext context, int index) {
+    final vmRead = context.read<RecommendOutputProvider>();
+    return FutureBuilder(
+      future: vmRead.bottleneck[index],
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          return snapshot.data!.fold(
+              (l) => Container(),
+              (r) => Text('호환성 ${100 - r}%',
+                  style: Theme.of(context).textTheme.headline5));
+        }
+        return CircularProgressIndicator();
+      },
     );
   }
 }

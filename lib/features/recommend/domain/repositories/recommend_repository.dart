@@ -5,9 +5,12 @@ import 'package:dartz/dartz.dart';
 import '../../../../core/error/failures.dart';
 import '../entities/computer_combine.dart';
 import '../entities/computer_item.dart';
+import '../entities/program_fit.dart';
 import '../entities/recommend_input_list.dart';
 
 abstract class RecommendRepository {
+  Future<Either<Failure, List<ProgramFit>>> getComputerProgramFit(
+      int vgaId, int purpose);
   Future<Either<Failure, double>> getBottleneckCPUVGA(int cpuId, int vgaId);
   Future<Either<Failure, List<RecommendOutput>>> getRecommendOutput(
       RecommendInput recommendInput);
