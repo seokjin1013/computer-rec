@@ -1,7 +1,8 @@
 String getCommaSeperatedPrice(String value) {
   String s = '';
   for (int i = 0; i < value.length; ++i) {
-    if ((value.length - i) % 3 == 0 && i != 0) {
+    int remaining = value.length - i;
+    if (remaining % 3 == 0 && remaining != value.length) {
       s += ',';
     }
     s += value[i];

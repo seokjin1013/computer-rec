@@ -453,6 +453,7 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
       for (Map<String, dynamic> e in json.decode(details))
         e.keys.first: e.values.first
     };
+    map['details'] = json.encode(detailsMap);
     map.addEntries(detailsMap.entries);
     final Map<String, dynamic> renamedMap = {
       for (MapEntry<String, dynamic> e in map.entries)

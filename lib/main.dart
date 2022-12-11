@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
         ),
         appBarTheme: const AppBarTheme(
           iconTheme: IconThemeData(color: Colors.black),
-          color: Color(0xFF7335BF),
+          color: Color.fromARGB(255, 138, 83, 206),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
@@ -55,15 +55,17 @@ class MyApp extends StatelessWidget {
       ),
       // home: RecommendOutputPage(recommendInput: recommendInput),
       home: const MainPage(),
-      // home: FutureBuilder(
-      //   future: getComputerItem(14705225),
-      //   builder: (context, snapshot) {
-      //     if (snapshot.connectionState == ConnectionState.done) {
-      //       return snapshot.data!.fold((l) => Container(),
-      //           (r) => ComputerItemDisplay2(computerItem: r));
-      //     }
-      //     return CircularProgressIndicator();
-      //   },
+      // home: Center(
+      //   child: FutureBuilder(
+      //     future: getComputerItem(14705225),
+      //     builder: (context, snapshot) {
+      //       if (snapshot.connectionState == ConnectionState.done) {
+      //         return snapshot.data!
+      //             .fold((l) => Container(), (r) => ComputerItemDisplay3(r, 1));
+      //       }
+      //       return CircularProgressIndicator();
+      //     },
+      //   ),
       // ),
     );
   }

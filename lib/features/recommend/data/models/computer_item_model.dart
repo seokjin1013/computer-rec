@@ -27,7 +27,7 @@ class ComputerCPUModel extends ComputerCPU {
     required super.shopLink,
     required super.shopLogo,
     required super.shopName,
-    super.hits = 0,
+    required super.hits,
   });
 
   factory ComputerCPUModel.fromJson(Map<String, dynamic> json) =>
@@ -63,6 +63,7 @@ class ComputerVGAModel extends ComputerVGA {
     required super.shopLink,
     required super.shopLogo,
     required super.shopName,
+    required super.hits,
   });
 
   factory ComputerVGAModel.fromJson(Map<String, dynamic> json) =>
@@ -91,6 +92,7 @@ class ComputerRAMModel extends ComputerRAM {
     required super.shopLink,
     required super.shopLogo,
     required super.shopName,
+    required super.hits,
   });
 
   factory ComputerRAMModel.fromJson(Map<String, dynamic> json) =>
@@ -123,6 +125,7 @@ class ComputerMainBoardModel extends ComputerMainBoard {
     required super.shopLink,
     required super.shopLogo,
     required super.shopName,
+    required super.hits,
   });
 
   factory ComputerMainBoardModel.fromJson(Map<String, dynamic> json) =>
@@ -150,6 +153,7 @@ class ComputerSSDModel extends ComputerSSD {
     required super.shopLink,
     required super.shopLogo,
     required super.shopName,
+    required super.hits,
   });
 
   factory ComputerSSDModel.fromJson(Map<String, dynamic> json) =>
@@ -176,6 +180,7 @@ class ComputerHDDModel extends ComputerHDD {
     required super.shopLink,
     required super.shopLogo,
     required super.shopName,
+    required super.hits,
   });
 
   factory ComputerHDDModel.fromJson(Map<String, dynamic> json) =>
@@ -202,6 +207,7 @@ class ComputerCoolerModel extends ComputerCooler {
     required super.shopLink,
     required super.shopLogo,
     required super.shopName,
+    required super.hits,
   });
 
   factory ComputerCoolerModel.fromJson(Map<String, dynamic> json) =>
@@ -230,6 +236,7 @@ class ComputerPowerModel extends ComputerPower {
     required super.shopLink,
     required super.shopLogo,
     required super.shopName,
+    required super.hits,
   });
 
   factory ComputerPowerModel.fromJson(Map<String, dynamic> json) =>
@@ -264,6 +271,7 @@ class ComputerCaseModel extends ComputerCase {
     required super.shopLink,
     required super.shopLogo,
     required super.shopName,
+    required super.hits,
   });
 
   factory ComputerCaseModel.fromJson(Map<String, dynamic> json) =>

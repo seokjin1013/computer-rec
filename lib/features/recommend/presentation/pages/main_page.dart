@@ -30,9 +30,16 @@ class MainPage extends StatelessWidget {
                   ),
                 );
               },
-              child: const Text('견적 추천')),
-          TextButton(onPressed: () {}, child: Text('이전 기록')),
-          TextButton(onPressed: () {}, child: Text('부품 목록')),
+              child:
+                  Text('견적 추천', style: Theme.of(context).textTheme.headline6)),
+          TextButton(
+              onPressed: () {},
+              child:
+                  Text('이전 기록', style: Theme.of(context).textTheme.headline6)),
+          TextButton(
+              onPressed: () {},
+              child:
+                  Text('부품 목록', style: Theme.of(context).textTheme.headline6)),
         ],
       ),
       body: buildBody(context),

@@ -28,7 +28,7 @@ ComputerCPUModel _$ComputerCPUModelFromJson(Map<String, dynamic> json) =>
       shopLink: json['shopLink'] as String,
       shopLogo: json['shopLogo'] as String,
       shopName: json['shopName'] as String,
-      hits: json['hits'] as int? ?? 0,
+      hits: json['hits'] as int,
     );
 
 Map<String, dynamic> _$ComputerCPUModelToJson(ComputerCPUModel instance) =>
@@ -80,6 +80,7 @@ ComputerVGAModel _$ComputerVGAModelFromJson(Map<String, dynamic> json) =>
       shopLink: json['shopLink'] as String,
       shopLogo: json['shopLogo'] as String,
       shopName: json['shopName'] as String,
+      hits: json['hits'] as int,
     );
 
 Map<String, dynamic> _$ComputerVGAModelToJson(ComputerVGAModel instance) =>
@@ -98,6 +99,7 @@ Map<String, dynamic> _$ComputerVGAModelToJson(ComputerVGAModel instance) =>
       'shopLogo': instance.shopLogo,
       'shopName': instance.shopName,
       'manufacturer': instance.manufacturer,
+      'hits': instance.hits,
       'chipsetManufacturer': instance.chipsetManufacturer,
       'memoryCapacity': instance.memoryCapacity,
       'hdmi': instance.hdmi,
@@ -126,6 +128,7 @@ ComputerRAMModel _$ComputerRAMModelFromJson(Map<String, dynamic> json) =>
       shopLink: json['shopLink'] as String,
       shopLogo: json['shopLogo'] as String,
       shopName: json['shopName'] as String,
+      hits: json['hits'] as int,
     );
 
 Map<String, dynamic> _$ComputerRAMModelToJson(ComputerRAMModel instance) =>
@@ -144,6 +147,7 @@ Map<String, dynamic> _$ComputerRAMModelToJson(ComputerRAMModel instance) =>
       'shopLogo': instance.shopLogo,
       'shopName': instance.shopName,
       'manufacturer': instance.manufacturer,
+      'hits': instance.hits,
       'useDevice': instance.useDevice,
       'memoryCapacity': instance.memoryCapacity,
     };
@@ -170,6 +174,7 @@ ComputerMainBoardModel _$ComputerMainBoardModelFromJson(
       shopLink: json['shopLink'] as String,
       shopLogo: json['shopLogo'] as String,
       shopName: json['shopName'] as String,
+      hits: json['hits'] as int,
     );
 
 Map<String, dynamic> _$ComputerMainBoardModelToJson(
@@ -189,6 +194,7 @@ Map<String, dynamic> _$ComputerMainBoardModelToJson(
       'shopLogo': instance.shopLogo,
       'shopName': instance.shopName,
       'manufacturer': instance.manufacturer,
+      'hits': instance.hits,
       'category': instance.category,
       'detailChipset': instance.detailChipset,
       'formFactor': instance.formFactor,
@@ -213,6 +219,7 @@ ComputerSSDModel _$ComputerSSDModelFromJson(Map<String, dynamic> json) =>
       shopLink: json['shopLink'] as String,
       shopLogo: json['shopLogo'] as String,
       shopName: json['shopName'] as String,
+      hits: json['hits'] as int,
     );
 
 Map<String, dynamic> _$ComputerSSDModelToJson(ComputerSSDModel instance) =>
@@ -231,6 +238,7 @@ Map<String, dynamic> _$ComputerSSDModelToJson(ComputerSSDModel instance) =>
       'shopLogo': instance.shopLogo,
       'shopName': instance.shopName,
       'manufacturer': instance.manufacturer,
+      'hits': instance.hits,
       'formFactor': instance.formFactor,
     };
 
@@ -251,6 +259,7 @@ ComputerHDDModel _$ComputerHDDModelFromJson(Map<String, dynamic> json) =>
       shopLink: json['shopLink'] as String,
       shopLogo: json['shopLogo'] as String,
       shopName: json['shopName'] as String,
+      hits: json['hits'] as int,
     );
 
 Map<String, dynamic> _$ComputerHDDModelToJson(ComputerHDDModel instance) =>
@@ -269,6 +278,7 @@ Map<String, dynamic> _$ComputerHDDModelToJson(ComputerHDDModel instance) =>
       'shopLogo': instance.shopLogo,
       'shopName': instance.shopName,
       'manufacturer': instance.manufacturer,
+      'hits': instance.hits,
       'category': instance.category,
     };
 
@@ -289,6 +299,7 @@ ComputerCoolerModel _$ComputerCoolerModelFromJson(Map<String, dynamic> json) =>
       shopLink: json['shopLink'] as String,
       shopLogo: json['shopLogo'] as String,
       shopName: json['shopName'] as String,
+      hits: json['hits'] as int,
     );
 
 Map<String, dynamic> _$ComputerCoolerModelToJson(
@@ -308,6 +319,7 @@ Map<String, dynamic> _$ComputerCoolerModelToJson(
       'shopLogo': instance.shopLogo,
       'shopName': instance.shopName,
       'manufacturer': instance.manufacturer,
+      'hits': instance.hits,
       'coolingType': instance.coolingType,
     };
 
@@ -329,6 +341,7 @@ ComputerPowerModel _$ComputerPowerModelFromJson(Map<String, dynamic> json) =>
       shopLink: json['shopLink'] as String,
       shopLogo: json['shopLogo'] as String,
       shopName: json['shopName'] as String,
+      hits: json['hits'] as int,
     );
 
 Map<String, dynamic> _$ComputerPowerModelToJson(ComputerPowerModel instance) =>
@@ -347,6 +360,7 @@ Map<String, dynamic> _$ComputerPowerModelToJson(ComputerPowerModel instance) =>
       'shopLogo': instance.shopLogo,
       'shopName': instance.shopName,
       'manufacturer': instance.manufacturer,
+      'hits': instance.hits,
       'category': instance.category,
       'is80Plus': instance.is80Plus,
     };
@@ -373,6 +387,7 @@ ComputerCaseModel _$ComputerCaseModelFromJson(Map<String, dynamic> json) =>
       shopLink: json['shopLink'] as String,
       shopLogo: json['shopLogo'] as String,
       shopName: json['shopName'] as String,
+      hits: json['hits'] as int,
     );
 
 Map<String, dynamic> _$ComputerCaseModelToJson(ComputerCaseModel instance) =>
@@ -391,6 +406,7 @@ Map<String, dynamic> _$ComputerCaseModelToJson(ComputerCaseModel instance) =>
       'shopLogo': instance.shopLogo,
       'shopName': instance.shopName,
       'manufacturer': instance.manufacturer,
+      'hits': instance.hits,
       'category': instance.category,
       'size': instance.size,
       'supportPowerType': instance.supportPowerType,

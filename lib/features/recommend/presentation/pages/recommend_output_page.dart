@@ -17,9 +17,18 @@ class RecommendOutputPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("컴퓨터 견적 추천 서비스"),
         actions: [
-          TextButton(onPressed: () {}, child: Text('견적 추천')),
-          TextButton(onPressed: () {}, child: Text('이전 기록')),
-          TextButton(onPressed: () {}, child: Text('부품 목록')),
+          TextButton(
+              onPressed: () {},
+              child:
+                  Text('견적 추천', style: Theme.of(context).textTheme.headline6)),
+          TextButton(
+              onPressed: () {},
+              child:
+                  Text('이전 기록', style: Theme.of(context).textTheme.headline6)),
+          TextButton(
+              onPressed: () {},
+              child:
+                  Text('부품 목록', style: Theme.of(context).textTheme.headline6)),
         ],
       ),
       body: buildBody(context),

@@ -1,3 +1,5 @@
+import 'package:clean_architecture_flutter/features/recommend/presentation/widgets/external_link_dialog.dart';
+
 import '../../domain/entities/recommend_output.dart';
 import '../../domain/entities/program_fit.dart';
 import '../../domain/usecases/get_computer_program_fit.dart';
@@ -141,7 +143,8 @@ class RecommendOutputDisplay extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () => showDialog<String>(
                       context: context,
-                      builder: ((context) => buildMallDialog(context)),
+                      builder: ((context) =>
+                          ExternalLinkDialog(link: recommendOutput.totalLink)),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -200,17 +203,6 @@ class RecommendOutputDisplay extends StatelessWidget {
       recommendOutput.numPower,
       recommendOutput.numCase,
     ];
-    final categories = [
-      'CPU',
-      'GPU',
-      'RAM',
-      'Mainboard',
-      'SSD',
-      'HDD',
-      'Cooler',
-      'Power',
-      'Case',
-    ];
     return Expanded(
       child: ListView(children: [
         for (int i = 0; i < itemList.length; ++i)
@@ -220,43 +212,13 @@ class RecommendOutputDisplay extends StatelessWidget {
               if (snapshot.connectionState == ConnectionState.done) {
                 return snapshot.data!.fold(
                   (l) => Container(),
-                  (r) => ComputerItemDisplay3(r, categories[i], itemNum[i]),
+                  (r) => ComputerItemDisplay3(r, itemNum[i]),
                 );
               }
               return CircularProgressIndicator();
             },
           ),
       ]),
-    );
-  }
-
-  Widget buildMallDialog(BuildContext context) {
-    return AlertDialog(
-      title: const Text('외부 웹사이트 구매페이지를 여시겠습니까?'),
-      content: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text('샵다나와 구매페이지'),
-            SizedBox(
-              width: 600,
-              child: Text(
-                recommendOutput.totalLink,
-                overflow: TextOverflow.fade,
-              ),
-            ),
-          ],
-        ),
-      ),
-      actions: <Widget>[
-        TextButton(
-          child: const Text('열기'),
-          onPressed: () {
-            launchUrl(Uri.parse(recommendOutput.totalLink));
-            Navigator.of(context).pop();
-          },
-        ),
-      ],
     );
   }
 }

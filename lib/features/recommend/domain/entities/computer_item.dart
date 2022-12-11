@@ -1,4 +1,7 @@
-class ComputerItem {
+import 'dart:convert';
+import 'dart:math';
+
+abstract class ComputerItem {
   final int id;
   final int price;
   final int happyId;
@@ -30,7 +33,22 @@ class ComputerItem {
       required this.shopLogo,
       required this.shopName,
       required this.manufacturer,
-      this.hits = 0});
+      required this.hits});
+
+  String get partName;
+  String get cheapLink {
+    if (price < happyPrice) {
+      return shopLink;
+    }
+    return 'https://shopping.pping.kr/detail/$happyId';
+  }
+
+  int get cheapPrice {
+    return min(price, happyPrice);
+  }
+
+  Map<String, String> get detailsMap =>
+      (json.decode(details) as Map<String, dynamic>).cast<String, String>();
 }
 
 class ComputerCPU extends ComputerItem {
@@ -64,7 +82,10 @@ class ComputerCPU extends ComputerItem {
       required super.shopLogo,
       required super.shopName,
       required super.manufacturer,
-      super.hits = 0});
+      required super.hits});
+
+  @override
+  String get partName => 'CPU';
 }
 
 class ComputerVGA extends ComputerItem {
@@ -105,7 +126,11 @@ class ComputerVGA extends ComputerItem {
       required super.shopLink,
       required super.shopLogo,
       required super.shopName,
-      required super.manufacturer});
+      required super.manufacturer,
+      required super.hits});
+
+  @override
+  String get partName => 'GPU';
 }
 
 class ComputerRAM extends ComputerItem {
@@ -132,7 +157,11 @@ class ComputerRAM extends ComputerItem {
       required super.shopLink,
       required super.shopLogo,
       required super.shopName,
-      required super.manufacturer});
+      required super.manufacturer,
+      required super.hits});
+
+  @override
+  String get partName => 'RAM';
 }
 
 class ComputerMainBoard extends ComputerItem {
@@ -167,7 +196,11 @@ class ComputerMainBoard extends ComputerItem {
       required super.shopLink,
       required super.shopLogo,
       required super.shopName,
-      required super.manufacturer});
+      required super.manufacturer,
+      required super.hits});
+
+  @override
+  String get partName => 'MainBoard';
 }
 
 class ComputerSSD extends ComputerItem {
@@ -193,7 +226,11 @@ class ComputerSSD extends ComputerItem {
       required super.shopLink,
       required super.shopLogo,
       required super.shopName,
-      required super.manufacturer});
+      required super.manufacturer,
+      required super.hits});
+
+  @override
+  String get partName => 'SSD';
 }
 
 class ComputerHDD extends ComputerItem {
@@ -216,7 +253,11 @@ class ComputerHDD extends ComputerItem {
       required super.shopLink,
       required super.shopLogo,
       required super.shopName,
-      required super.manufacturer});
+      required super.manufacturer,
+      required super.hits});
+
+  @override
+  String get partName => 'HDD';
 }
 
 class ComputerCooler extends ComputerItem {
@@ -239,7 +280,11 @@ class ComputerCooler extends ComputerItem {
       required super.shopLink,
       required super.shopLogo,
       required super.shopName,
-      required super.manufacturer});
+      required super.manufacturer,
+      required super.hits});
+
+  @override
+  String get partName => 'Cooler';
 }
 
 class ComputerPower extends ComputerItem {
@@ -266,7 +311,11 @@ class ComputerPower extends ComputerItem {
       required super.shopLink,
       required super.shopLogo,
       required super.shopName,
-      required super.manufacturer});
+      required super.manufacturer,
+      required super.hits});
+
+  @override
+  String get partName => 'Power';
 }
 
 class ComputerCase extends ComputerItem {
@@ -305,5 +354,9 @@ class ComputerCase extends ComputerItem {
       required super.shopLink,
       required super.shopLogo,
       required super.shopName,
-      required super.manufacturer});
+      required super.manufacturer,
+      required super.hits});
+
+  @override
+  String get partName => 'Case';
 }
