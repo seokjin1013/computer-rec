@@ -7,7 +7,7 @@ import '../../../../core/utility/string.dart';
 
 class ComputerItemDisplay2 extends StatelessWidget {
   final ComputerItem computerItem;
-  const ComputerItemDisplay2({required this.computerItem, super.key});
+  const ComputerItemDisplay2(this.computerItem, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class ComputerItemDisplay2 extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                          '${getCommaSeperatedPrice(computerItem.price.toString())}원',
+                          '${getCommaSeperatedPrice(computerItem.cheapPrice.toString())}원',
                           style: Theme.of(context).textTheme.headline5),
                     ),
                     Padding(
@@ -80,26 +80,3 @@ class ComputerItemDisplay2 extends StatelessWidget {
     );
   }
 }
-
-// class ComputerItemErrorDisplay extends StatelessWidget {
-//   final String message;
-//   const ComputerItemErrorDisplay(
-//       {this.message = '해당 부품을 찾을 수 없습니다.', super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return TextButton(
-//       onPressed: () {},
-//       child: Text(message),
-//     );
-//   }
-// }
-
-// class ComputerItemLoadingDisplay extends StatelessWidget {
-//   const ComputerItemLoadingDisplay({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return CircularProgressIndicator();
-//   }
-// }

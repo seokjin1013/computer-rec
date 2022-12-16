@@ -1,4 +1,7 @@
 import 'dart:math';
+import 'dart:ui';
+
+import 'package:clean_architecture_flutter/core/utility/state_widget.dart';
 
 import '../../domain/entities/milestone.dart';
 import 'recommend_input_page.dart';
@@ -56,12 +59,19 @@ class MainPage extends StatelessWidget {
   }
 
   Widget buildContent(BuildContext context) {
-    return ListView(
-      children: [
-        buildMilestone(context),
-        buildTodayTip(context),
-        buildRecentHotCPUList(context),
-      ],
+    return SingleChildScrollView(
+      child: Center(
+        child: SizedBox(
+          width: 1200,
+          child: Column(
+            children: [
+              buildMilestone(context),
+              buildTodayTip(context),
+              buildRecentHotCPUList(context),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
@@ -73,11 +83,11 @@ class MainPage extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           return snapshot.data!.fold(
-            (l) => MilestoneErrorDisplay(message: l.message),
-            (r) => MilestoneDisplay(milestone: r),
+            (l) => FailedWidget<MilestoneDisplay>(message: l.message),
+            (r) => MilestoneDisplay(r),
           );
         }
-        return const MilestoneLoadingDisplay();
+        return const LoadingWidget<MilestoneDisplay>();
       },
     );
   }
@@ -128,20 +138,17 @@ class MainPage extends StatelessWidget {
   Widget buildRecentHotCPU(BuildContext context, int rank) {
     final vmRead = context.read<MainProvider>();
     final data = vmRead.getComputerCPUHit(rank + 1);
-    return SizedBox(
-      width: 1200,
-      child: FutureBuilder(
-        future: data,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return snapshot.data!.fold(
-              (l) => ComputerItemErrorDisplay(message: l.message),
-              (r) => ComputerItemDisplay2(computerItem: r),
-            );
-          }
-          return const ComputerItemLoadingDisplay();
-        },
-      ),
+    return FutureBuilder(
+      future: data,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          return snapshot.data!.fold(
+            (l) => FailedWidget<ComputerItemDisplay2>(message: l.message),
+            (r) => ComputerItemDisplay2(r),
+          );
+        }
+        return const LoadingWidget<ComputerItemDisplay2>();
+      },
     );
   }
 }

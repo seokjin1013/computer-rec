@@ -60,7 +60,7 @@ class ComputerItemDisplay3 extends StatelessWidget {
                         overflow: TextOverflow.fade,
                         style: Theme.of(context).textTheme.headline6),
                     Text(
-                        '${getCommaSeperatedPrice(computerItem.price.toString())}원',
+                        '${getCommaSeperatedPrice(computerItem.cheapPrice.toString())}원',
                         style: Theme.of(context).textTheme.bodyLarge),
                     Text('⭐ ${computerItem.score.toStringAsPrecision(2)} / 5.0',
                         style: Theme.of(context).textTheme.bodyLarge),

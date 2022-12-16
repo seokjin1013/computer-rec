@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:http/http.dart';
+
 import '../../domain/entities/milestone.dart';
 import '../../domain/usecases/get_computer_item_hit%20copy.dart';
 import '../../domain/usecases/get_recommend_output.dart';
@@ -41,6 +43,8 @@ class RecommendRepositoryImpl implements RecommendRepository {
         return Right(recommendOutputs);
       } on ServerException catch (e) {
         return Left(ServerFailure(errorCode: e.errorCode));
+      } on ClientException {
+        return Left(ClientFailure());
       }
     } else {
       return Left(ConnectionFailure());
@@ -57,6 +61,8 @@ class RecommendRepositoryImpl implements RecommendRepository {
         return Right(recommendOutputs);
       } on ServerException catch (e) {
         return Left(ServerFailure(errorCode: e.errorCode));
+      } on ClientException {
+        return Left(ClientFailure());
       }
     } else {
       return Left(ConnectionFailure());
@@ -73,6 +79,8 @@ class RecommendRepositoryImpl implements RecommendRepository {
         return Right(recommendOutputs);
       } on ServerException catch (e) {
         return Left(ServerFailure(errorCode: e.errorCode));
+      } on ClientException {
+        return Left(ClientFailure());
       }
     } else {
       return Left(ConnectionFailure());
@@ -87,6 +95,8 @@ class RecommendRepositoryImpl implements RecommendRepository {
         return Right(milestone);
       } on ServerException catch (e) {
         return Left(ServerFailure(errorCode: e.errorCode));
+      } on ClientException {
+        return Left(ClientFailure());
       }
     } else {
       return Left(ConnectionFailure());
@@ -102,6 +112,8 @@ class RecommendRepositoryImpl implements RecommendRepository {
         return Right(computerCPUHitId);
       } on ServerException catch (e) {
         return Left(ServerFailure(errorCode: e.errorCode));
+      } on ClientException {
+        return Left(ClientFailure());
       }
     } else {
       return Left(ConnectionFailure());
@@ -118,6 +130,8 @@ class RecommendRepositoryImpl implements RecommendRepository {
         return Right(computerCPUBestId);
       } on ServerException catch (e) {
         return Left(ServerFailure(errorCode: e.errorCode));
+      } on ClientException {
+        return Left(ClientFailure());
       }
     } else {
       return Left(ConnectionFailure());
@@ -132,6 +146,8 @@ class RecommendRepositoryImpl implements RecommendRepository {
         return Right(remoteComputerItem);
       } on ServerException catch (e) {
         return Left(ServerFailure(errorCode: e.errorCode));
+      } on ClientException {
+        return Left(ClientFailure());
       }
     } else {
       return Left(ConnectionFailure());
@@ -146,6 +162,8 @@ class RecommendRepositoryImpl implements RecommendRepository {
         return Right(remoteComputerItem);
       } on ServerException catch (e) {
         return Left(ServerFailure(errorCode: e.errorCode));
+      } on ClientException {
+        return Left(ClientFailure());
       }
     } else {
       return Left(ConnectionFailure());
@@ -160,6 +178,8 @@ class RecommendRepositoryImpl implements RecommendRepository {
         return Right(remoteComputerItem);
       } on ServerException catch (e) {
         return Left(ServerFailure(errorCode: e.errorCode));
+      } on ClientException {
+        return Left(ClientFailure());
       }
     } else {
       return Left(ConnectionFailure());
@@ -176,6 +196,8 @@ class RecommendRepositoryImpl implements RecommendRepository {
         return Right(remoteComputerItem);
       } on ServerException catch (e) {
         return Left(ServerFailure(errorCode: e.errorCode));
+      } on ClientException {
+        return Left(ClientFailure());
       }
     } else {
       return Left(ConnectionFailure());
@@ -190,6 +212,8 @@ class RecommendRepositoryImpl implements RecommendRepository {
         return Right(remoteComputerItem);
       } on ServerException catch (e) {
         return Left(ServerFailure(errorCode: e.errorCode));
+      } on ClientException {
+        return Left(ClientFailure());
       }
     } else {
       return Left(ConnectionFailure());
@@ -204,6 +228,8 @@ class RecommendRepositoryImpl implements RecommendRepository {
         return Right(remoteComputerItem);
       } on ServerException catch (e) {
         return Left(ServerFailure(errorCode: e.errorCode));
+      } on ClientException {
+        return Left(ClientFailure());
       }
     } else {
       return Left(ConnectionFailure());
@@ -218,6 +244,8 @@ class RecommendRepositoryImpl implements RecommendRepository {
         return Right(remoteComputerItem);
       } on ServerException catch (e) {
         return Left(ServerFailure(errorCode: e.errorCode));
+      } on ClientException {
+        return Left(ClientFailure());
       }
     } else {
       return Left(ConnectionFailure());
@@ -232,6 +260,8 @@ class RecommendRepositoryImpl implements RecommendRepository {
         return Right(remoteComputerItem);
       } on ServerException catch (e) {
         return Left(ServerFailure(errorCode: e.errorCode));
+      } on ClientException {
+        return Left(ClientFailure());
       }
     } else {
       return Left(ConnectionFailure());
@@ -246,6 +276,8 @@ class RecommendRepositoryImpl implements RecommendRepository {
         return Right(remoteComputerItem);
       } on ServerException catch (e) {
         return Left(ServerFailure(errorCode: e.errorCode));
+      } on ClientException {
+        return Left(ClientFailure());
       }
     } else {
       return Left(ConnectionFailure());
@@ -260,6 +292,8 @@ class RecommendRepositoryImpl implements RecommendRepository {
         return Right(isExist);
       } on ServerException catch (e) {
         return Left(ServerFailure(errorCode: e.errorCode));
+      } on ClientException {
+        return Left(ClientFailure());
       }
     } else {
       return Left(ConnectionFailure());
@@ -274,6 +308,8 @@ class RecommendRepositoryImpl implements RecommendRepository {
         return Right(isCreated);
       } on ServerException catch (e) {
         return Left(ServerFailure(errorCode: e.errorCode));
+      } on ClientException {
+        return Left(ClientFailure());
       }
     } else {
       return Left(ConnectionFailure());

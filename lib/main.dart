@@ -1,3 +1,5 @@
+import 'features/recommend/data/models/computer_item_model.dart';
+import 'features/recommend/domain/entities/computer_item.dart';
 import 'features/recommend/domain/entities/recommend_output.dart';
 import 'features/recommend/domain/entities/recommend_input.dart';
 import 'features/recommend/domain/usecases/get_computer_item.dart';
@@ -30,7 +32,7 @@ class MyApp extends StatelessWidget {
       priceHigh: 700000,
       purpose: 2,
     );
-    GetComputerCooler getComputerItem = sl();
+    GetComputerSSD getComputerItem = sl();
     return MaterialApp(
       title: '컴퓨터 견적 추천 시스템',
       theme: ThemeData(
@@ -57,7 +59,7 @@ class MyApp extends StatelessWidget {
       home: const MainPage(),
       // home: Center(
       //   child: FutureBuilder(
-      //     future: getComputerItem(14705225),
+      //     future: getComputerItem(17000984),
       //     builder: (context, snapshot) {
       //       if (snapshot.connectionState == ConnectionState.done) {
       //         return snapshot.data!
