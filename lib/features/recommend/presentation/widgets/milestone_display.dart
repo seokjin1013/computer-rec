@@ -24,8 +24,8 @@ class _MilestoneDisplayState extends State<MilestoneDisplay> {
 }
 
 class MilestoneDisplayLoading extends StatelessWidget {
-  const MilestoneDisplayLoading({super.key});
-
+  const MilestoneDisplayLoading({this.play = true, super.key});
+  final bool play;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -33,12 +33,14 @@ class MilestoneDisplayLoading extends StatelessWidget {
       child: Column(
         children: [
           ShimmerLoading(
+            play: play,
             child: TextSpaceRoundRect(
               text: Text('지금까지 0명의 유저가',
                   style: Theme.of(context).textTheme.headline2),
             ),
           ),
           ShimmerLoading(
+            play: play,
             child: TextSpaceRoundRect(
               text: Text('0개의 조합을 맞췄어요.',
                   style: Theme.of(context).textTheme.headline2),

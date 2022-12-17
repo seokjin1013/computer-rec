@@ -1,3 +1,5 @@
+import 'package:clean_architecture_flutter/core/utility/shimmer.dart';
+
 import '../provider/recommend_output_provider.dart';
 import 'selection_card.dart';
 import 'package:flutter/material.dart';
@@ -168,6 +170,51 @@ class RecommendOutputListDisplay extends StatelessWidget {
         }
         return CircularProgressIndicator();
       },
+    );
+  }
+}
+
+class RecommendOutputListDisplayLoading extends StatelessWidget {
+  const RecommendOutputListDisplayLoading({this.play = true, super.key});
+  final bool play;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: const Color(0xFF2E3945),
+      elevation: 10,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: SizedBox(
+        width: 500,
+        child: buildListView(context),
+      ),
+    );
+  }
+
+  Widget buildListView(BuildContext context) {
+    return ListView(children: [
+      for (int i = 0; i < 5; ++i) buildRecommendOutputListTile(context, i),
+    ]);
+  }
+
+  Widget buildRecommendOutputListTile(BuildContext context, int index) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: SizedBox(
+        height: 180,
+        child: ShimmerLoading(
+          play: play,
+          child: Card(
+            elevation: 10,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            color: Colors.black,
+          ),
+        ),
+      ),
     );
   }
 }

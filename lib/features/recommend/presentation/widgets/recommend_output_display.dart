@@ -1,3 +1,5 @@
+import 'package:clean_architecture_flutter/core/utility/shimmer.dart';
+import 'package:clean_architecture_flutter/features/recommend/data/models/program_fit_model.dart';
 import 'package:clean_architecture_flutter/features/recommend/presentation/widgets/external_link_dialog.dart';
 
 import '../../domain/entities/recommend_output.dart';
@@ -223,6 +225,144 @@ class RecommendOutputDisplay extends StatelessWidget {
   }
 }
 
+class RecommendOutputDisplayLoading extends StatelessWidget {
+  final bool play;
+  const RecommendOutputDisplayLoading({this.play = true, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: const Color(0xFF2E3945),
+      elevation: 10,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(child: buildBottleneck(context)),
+                Expanded(flex: 2, child: buildProgramFit(context)),
+              ],
+            ),
+          ),
+          Expanded(flex: 2, child: buildParts(context)),
+        ],
+      ),
+    );
+  }
+
+  Widget buildBottleneck(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text('CPU-GPU 호환성',
+                  style: Theme.of(context).textTheme.headline4),
+            ),
+            Expanded(child: buildBottleneckChart(context)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildBottleneckChart(BuildContext context) {
+    return BottleneckChartLoading(play: play);
+  }
+
+  Widget buildProgramFit(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text('적합도', style: Theme.of(context).textTheme.headline4),
+            ),
+            buildProgramFitList(context),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildProgramFitList(BuildContext context) {
+    return Expanded(
+      child: ListView.separated(
+        itemCount: 5,
+        itemBuilder: (context, index) => ListTile(
+          title: ShimmerLoading(
+              play: play, child: TextSpaceRoundRect(text: Text('리그오브레전드'))),
+          subtitle: ProgramFitChartLoading(play: play),
+        ),
+        separatorBuilder: (context, index) {
+          return const Divider();
+        },
+      ),
+    );
+  }
+
+  Widget buildParts(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text('견적서', style: Theme.of(context).textTheme.headline4),
+            ),
+            buildPartsList(context),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text('구매링크',
+                          style: Theme.of(context).textTheme.headline4),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text('저장하기',
+                          style: Theme.of(context).textTheme.headline4),
+                    ),
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildPartsList(BuildContext context) {
+    return Expanded(
+      child: ListView(children: [
+        for (int i = 0; i < 10; ++i) ComputerItemDisplay3Loading(play: play),
+      ]),
+    );
+  }
+}
+
 class BottleneckChart extends StatelessWidget {
   final double value;
   const BottleneckChart(this.value, {super.key});
@@ -290,6 +430,39 @@ class NoBottleneckChart extends StatelessWidget {
   }
 }
 
+class BottleneckChartLoading extends StatelessWidget {
+  const BottleneckChartLoading({this.play = true, super.key});
+  final bool play;
+
+  @override
+  Widget build(BuildContext context) {
+    return ShimmerLoading(
+      play: play,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          SfRadialGauge(
+            axes: <RadialAxis>[
+              RadialAxis(
+                startAngle: 180,
+                canScaleToFit: true,
+                endAngle: 0,
+                interval: 10,
+                useRangeColorForAxis: true,
+              ),
+            ],
+          ),
+          const Positioned.fill(
+            child: ColoredBox(
+              color: Color(0x66000000),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class ProgramFitChart extends StatelessWidget {
   final ProgramFit programFit;
   const ProgramFitChart(this.programFit, {super.key});
@@ -326,6 +499,40 @@ class ProgramFitChart extends StatelessWidget {
         }
         return value;
       },
+    );
+  }
+}
+
+class ProgramFitChartLoading extends StatelessWidget {
+  const ProgramFitChartLoading({this.play = true, super.key});
+  final bool play;
+
+  @override
+  Widget build(BuildContext context) {
+    return ShimmerLoading(
+      play: play,
+      child: Stack(children: [
+        SfLinearGauge(
+          maximum: 200,
+          animateAxis: true,
+          animateRange: true,
+          animationDuration: 2000,
+          labelFormatterCallback: (value) {
+            if (value == '0') {
+              return '부족';
+            }
+            if (value == '200') {
+              return '충분';
+            }
+            return value;
+          },
+        ),
+        const Positioned.fill(
+          child: ColoredBox(
+            color: Color(0x66000000),
+          ),
+        ),
+      ]),
     );
   }
 }

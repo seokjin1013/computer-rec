@@ -5,7 +5,6 @@ import 'features/recommend/domain/entities/recommend_input.dart';
 import 'features/recommend/domain/usecases/get_computer_item.dart';
 import 'features/recommend/presentation/pages/recommend_input_page.dart';
 import 'features/recommend/presentation/pages/recommend_output_page.dart';
-import 'features/recommend/presentation/widgets/computer_item_display.dart';
 import 'features/recommend/presentation/widgets/computer_item_display2.dart';
 import 'features/recommend/presentation/widgets/computer_item_display3.dart';
 import 'package:flutter/material.dart';
@@ -55,8 +54,8 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      // home: RecommendOutputPage(recommendInput: recommendInput),
-      home: const MainPage(),
+      home: RecommendOutputPage(recommendInput: recommendInput),
+      // home: const MainPage(),
       // home: Center(
       //   child: FutureBuilder(
       //     future: getComputerItem(17000984),

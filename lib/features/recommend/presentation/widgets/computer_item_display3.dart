@@ -1,5 +1,6 @@
 import 'package:clean_architecture_flutter/features/recommend/presentation/widgets/external_link_dialog.dart';
 
+import '../../../../core/utility/shimmer.dart';
 import '../../domain/entities/computer_item.dart';
 import '../../domain/entities/no_item.dart';
 import 'package:flutter/material.dart';
@@ -324,6 +325,120 @@ class ComputerItemDisplay3 extends StatelessWidget {
             ],
           ),
       ],
+    );
+  }
+}
+
+class ComputerItemDisplay3Loading extends StatelessWidget {
+  const ComputerItemDisplay3Loading({this.play = true, super.key});
+  final bool play;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 10,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Stack(
+        children: [
+          SizedBox(
+            height: 100,
+            child: Row(
+              children: [
+                SizedBox(
+                  width: 100,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ShimmerLoading(
+                        play: play,
+                        child: TextSpaceRoundRect(
+                          text: Text('CPU',
+                              style: Theme.of(context).textTheme.bodyLarge),
+                        ),
+                      ),
+                      ShimmerLoading(
+                        play: play,
+                        child: SizedBox(
+                          width: 70,
+                          height: 70,
+                          child: Card(
+                            elevation: 10,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: FittedBox(
+                    fit: BoxFit.fitHeight,
+                    child: Card(
+                      elevation: 10,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ShimmerLoading(
+                      play: play,
+                      child: TextSpaceRoundRect(
+                        text: Text('인텔 코어i5-12세대 12400F (엘더레이크) (정품)',
+                            overflow: TextOverflow.fade,
+                            style: Theme.of(context).textTheme.headline6),
+                      ),
+                    ),
+                    ShimmerLoading(
+                      play: play,
+                      child: TextSpaceRoundRect(
+                        text: Text('50000원',
+                            style: Theme.of(context).textTheme.bodyLarge),
+                      ),
+                    ),
+                    ShimmerLoading(
+                      play: play,
+                      child: TextSpaceRoundRect(
+                        text: Text('⭐ 5.0 / 5.0',
+                            style: Theme.of(context).textTheme.bodyLarge),
+                      ),
+                    ),
+                    ShimmerLoading(
+                      play: play,
+                      child: TextSpaceRoundRect(
+                        text: Text('🔍 123',
+                            style: Theme.of(context).textTheme.bodyLarge),
+                      ),
+                    ),
+                  ],
+                ),
+                const Spacer(),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ShimmerLoading(
+                    play: play,
+                    child: TextSpaceRoundRect(
+                      text: Text('X1',
+                          style: Theme.of(context).textTheme.headline5),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

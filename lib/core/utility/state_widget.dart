@@ -9,31 +9,23 @@ import 'package:flutter/src/widgets/framework.dart';
 import '../../features/recommend/presentation/widgets/milestone_display.dart';
 import '../../injection_container.dart';
 
-class LoadingWidget<T extends Widget> extends StatelessWidget {
-  const LoadingWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return sl<T>();
-  }
-}
-
-class FailedWidget<T extends Widget> extends StatelessWidget {
+class FailedWidget extends StatelessWidget {
   final String message;
-  const FailedWidget({this.message = '', super.key});
+  final Widget child;
+  const FailedWidget({required this.child, this.message = '', super.key});
 
   @override
   Widget build(BuildContext context) {
     return ClipRect(
       child: IgnorePointer(
         child: Stack(
-          children: <Widget>[
-            sl<T>(),
+          children: [
+            child,
             Positioned.fill(
               child: BackdropFilter(
                 filter: ImageFilter.blur(
-                  sigmaX: 10.0,
-                  sigmaY: 10.0,
+                  sigmaX: 6.0,
+                  sigmaY: 6.0,
                 ),
                 child: Center(
                   child: Text(

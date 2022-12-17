@@ -1,3 +1,6 @@
+import 'package:clean_architecture_flutter/core/utility/state_widget.dart';
+
+import '../../../../core/utility/shimmer.dart';
 import '../../domain/entities/recommend_input.dart';
 import '../widgets/recommend_output_display.dart';
 import '../widgets/recommend_output_list_display.dart';
@@ -31,7 +34,7 @@ class RecommendOutputPage extends StatelessWidget {
                   Text('부품 목록', style: Theme.of(context).textTheme.headline6)),
         ],
       ),
-      body: buildBody(context),
+      body: Shimmer(child: buildBody(context)),
     );
   }
 
@@ -51,7 +54,18 @@ class RecommendOutputPage extends StatelessWidget {
       future: vmRead.results,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          return snapshot.data!.fold((l) => Container(), (r) {
+          return snapshot.data!.fold((l) {
+            return FailedWidget(
+                message: l.message,
+                child: Row(
+                  children: [
+                    RecommendOutputListDisplayLoading(play: false),
+                    Expanded(
+                      child: RecommendOutputDisplayLoading(play: false),
+                    ),
+                  ],
+                ));
+          }, (r) {
             if (r.length == 0) {
               return Center(child: Text('조건을 만족하는 견적서가 없습니다.'));
             }
@@ -65,7 +79,14 @@ class RecommendOutputPage extends StatelessWidget {
             );
           });
         }
-        return Center(child: CircularProgressIndicator());
+        return Row(
+          children: [
+            RecommendOutputListDisplayLoading(),
+            Expanded(
+              child: RecommendOutputDisplayLoading(),
+            ),
+          ],
+        );
       },
     );
   }

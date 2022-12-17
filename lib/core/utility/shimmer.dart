@@ -1,5 +1,21 @@
 import 'package:flutter/material.dart';
 
+const _shimmerGradient = LinearGradient(
+  colors: [
+    Color(0x33FFFFFF),
+    Color(0x88FFFFFF),
+    Color(0x33FFFFFF),
+  ],
+  stops: [
+    0.1,
+    0.3,
+    0.4,
+  ],
+  begin: Alignment(-1.0, -0.3),
+  end: Alignment(1.0, 0.3),
+  tileMode: TileMode.clamp,
+);
+
 class Shimmer extends StatefulWidget {
   static ShimmerState? of(BuildContext context) {
     return context.findAncestorStateOfType<ShimmerState>();
@@ -7,7 +23,7 @@ class Shimmer extends StatefulWidget {
 
   const Shimmer({
     super.key,
-    required this.linearGradient,
+    this.linearGradient = _shimmerGradient,
     this.child,
   });
 
@@ -42,6 +58,12 @@ class ShimmerState extends State<Shimmer> with SingleTickerProviderStateMixin {
         end: widget.linearGradient.end,
         transform:
             _SlidingGradientTransform(slidePercent: _shimmerController.value),
+      );
+  LinearGradient get gradientZero => LinearGradient(
+        colors: [widget.linearGradient.colors.first],
+        stops: [widget.linearGradient.stops!.first],
+        begin: widget.linearGradient.begin,
+        end: widget.linearGradient.end,
       );
 
   bool get isSized =>
@@ -81,9 +103,11 @@ class _SlidingGradientTransform extends GradientTransform {
 class ShimmerLoading extends StatefulWidget {
   const ShimmerLoading({
     super.key,
+    required this.play,
     required this.child,
   });
 
+  final bool play;
   final Widget child;
 
   @override
@@ -112,9 +136,7 @@ class _ShimmerLoadingState extends State<ShimmerLoading> {
   }
 
   void _onShimmerChange() {
-    setState(() {
-      // update the shimmer painting.
-    });
+    setState(() {});
   }
 
   @override
@@ -125,15 +147,16 @@ class _ShimmerLoadingState extends State<ShimmerLoading> {
     }
 
     final shimmerSize = shimmer.size;
-    final gradient = shimmer.gradient;
-    final offsetWithinShimmer = shimmer.getDescendantOffset(
-      descendant: context.findRenderObject() as RenderBox,
-    );
+    RenderObject? renderObject = context.findRenderObject();
+    final offsetWithinShimmer = renderObject != null
+        ? shimmer.getDescendantOffset(descendant: renderObject as RenderBox)
+        : const Offset(0, 0);
 
     return ShaderMask(
       blendMode: BlendMode.srcATop,
       shaderCallback: (bounds) {
-        return gradient.createShader(
+        return (widget.play ? shimmer.gradient : shimmer.gradientZero)
+            .createShader(
           Rect.fromLTWH(
             -offsetWithinShimmer.dx,
             -offsetWithinShimmer.dy,
@@ -151,8 +174,10 @@ class TextSpaceRoundRect extends StatelessWidget {
   final Text text;
   const TextSpaceRoundRect({
     required this.text,
+    this.width,
     Key? key,
   }) : super(key: key);
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
@@ -164,41 +189,7 @@ class TextSpaceRoundRect extends StatelessWidget {
     )..layout(minWidth: 0, maxWidth: double.infinity);
     Size size = textPainter.size;
     return Container(
-      width: size.width,
-      height: size.height,
-      decoration: BoxDecoration(
-        color: Colors.black,
-        borderRadius: BorderRadius.circular(size.height),
-      ),
-    );
-  }
-}
-
-class TextSpaceRoundRect2 extends StatelessWidget {
-  const TextSpaceRoundRect2({
-    required this.length,
-    required this.textStyle,
-    Key? key,
-  }) : super(key: key);
-
-  final int length;
-  final TextStyle? textStyle;
-
-  @override
-  Widget build(BuildContext context) {
-    final double textScaleFactor = MediaQuery.of(context).textScaleFactor;
-
-    final TextDirection textDirection = Directionality.of(context);
-
-    final TextPainter textPainter = TextPainter(
-      text: TextSpan(text: ' ' * length, style: textStyle),
-      textDirection: textDirection,
-      textScaleFactor: textScaleFactor,
-    )..layout(minWidth: 0, maxWidth: double.infinity);
-    Size size = textPainter.size;
-
-    return Container(
-      width: size.width,
+      width: width ?? size.width,
       height: size.height,
       decoration: BoxDecoration(
         color: Colors.black,

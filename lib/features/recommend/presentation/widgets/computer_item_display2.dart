@@ -82,7 +82,8 @@ class ComputerItemDisplay2 extends StatelessWidget {
 }
 
 class ComputerItemDisplay2Loading extends StatelessWidget {
-  const ComputerItemDisplay2Loading({super.key});
+  const ComputerItemDisplay2Loading({this.play = true, super.key});
+  final bool play;
 
   @override
   Widget build(BuildContext context) {
@@ -101,6 +102,7 @@ class ComputerItemDisplay2Loading extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ShimmerLoading(
+                    play: play,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: const AspectRatio(
@@ -118,6 +120,7 @@ class ComputerItemDisplay2Loading extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ShimmerLoading(
+                        play: play,
                         child: TextSpaceRoundRect(
                           text: Text(' ' * 50,
                               style: Theme.of(context).textTheme.headline4),
@@ -128,6 +131,7 @@ class ComputerItemDisplay2Loading extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ShimmerLoading(
+                          play: play,
                           child: TextSpaceRoundRect(
                             text: Text(' ' * 30,
                                 style: Theme.of(context).textTheme.headline5),

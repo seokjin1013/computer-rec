@@ -1,7 +1,6 @@
 import '../../domain/entities/milestone.dart';
 import 'recommend_output_page.dart';
 import '../provider/main_provider.dart';
-import '../widgets/computer_item_display.dart';
 import '../widgets/computer_item_display2.dart';
 import '../widgets/milestone_display.dart';
 import '../widgets/selection_card.dart';
