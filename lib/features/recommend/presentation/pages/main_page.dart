@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:clean_architecture_flutter/core/utility/state_widget.dart';
 
+import '../../../../core/utility/shimmer.dart';
 import '../../domain/entities/milestone.dart';
 import 'recommend_input_page.dart';
 import '../provider/main_provider.dart';
@@ -14,6 +15,22 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../injection_container.dart';
+
+const _shimmerGradient = LinearGradient(
+  colors: [
+    Color(0x33FFFFFF),
+    Color(0x88FFFFFF),
+    Color(0x33FFFFFF),
+  ],
+  stops: [
+    0.1,
+    0.3,
+    0.4,
+  ],
+  begin: Alignment(-1.0, -0.3),
+  end: Alignment(1.0, 0.3),
+  tileMode: TileMode.clamp,
+);
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
@@ -45,7 +62,8 @@ class MainPage extends StatelessWidget {
                   Text('부품 목록', style: Theme.of(context).textTheme.headline6)),
         ],
       ),
-      body: buildBody(context),
+      body:
+          Shimmer(linearGradient: _shimmerGradient, child: buildBody(context)),
     );
   }
 
@@ -87,7 +105,8 @@ class MainPage extends StatelessWidget {
             (r) => MilestoneDisplay(r),
           );
         }
-        return const LoadingWidget<MilestoneDisplay>();
+        // return const LoadingWidget<MilestoneDisplay>();
+        return const MilestoneDisplayLoading();
       },
     );
   }
@@ -143,11 +162,12 @@ class MainPage extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           return snapshot.data!.fold(
-            (l) => FailedWidget<ComputerItemDisplay2>(message: l.message),
+            // (l) => FailedWidget<ComputerItemDisplay2>(message: l.message),
+            (l) => const ComputerItemDisplay2Loading(),
             (r) => ComputerItemDisplay2(r),
           );
         }
-        return const LoadingWidget<ComputerItemDisplay2>();
+        return const ComputerItemDisplay2Loading();
       },
     );
   }

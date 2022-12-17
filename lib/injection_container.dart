@@ -34,34 +34,34 @@ import 'features/recommend/presentation/provider/recommend_output_provider.dart'
 final sl = GetIt.instance;
 
 Future<void> init() async {
-  ComputerItem computerItem = ComputerCPUModel.fromJson({
-    "id": 16101353,
-    "name": "인텔 코어i5-12세대 12400F (엘더레이크) (정품)",
-    "image":
-        "https://img.danawa.com/prod_img/500000/353/101/img/16101353_1.jpg?shrink=330:330&_v=20220825172644",
-    "price": 248530,
-    "rank": 8,
-    "shopLink":
-        "https://prod.danawa.com/bridge/loadingBridge.html?cate1=861&cate2=873&cate3=959&cate4=0&pcode=16101353&cmpnyc=TH201&safe_trade=4&fee_type=T&link_pcode=4724320290&package=0&setpc=0&r=16678519296311",
-    "shopName": "11번가",
-    "shopLogo": "https://img.danawa.com/cmpny_info/images/TH201_logo.gif",
-    "socket": "인텔(소켓1700)",
-    "score": 4.8,
-    "totalScore": 92.2,
-    "happyId": 10969556,
-    "happyPrice": 234000,
-    "manufacturer": "인텔",
-    "tcp": "65~117W",
-    "maxClock": "4.4GHz",
-    "numCore": "6코어",
-    "numThread": "12쓰레드",
-    "memoryType": "DDR5, DDR4",
-    "details":
-        '[{"manufacturer": "인텔"}, {"tcp": "65~117W"}, {"maxClock": "4.4GHz"}, {"numCore": "6코어"}, {"numThread": "12쓰레드"}, {"memoryType": "DDR5, DDR4"}]',
-    "hits": 0,
-  });
-  sl.registerLazySingleton(() => ComputerItemDisplay2(sl()));
-  sl.registerLazySingleton(() => computerItem);
+  // ComputerItem computerItem = ComputerCPUModel.fromJson({
+  //   "id": 16101353,
+  //   "name": "인텔 코어i5-12세대 12400F (엘더레이크) (정품)",
+  //   "image":
+  //       "https://img.danawa.com/prod_img/500000/353/101/img/16101353_1.jpg?shrink=330:330&_v=20220825172644",
+  //   "price": 248530,
+  //   "rank": 8,
+  //   "shopLink":
+  //       "https://prod.danawa.com/bridge/loadingBridge.html?cate1=861&cate2=873&cate3=959&cate4=0&pcode=16101353&cmpnyc=TH201&safe_trade=4&fee_type=T&link_pcode=4724320290&package=0&setpc=0&r=16678519296311",
+  //   "shopName": "11번가",
+  //   "shopLogo": "https://img.danawa.com/cmpny_info/images/TH201_logo.gif",
+  //   "socket": "인텔(소켓1700)",
+  //   "score": 4.8,
+  //   "totalScore": 92.2,
+  //   "happyId": 10969556,
+  //   "happyPrice": 234000,
+  //   "manufacturer": "인텔",
+  //   "tcp": "65~117W",
+  //   "maxClock": "4.4GHz",
+  //   "numCore": "6코어",
+  //   "numThread": "12쓰레드",
+  //   "memoryType": "DDR5, DDR4",
+  //   "details":
+  //       '[{"manufacturer": "인텔"}, {"tcp": "65~117W"}, {"maxClock": "4.4GHz"}, {"numCore": "6코어"}, {"numThread": "12쓰레드"}, {"memoryType": "DDR5, DDR4"}]',
+  //   "hits": 0,
+  // });
+  // sl.registerLazySingleton(() => ComputerItemDisplay2(sl()));
+  // sl.registerLazySingleton(() => computerItem);
   sl.registerLazySingleton(() => MilestoneDisplay(sl()));
   sl.registerLazySingleton(() => Milestone(numUser: 0, numUsage: 0));
 
