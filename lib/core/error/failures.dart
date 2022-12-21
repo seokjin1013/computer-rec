@@ -16,3 +16,7 @@ class ConnectionFailure extends Failure {
 class ClientFailure extends Failure {
   ClientFailure() : super('서버의 응답이 없습니다.');
 }
+
+class UnknownFailure extends Failure {
+  UnknownFailure() : super('알 수 없는 오류가 발생했습니다.');
+}

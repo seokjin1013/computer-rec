@@ -360,3 +360,92 @@ class ComputerCase extends ComputerItem {
   @override
   String get partName => 'Case';
 }
+
+class ComputerMonitor extends ComputerItem {
+  final String displaySize;
+  final String displayRatio;
+  final String panelShape;
+  final String resolution;
+  final String refreshRate;
+
+  ComputerMonitor(
+      {required this.displaySize,
+      required this.displayRatio,
+      required this.panelShape,
+      required this.resolution,
+      required this.refreshRate,
+      required super.id,
+      required super.price,
+      required super.happyId,
+      required super.happyPrice,
+      required super.image,
+      required super.name,
+      required super.details,
+      required super.rank,
+      required super.score,
+      required super.totalScore,
+      required super.shopLink,
+      required super.shopLogo,
+      required super.shopName,
+      required super.manufacturer,
+      required super.hits});
+
+  @override
+  String get partName => 'Monitor';
+}
+
+class ComputerKeyboard extends ComputerItem {
+  final String connectionType;
+  final String isGaming;
+
+  ComputerKeyboard(
+      {required this.connectionType,
+      required this.isGaming,
+      required super.id,
+      required super.price,
+      required super.happyId,
+      required super.happyPrice,
+      required super.image,
+      required super.name,
+      required super.details,
+      required super.rank,
+      required super.score,
+      required super.totalScore,
+      required super.shopLink,
+      required super.shopLogo,
+      required super.shopName,
+      required super.manufacturer,
+      required super.hits});
+
+  @override
+  String get partName => 'Keyboard';
+}
+
+class ComputerMouse extends ComputerItem {
+  final String connectionType;
+  final String maxSensitivity;
+  final String dpiModification;
+
+  ComputerMouse(
+      {required this.connectionType,
+      required this.maxSensitivity,
+      required this.dpiModification,
+      required super.id,
+      required super.price,
+      required super.happyId,
+      required super.happyPrice,
+      required super.image,
+      required super.name,
+      required super.details,
+      required super.rank,
+      required super.score,
+      required super.totalScore,
+      required super.shopLink,
+      required super.shopLogo,
+      required super.shopName,
+      required super.manufacturer,
+      required super.hits});
+
+  @override
+  String get partName => 'Mouse';
+}

@@ -8,6 +8,12 @@ class NoCPU implements ComputerCPU, NoComputerItem {
 
   @override
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+
+  @override
+  String get partName => 'CPU';
+
+  @override
+  int get cheapPrice => 0;
 }
 
 class NoVGA implements ComputerVGA, NoComputerItem {
@@ -16,6 +22,12 @@ class NoVGA implements ComputerVGA, NoComputerItem {
 
   @override
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+
+  @override
+  String get partName => 'GPU';
+
+  @override
+  int get cheapPrice => 0;
 }
 
 class NoRAM implements ComputerRAM, NoComputerItem {
@@ -24,6 +36,12 @@ class NoRAM implements ComputerRAM, NoComputerItem {
 
   @override
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+
+  @override
+  String get partName => 'RAM';
+
+  @override
+  int get cheapPrice => 0;
 }
 
 class NoMainBoard implements ComputerMainBoard, NoComputerItem {
@@ -32,6 +50,12 @@ class NoMainBoard implements ComputerMainBoard, NoComputerItem {
 
   @override
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+
+  @override
+  String get partName => 'Mainboard';
+
+  @override
+  int get cheapPrice => 0;
 }
 
 class NoSSD implements ComputerSSD, NoComputerItem {
@@ -40,6 +64,12 @@ class NoSSD implements ComputerSSD, NoComputerItem {
 
   @override
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+
+  @override
+  String get partName => 'SSD';
+
+  @override
+  int get cheapPrice => 0;
 }
 
 class NoHDD implements ComputerHDD, NoComputerItem {
@@ -48,6 +78,12 @@ class NoHDD implements ComputerHDD, NoComputerItem {
 
   @override
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+
+  @override
+  String get partName => 'HDD';
+
+  @override
+  int get cheapPrice => 0;
 }
 
 class NoCooler implements ComputerCooler, NoComputerItem {
@@ -56,6 +92,12 @@ class NoCooler implements ComputerCooler, NoComputerItem {
 
   @override
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+
+  @override
+  String get partName => 'Cooler';
+
+  @override
+  int get cheapPrice => 0;
 }
 
 class NoPower implements ComputerPower, NoComputerItem {
@@ -64,6 +106,12 @@ class NoPower implements ComputerPower, NoComputerItem {
 
   @override
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+
+  @override
+  String get partName => 'Power';
+
+  @override
+  int get cheapPrice => 0;
 }
 
 class NoCase implements ComputerCase, NoComputerItem {
@@ -72,4 +120,52 @@ class NoCase implements ComputerCase, NoComputerItem {
 
   @override
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+
+  @override
+  String get partName => 'Case';
+
+  @override
+  int get cheapPrice => 0;
+}
+
+class NoMonitor implements ComputerMonitor, NoComputerItem {
+  @override
+  int get id => 0;
+
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+
+  @override
+  String get partName => 'Monitor';
+
+  @override
+  int get cheapPrice => 0;
+}
+
+class NoKeyboard implements ComputerKeyboard, NoComputerItem {
+  @override
+  int get id => 0;
+
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+
+  @override
+  String get partName => 'Keyboard';
+
+  @override
+  int get cheapPrice => 0;
+}
+
+class NoMouse implements ComputerMouse, NoComputerItem {
+  @override
+  int get id => 0;
+
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+
+  @override
+  String get partName => 'Mouse';
+
+  @override
+  int get cheapPrice => 0;
 }

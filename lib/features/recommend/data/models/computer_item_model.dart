@@ -278,3 +278,88 @@ class ComputerCaseModel extends ComputerCase {
       _$ComputerCaseModelFromJson(json);
   Map<String, dynamic> toJson() => _$ComputerCaseModelToJson(this);
 }
+
+@JsonSerializable(explicitToJson: true)
+class ComputerMonitorModel extends ComputerMonitor {
+  ComputerMonitorModel({
+    required super.manufacturer,
+    required super.displaySize,
+    required super.displayRatio,
+    required super.panelShape,
+    required super.resolution,
+    required super.refreshRate,
+    required super.id,
+    required super.price,
+    required super.happyId,
+    required super.happyPrice,
+    required super.image,
+    required super.name,
+    required super.details,
+    required super.rank,
+    required super.score,
+    required super.totalScore,
+    required super.shopLink,
+    required super.shopLogo,
+    required super.shopName,
+    required super.hits,
+  });
+
+  factory ComputerMonitorModel.fromJson(Map<String, dynamic> json) =>
+      _$ComputerMonitorModelFromJson(json);
+  Map<String, dynamic> toJson() => _$ComputerMonitorModelToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class ComputerKeyboardModel extends ComputerKeyboard {
+  ComputerKeyboardModel({
+    required super.manufacturer,
+    required super.connectionType,
+    required super.isGaming,
+    required super.id,
+    required super.price,
+    required super.happyId,
+    required super.happyPrice,
+    required super.image,
+    required super.name,
+    required super.details,
+    required super.rank,
+    required super.score,
+    required super.totalScore,
+    required super.shopLink,
+    required super.shopLogo,
+    required super.shopName,
+    required super.hits,
+  });
+
+  factory ComputerKeyboardModel.fromJson(Map<String, dynamic> json) =>
+      _$ComputerKeyboardModelFromJson(json);
+  Map<String, dynamic> toJson() => _$ComputerKeyboardModelToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class ComputerMouseModel extends ComputerMouse {
+  ComputerMouseModel({
+    required super.manufacturer,
+    required super.connectionType,
+    required super.maxSensitivity,
+    required super.dpiModification,
+    required super.id,
+    required super.price,
+    required super.happyId,
+    required super.happyPrice,
+    required super.image,
+    required super.name,
+    required super.details,
+    required super.rank,
+    required super.score,
+    required super.totalScore,
+    required super.shopLink,
+    required super.shopLogo,
+    required super.shopName,
+    required super.hits,
+  });
+
+  factory ComputerMouseModel.fromJson(Map<String, dynamic> json) =>
+      _$ComputerMouseModelFromJson(json);
+  Map<String, dynamic> toJson() => _$ComputerMouseModelToJson(this);
+}

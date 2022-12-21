@@ -1,5 +1,6 @@
 import 'package:clean_architecture_flutter/features/recommend/presentation/widgets/external_link_dialog.dart';
 
+import '../../../../core/utility/future_widget.dart';
 import '../../../../core/utility/shimmer.dart';
 import '../../domain/entities/computer_item.dart';
 import '../../domain/entities/no_item.dart';
@@ -7,15 +8,63 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/utility/string.dart';
 
-class ComputerItemDisplay3 extends StatelessWidget {
+class ComputerItemDisplayPartsBuilder extends StatelessWidget {
+  const ComputerItemDisplayPartsBuilder(this.data, this.count, {super.key});
+  final Future<ComputerItem> data;
+  final int count;
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureWidget(
+      data: Future.wait([data, Future.value(count)]),
+      display: ((p0) =>
+          ComputerItemDisplayParts(p0[0] as ComputerItem, p0[1] as int)),
+      error: const ComputerItemDisplayPartsLoading(play: false),
+      loading: const ComputerItemDisplayPartsLoading(),
+    );
+  }
+}
+
+class ComputerItemDisplayParts extends StatelessWidget {
   final ComputerItem computerItem;
   final int num;
-  const ComputerItemDisplay3(this.computerItem, this.num, {super.key});
+  const ComputerItemDisplayParts(this.computerItem, this.num, {super.key});
 
   @override
   Widget build(BuildContext context) {
     if (computerItem is NoComputerItem) {
-      return Container();
+      return Card(
+        elevation: 10,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Stack(
+          children: [
+            SizedBox(
+              height: 100,
+              child: Center(child: Text("${computerItem.partName} 부품이 없습니다.")),
+            ),
+            Positioned.fill(
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(12),
+                  onTap: () => Navigator.push(
+                    context,
+                    HeroDialogRoute(
+                      builder: (BuildContext context) {
+                        return Center(
+                          child: buildDetailsDialog(context),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
     }
     return Card(
       elevation: 10,
@@ -88,7 +137,7 @@ class ComputerItemDisplay3 extends StatelessWidget {
                   HeroDialogRoute(
                     builder: (BuildContext context) {
                       return Center(
-                        child: buildDetailDialog(context),
+                        child: buildDetailsDialog(context),
                       );
                     },
                   ),
@@ -101,7 +150,7 @@ class ComputerItemDisplay3 extends StatelessWidget {
     );
   }
 
-  Widget buildDetailDialog(BuildContext context) {
+  Widget buildDetailsDialog(BuildContext context) {
     return AlertDialog(
       title:
           Text(computerItem.name, style: Theme.of(context).textTheme.headline4),
@@ -156,7 +205,7 @@ class ComputerItemDisplay3 extends StatelessWidget {
                       const SizedBox(height: 8),
                       SizedBox(
                         width: double.infinity,
-                        child: buildDetailsTable2(context),
+                        child: buildDetailsTable(context),
                       ),
                       const Spacer(),
                       Row(
@@ -204,63 +253,6 @@ class ComputerItemDisplay3 extends StatelessWidget {
   }
 
   Widget buildDetailsTable(BuildContext context) {
-    final detailsMap = computerItem.detailsMap.entries.toList();
-    return Table(
-      border: TableBorder.symmetric(
-        inside: BorderSide(
-            width: 1, color: Theme.of(context).textTheme.bodyText1!.color!),
-        outside: BorderSide(
-            width: 1.5, color: Theme.of(context).textTheme.bodyText1!.color!),
-      ),
-      children: [
-        for (int i = 0; i < (detailsMap.length + 1) ~/ 2; ++i)
-          TableRow(
-            children: [
-              TableCell(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    detailsMap[i * 2].key,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
-              TableCell(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    detailsMap[i * 2].value,
-                  ),
-                ),
-              ),
-              TableCell(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    (i * 2 + 1 < detailsMap.length)
-                        ? detailsMap[i * 2 + 1].key
-                        : '',
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
-              TableCell(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    (i * 2 + 1 < detailsMap.length)
-                        ? detailsMap[i * 2 + 1].value
-                        : '',
-                  ),
-                ),
-              ),
-            ],
-          ),
-      ],
-    );
-  }
-
-  Widget buildDetailsTable2(BuildContext context) {
     final detailsMap = computerItem.detailsMap.entries.toList();
     return DataTable(
       headingRowHeight: 0,
@@ -329,8 +321,8 @@ class ComputerItemDisplay3 extends StatelessWidget {
   }
 }
 
-class ComputerItemDisplay3Loading extends StatelessWidget {
-  const ComputerItemDisplay3Loading({this.play = true, super.key});
+class ComputerItemDisplayPartsLoading extends StatelessWidget {
+  const ComputerItemDisplayPartsLoading({this.play = true, super.key});
   final bool play;
 
   @override

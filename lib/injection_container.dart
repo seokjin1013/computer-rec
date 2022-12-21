@@ -27,8 +27,8 @@ final sl = GetIt.instance;
 Future<void> init() async {
   sl.registerFactory(() => MainProvider(sl(), sl(), sl(), sl()));
   sl.registerFactory(() => RecommendInputProvider());
-  sl.registerFactory(() => RecommendOutputProvider(
-      sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl()));
+  sl.registerFactory(() => RecommendOutputProvider(sl(), sl(), sl(), sl(), sl(),
+      sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl()));
   sl.registerLazySingleton(() => GetTodayTip(sl()));
   sl.registerLazySingleton(() => GetComputerProgramFit(sl()));
   sl.registerLazySingleton(() => GetBottleneckCPUVGA(sl()));
@@ -45,6 +45,9 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetComputerCooler(sl()));
   sl.registerLazySingleton(() => GetComputerPower(sl()));
   sl.registerLazySingleton(() => GetComputerCase(sl()));
+  sl.registerLazySingleton(() => GetComputerMonitor(sl()));
+  sl.registerLazySingleton(() => GetComputerKeyboard(sl()));
+  sl.registerLazySingleton(() => GetComputerMouse(sl()));
   sl.registerLazySingleton(() => IsExistAccount(sl()));
   sl.registerLazySingleton(() => PostNewAccount(sl()));
   sl.registerLazySingleton<RecommendRepository>(() => RecommendRepositoryImpl(

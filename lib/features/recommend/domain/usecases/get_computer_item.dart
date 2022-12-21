@@ -90,3 +90,33 @@ class GetComputerCase {
     return recommendRepository.getComputerCase(id);
   }
 }
+
+class GetComputerMonitor {
+  final RecommendRepository recommendRepository;
+
+  GetComputerMonitor(this.recommendRepository);
+
+  Future<ComputerMonitor> call(int id) async {
+    return recommendRepository.getComputerMonitor(id);
+  }
+}
+
+class GetComputerKeyboard {
+  final RecommendRepository recommendRepository;
+
+  GetComputerKeyboard(this.recommendRepository);
+
+  Future<ComputerKeyboard> call(int id) async {
+    return recommendRepository.getComputerKeyboard(id);
+  }
+}
+
+class GetComputerMouse {
+  final RecommendRepository recommendRepository;
+
+  GetComputerMouse(this.recommendRepository);
+
+  Future<ComputerMouse> call(int id) async {
+    return recommendRepository.getComputerMouse(id);
+  }
+}

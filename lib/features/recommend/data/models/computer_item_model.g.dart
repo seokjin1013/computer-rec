@@ -414,3 +414,141 @@ Map<String, dynamic> _$ComputerCaseModelToJson(ComputerCaseModel instance) =>
       'height': instance.height,
       'depth': instance.depth,
     };
+
+ComputerMonitorModel _$ComputerMonitorModelFromJson(
+        Map<String, dynamic> json) =>
+    ComputerMonitorModel(
+      manufacturer: json['manufacturer'] as String,
+      displaySize: json['displaySize'] as String,
+      displayRatio: json['displayRatio'] as String,
+      panelShape: json['panelShape'] as String,
+      resolution: json['resolution'] as String,
+      refreshRate: json['refreshRate'] as String,
+      id: json['id'] as int,
+      price: json['price'] as int,
+      happyId: json['happyId'] as int,
+      happyPrice: json['happyPrice'] as int,
+      image: json['image'] as String,
+      name: json['name'] as String,
+      details: json['details'] as String,
+      rank: json['rank'] as int,
+      score: (json['score'] as num).toDouble(),
+      totalScore: (json['totalScore'] as num).toDouble(),
+      shopLink: json['shopLink'] as String,
+      shopLogo: json['shopLogo'] as String,
+      shopName: json['shopName'] as String,
+      hits: json['hits'] as int,
+    );
+
+Map<String, dynamic> _$ComputerMonitorModelToJson(
+        ComputerMonitorModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'price': instance.price,
+      'happyId': instance.happyId,
+      'happyPrice': instance.happyPrice,
+      'image': instance.image,
+      'name': instance.name,
+      'details': instance.details,
+      'rank': instance.rank,
+      'score': instance.score,
+      'totalScore': instance.totalScore,
+      'shopLink': instance.shopLink,
+      'shopLogo': instance.shopLogo,
+      'shopName': instance.shopName,
+      'manufacturer': instance.manufacturer,
+      'hits': instance.hits,
+      'displaySize': instance.displaySize,
+      'displayRatio': instance.displayRatio,
+      'panelShape': instance.panelShape,
+      'resolution': instance.resolution,
+      'refreshRate': instance.refreshRate,
+    };
+
+ComputerKeyboardModel _$ComputerKeyboardModelFromJson(
+        Map<String, dynamic> json) =>
+    ComputerKeyboardModel(
+      manufacturer: json['manufacturer'] as String,
+      connectionType: json['connectionType'] as String,
+      isGaming: json['isGaming'] as String,
+      id: json['id'] as int,
+      price: json['price'] as int,
+      happyId: json['happyId'] as int,
+      happyPrice: json['happyPrice'] as int,
+      image: json['image'] as String,
+      name: json['name'] as String,
+      details: json['details'] as String,
+      rank: json['rank'] as int,
+      score: (json['score'] as num).toDouble(),
+      totalScore: (json['totalScore'] as num).toDouble(),
+      shopLink: json['shopLink'] as String,
+      shopLogo: json['shopLogo'] as String,
+      shopName: json['shopName'] as String,
+      hits: json['hits'] as int,
+    );
+
+Map<String, dynamic> _$ComputerKeyboardModelToJson(
+        ComputerKeyboardModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'price': instance.price,
+      'happyId': instance.happyId,
+      'happyPrice': instance.happyPrice,
+      'image': instance.image,
+      'name': instance.name,
+      'details': instance.details,
+      'rank': instance.rank,
+      'score': instance.score,
+      'totalScore': instance.totalScore,
+      'shopLink': instance.shopLink,
+      'shopLogo': instance.shopLogo,
+      'shopName': instance.shopName,
+      'manufacturer': instance.manufacturer,
+      'hits': instance.hits,
+      'connectionType': instance.connectionType,
+      'isGaming': instance.isGaming,
+    };
+
+ComputerMouseModel _$ComputerMouseModelFromJson(Map<String, dynamic> json) =>
+    ComputerMouseModel(
+      manufacturer: json['manufacturer'] as String,
+      connectionType: json['connectionType'] as String,
+      maxSensitivity: json['maxSensitivity'] as String,
+      dpiModification: json['dpiModification'] as String,
+      id: json['id'] as int,
+      price: json['price'] as int,
+      happyId: json['happyId'] as int,
+      happyPrice: json['happyPrice'] as int,
+      image: json['image'] as String,
+      name: json['name'] as String,
+      details: json['details'] as String,
+      rank: json['rank'] as int,
+      score: (json['score'] as num).toDouble(),
+      totalScore: (json['totalScore'] as num).toDouble(),
+      shopLink: json['shopLink'] as String,
+      shopLogo: json['shopLogo'] as String,
+      shopName: json['shopName'] as String,
+      hits: json['hits'] as int,
+    );
+
+Map<String, dynamic> _$ComputerMouseModelToJson(ComputerMouseModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'price': instance.price,
+      'happyId': instance.happyId,
+      'happyPrice': instance.happyPrice,
+      'image': instance.image,
+      'name': instance.name,
+      'details': instance.details,
+      'rank': instance.rank,
+      'score': instance.score,
+      'totalScore': instance.totalScore,
+      'shopLink': instance.shopLink,
+      'shopLogo': instance.shopLogo,
+      'shopName': instance.shopName,
+      'manufacturer': instance.manufacturer,
+      'hits': instance.hits,
+      'connectionType': instance.connectionType,
+      'maxSensitivity': instance.maxSensitivity,
+      'dpiModification': instance.dpiModification,
+    };

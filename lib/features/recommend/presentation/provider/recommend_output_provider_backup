@@ -44,6 +44,12 @@ class RecommendOutputProvider with ChangeNotifier {
       this.getComputerKeyboard,
       this.getComputerMouse);
 
+  Future<List<RecommendOutput>> getRecommendOutputList(
+      RecommendInput recommendInput) async {
+    List<RecommendOutput> result = await getRecommendOutput(recommendInput);
+    return result;
+  }
+
   late Future<List<RecommendOutput>> results;
   List<Future<ComputerCPU>> cpu = [];
   List<Future<ComputerVGA>> vga = [];
@@ -59,7 +65,6 @@ class RecommendOutputProvider with ChangeNotifier {
   List<Future<ComputerMouse>> mouse = [];
   List<Future<double>> bottleneck = [];
   List<Future<List<ProgramFit>>> programFit = [];
-  List<Future<int>> totalPrice = [];
 
   void setRecommendOutputList(RecommendInput recommendInput) async {
     results = getRecommendOutput(recommendInput);
@@ -108,26 +113,6 @@ class RecommendOutputProvider with ChangeNotifier {
         programFit.add(vga.last.then((value) {
           return getComputerProgramFit(value.id, recommendInput.purpose);
         }));
-        totalPrice.add(Future.wait([
-          cpu.last,
-          vga.last,
-          ram.last,
-          mainboard.last,
-          ssd.last,
-          hdd.last,
-          cooler.last,
-          power.last,
-          ccase.last,
-          monitor.last,
-          keyboard.last,
-          mouse.last
-        ]).then(((value) {
-          int total = 0;
-          for (ComputerItem e in value) {
-            total += e.cheapPrice;
-          }
-          return total;
-        })));
       }
     });
   }
@@ -139,6 +124,31 @@ class RecommendOutputProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  int getTotalPrice(int idx) {
+    List<Future<ComputerItem>> computerItem = [
+      cpu[idx],
+      vga[idx],
+      ram[idx],
+      mainboard[idx],
+      ssd[idx],
+      hdd[idx],
+      cooler[idx],
+      power[idx],
+      ccase[idx],
+      monitor[idx],
+      keyboard[idx],
+      mouse[idx],
+    ];
+    int price = 0;
+    for (Future<ComputerItem> e in computerItem) {
+      e.then((value) {
+        price += value.cheapPrice;
+        notifyListeners();
+      });
+    }
+    return price;
+  }
+
   void setPartsCPUNum(int cnt) {
     results.then((value) {
       value[viewIndex].numCpu = cnt;
@@ -147,26 +157,6 @@ class RecommendOutputProvider with ChangeNotifier {
         cpu[viewIndex] = Future.value(NoCPU());
       }
     });
-    totalPrice[viewIndex] = Future.wait([
-      cpu[viewIndex],
-      vga[viewIndex],
-      ram[viewIndex],
-      mainboard[viewIndex],
-      ssd[viewIndex],
-      hdd[viewIndex],
-      cooler[viewIndex],
-      power[viewIndex],
-      ccase[viewIndex],
-      monitor[viewIndex],
-      keyboard[viewIndex],
-      mouse[viewIndex],
-    ]).then(((value) {
-      int total = 0;
-      for (ComputerItem e in value) {
-        total += e.cheapPrice;
-      }
-      return total;
-    }));
     notifyListeners();
   }
 

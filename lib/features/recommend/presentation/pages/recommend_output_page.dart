@@ -1,6 +1,7 @@
 import 'package:clean_architecture_flutter/core/utility/state_widget.dart';
 
 import '../../../../core/error/failures.dart';
+import '../../../../core/utility/future_widget.dart';
 import '../../../../core/utility/shimmer.dart';
 import '../../domain/entities/recommend_input.dart';
 import '../widgets/recommend_output_display.dart';
@@ -51,43 +52,23 @@ class RecommendOutputPage extends StatelessWidget {
   Widget buildContent(BuildContext context) {
     final vmRead = context.read<RecommendOutputProvider>();
     vmRead.setRecommendOutputList(recommendInput);
-    return FutureBuilder(
-      future: vmRead.results,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          if (snapshot.requireData.isEmpty) {
-            return const Center(child: Text('조건을 만족하는 견적서가 없습니다.'));
-          }
-          return Row(
-            children: [
-              const RecommendOutputListDisplay(),
-              Expanded(
-                child: RecommendOutputDisplay(
-                    snapshot.requireData[vmRead.viewIndex]),
-              ),
-            ],
-          );
-        } else if (snapshot.hasError) {
-          return FailedWidget(
-              message: (snapshot.error as Failure).message,
-              child: Row(
-                children: const [
-                  RecommendOutputListDisplayLoading(play: false),
-                  Expanded(
-                    child: RecommendOutputDisplayLoading(play: false),
-                  ),
-                ],
-              ));
+    return FutureWidget(
+      data: vmRead.results,
+      display: (p0) {
+        if (p0.isEmpty) {
+          return const Center(child: Text('조건을 만족하는 견적서가 없습니다.'));
         }
         return Row(
-          children: const [
-            RecommendOutputListDisplayLoading(),
+          children: [
+            const RecommendOutputListDisplay(),
             Expanded(
-              child: RecommendOutputDisplayLoading(),
+              child: RecommendOutputDisplay(p0[vmRead.viewIndex]),
             ),
           ],
         );
       },
+      error: Container(),
+      loading: const Center(child: CircularProgressIndicator()),
     );
   }
 }

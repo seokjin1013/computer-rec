@@ -22,6 +22,9 @@ abstract class RecommendRepository {
   Future<ComputerCooler> getComputerCooler(int id);
   Future<ComputerPower> getComputerPower(int id);
   Future<ComputerCase> getComputerCase(int id);
+  Future<ComputerMonitor> getComputerMonitor(int id);
+  Future<ComputerKeyboard> getComputerKeyboard(int id);
+  Future<ComputerMouse> getComputerMouse(int id);
   Future<bool> isExistAccount(String id, String pw);
   Future<bool> postNewAccount(String id, String pw);
 }

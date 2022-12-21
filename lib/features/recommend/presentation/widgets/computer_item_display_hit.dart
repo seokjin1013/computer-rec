@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/error/failures.dart';
 import '../../../../core/utility/future_widget.dart';
 import '../../../../core/utility/shimmer.dart';
-import '../../../../core/utility/state_widget.dart';
 import '../../../../core/utility/string.dart';
 import '../../domain/entities/computer_item.dart';
 

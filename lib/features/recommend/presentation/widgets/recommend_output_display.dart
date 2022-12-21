@@ -1,4 +1,6 @@
 import 'package:clean_architecture_flutter/core/utility/shimmer.dart';
+import 'package:clean_architecture_flutter/features/recommend/domain/entities/no_item.dart';
+import 'package:clean_architecture_flutter/features/recommend/presentation/widgets/computer_item_display_parts.dart';
 import 'package:clean_architecture_flutter/features/recommend/presentation/widgets/external_link_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,7 +9,6 @@ import 'package:syncfusion_flutter_gauges/gauges.dart';
 import '../../domain/entities/program_fit.dart';
 import '../../domain/entities/recommend_output.dart';
 import '../provider/recommend_output_provider.dart';
-import 'computer_item_display3.dart';
 
 class RecommendOutputDisplay extends StatelessWidget {
   final RecommendOutput recommendOutput;
@@ -184,6 +185,9 @@ class RecommendOutputDisplay extends StatelessWidget {
       vmRead.cooler[vmWatch.viewIndex],
       vmRead.power[vmWatch.viewIndex],
       vmRead.ccase[vmWatch.viewIndex],
+      vmRead.monitor[vmWatch.viewIndex],
+      vmRead.keyboard[vmWatch.viewIndex],
+      vmRead.mouse[vmWatch.viewIndex],
     ];
     final itemNum = [
       recommendOutput.numCpu,
@@ -195,20 +199,51 @@ class RecommendOutputDisplay extends StatelessWidget {
       recommendOutput.numCooler,
       recommendOutput.numPower,
       recommendOutput.numCase,
+      recommendOutput.numMonitor,
+      recommendOutput.numKeyboard,
+      recommendOutput.numMouse,
+    ];
+    final setNumFunc = [
+      vmRead.setPartsCPUNum,
+      vmRead.setPartsVGANum,
+      vmRead.setPartsRAMNum,
+      vmRead.setPartsMainboardNum,
+      vmRead.setPartsSSDNum,
+      vmRead.setPartsHDDNum,
+      vmRead.setPartsCoolerNum,
+      vmRead.setPartsPowerNum,
+      vmRead.setPartsCaseNum,
+      vmRead.setPartsMonitorNum,
+      vmRead.setPartsKeyboardNum,
+      vmRead.setPartsMouseNum,
     ];
     return Expanded(
       child: ListView(children: [
         for (int i = 0; i < itemList.length; ++i)
-          FutureBuilder(
-            future: itemList[i],
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return ComputerItemDisplay3(snapshot.requireData, itemNum[i]);
-              } else if (snapshot.hasError) {
-                return Container();
-              }
-              return const CircularProgressIndicator();
-            },
+          Row(
+            children: [
+              Expanded(
+                  child:
+                      ComputerItemDisplayPartsBuilder(itemList[i], itemNum[i])),
+              if (itemNum[i] > 0)
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text('바꾸기'),
+                  ),
+                ),
+              if (itemNum[i] > 0)
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      setNumFunc[i](0);
+                    },
+                    child: Text('삭제'),
+                  ),
+                ),
+            ],
           ),
       ]),
     );
@@ -348,7 +383,8 @@ class RecommendOutputDisplayLoading extends StatelessWidget {
   Widget buildPartsList(BuildContext context) {
     return Expanded(
       child: ListView(children: [
-        for (int i = 0; i < 10; ++i) ComputerItemDisplay3Loading(play: play),
+        for (int i = 0; i < 10; ++i)
+          ComputerItemDisplayPartsLoading(play: play),
       ]),
     );
   }

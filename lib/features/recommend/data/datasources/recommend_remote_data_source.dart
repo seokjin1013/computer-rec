@@ -26,6 +26,9 @@ abstract class RecommendRemoteDataSource {
   Future<ComputerCoolerModel> getComputerCooler(int id);
   Future<ComputerPowerModel> getComputerPower(int id);
   Future<ComputerCaseModel> getComputerCase(int id);
+  Future<ComputerMonitorModel> getComputerMonitor(int id);
+  Future<ComputerKeyboardModel> getComputerKeyboard(int id);
+  Future<ComputerMouseModel> getComputerMouse(int id);
   Future<bool> isExistAccount(String id, String pw);
   Future<bool> postNewAccount(String id, String pw);
 }
@@ -106,6 +109,9 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
       'cooler_id': 'coolerId',
       'power_id': 'powerId',
       'case_id': 'caseId',
+      'monitor_id': 'monitorId',
+      'keyboard_id': 'keyboardId',
+      'mouse_id': 'mouseId',
       'cpu_count': 'numCpu',
       'gpu_count': 'numVga',
       'ram_count': 'numRam',
@@ -115,6 +121,9 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
       'cooler_count': 'numCooler',
       'power_count': 'numPower',
       'case_count': 'numCase',
+      'monitor_count': 'numMonitor',
+      'keyboard_count': 'numKeyboard',
+      'mouse_count': 'numMouse',
       'total_price': 'totalPrice',
       'total_link': 'totalLink',
     };
@@ -435,6 +444,91 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
     final Map<String, dynamic> map =
         json.decode(utf8.decode(response.bodyBytes));
     return ComputerCaseModel.fromJson(_getFactorizedMap(map, renamingMap));
+  }
+
+  @override
+  Future<ComputerMonitorModel> getComputerMonitor(int id) async {
+    final response = await client.get(
+      Uri.parse('http://175.196.11.206:8080/monitor/model/$id'),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    );
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
+    Map<String, String> renamingMap = {
+      'shop_link': 'shopLink',
+      'shop_name': 'shopName',
+      'shop_logo': 'shopLogo',
+      'total_score': 'totalScore',
+      'happy_id': 'happyId',
+      'happy_price': 'happyPrice',
+      '제조회사': 'manufacturer',
+      '화면 크기': 'displaySize',
+      '화면 비율': 'displayRatio',
+      '패널 형태': 'panelShape',
+      '해상도': 'resolution',
+      '최대 주사율': 'refreshRate',
+    };
+    final Map<String, dynamic> map =
+        json.decode(utf8.decode(response.bodyBytes));
+    return ComputerMonitorModel.fromJson(_getFactorizedMap(map, renamingMap));
+  }
+
+  @override
+  Future<ComputerKeyboardModel> getComputerKeyboard(int id) async {
+    final response = await client.get(
+      Uri.parse('http://175.196.11.206:8080/keyboard/model/$id'),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    );
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
+    Map<String, String> renamingMap = {
+      'shop_link': 'shopLink',
+      'shop_name': 'shopName',
+      'shop_logo': 'shopLogo',
+      'total_score': 'totalScore',
+      'happy_id': 'happyId',
+      'happy_price': 'happyPrice',
+      '제조회사': 'manufacturer',
+      '연결 방식': 'connectionType',
+      '게이밍마우스': 'isGaming',
+    };
+    final Map<String, dynamic> map =
+        json.decode(utf8.decode(response.bodyBytes));
+    return ComputerKeyboardModel.fromJson(_getFactorizedMap(map, renamingMap));
+  }
+
+  @override
+  Future<ComputerMouseModel> getComputerMouse(int id) async {
+    final response = await client.get(
+      Uri.parse('http://175.196.11.206:8080/mouse/model/$id'),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    );
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
+    Map<String, String> renamingMap = {
+      'shop_link': 'shopLink',
+      'shop_name': 'shopName',
+      'shop_logo': 'shopLogo',
+      'total_score': 'totalScore',
+      'happy_id': 'happyId',
+      'happy_price': 'happyPrice',
+      '제조회사': 'manufacturer',
+      '연결 방식': 'connectionType',
+      '최대 감도': 'maxSensitivity',
+      'DPI 변경': 'dpiModification',
+    };
+    final Map<String, dynamic> map =
+        json.decode(utf8.decode(response.bodyBytes));
+    return ComputerMouseModel.fromJson(_getFactorizedMap(map, renamingMap));
   }
 
   Map<String, dynamic> _getFactorizedMap(

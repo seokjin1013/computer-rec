@@ -8,6 +8,9 @@ class RecommendOutput {
   int coolerId;
   int powerId;
   int caseId;
+  int monitorId;
+  int keyboardId;
+  int mouseId;
   int numCpu;
   int numVga;
   int numRam;
@@ -17,6 +20,9 @@ class RecommendOutput {
   int numCooler;
   int numPower;
   int numCase;
+  int numMonitor;
+  int numKeyboard;
+  int numMouse;
   int totalPrice;
   String totalLink;
 
@@ -30,6 +36,9 @@ class RecommendOutput {
     required this.coolerId,
     required this.powerId,
     required this.caseId,
+    required this.monitorId,
+    required this.keyboardId,
+    required this.mouseId,
     required this.numCpu,
     required this.numVga,
     required this.numRam,
@@ -39,6 +48,9 @@ class RecommendOutput {
     required this.numCooler,
     required this.numPower,
     required this.numCase,
+    required this.numMonitor,
+    required this.numKeyboard,
+    required this.numMouse,
     required this.totalPrice,
     required this.totalLink,
   });
