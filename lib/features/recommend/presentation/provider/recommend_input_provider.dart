@@ -1,15 +1,6 @@
-import '../../domain/entities/computer_item.dart';
-import '../../domain/usecases/get_milestone.dart';
-import 'package:dartz/dartz.dart';
-import '../../../../core/utility/dartz_x.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../../../../core/error/failures.dart';
-import '../../domain/entities/milestone.dart';
 import '../../domain/entities/recommend_input.dart';
-import '../../domain/usecases/get_computer_item.dart';
-import '../../domain/usecases/get_computer_item_best_range.dart';
 
 class RecommendInputProvider with ChangeNotifier {
   RecommendInput recommendInput = RecommendInput();

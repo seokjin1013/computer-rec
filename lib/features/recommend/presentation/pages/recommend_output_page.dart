@@ -1,5 +1,6 @@
 import 'package:clean_architecture_flutter/core/utility/state_widget.dart';
 
+import '../../../../core/error/failures.dart';
 import '../../../../core/utility/shimmer.dart';
 import '../../domain/entities/recommend_input.dart';
 import '../widgets/recommend_output_display.dart';
@@ -53,34 +54,33 @@ class RecommendOutputPage extends StatelessWidget {
     return FutureBuilder(
       future: vmRead.results,
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return snapshot.data!.fold((l) {
-            return FailedWidget(
-                message: l.message,
-                child: Row(
-                  children: [
-                    RecommendOutputListDisplayLoading(play: false),
-                    Expanded(
-                      child: RecommendOutputDisplayLoading(play: false),
-                    ),
-                  ],
-                ));
-          }, (r) {
-            if (r.length == 0) {
-              return Center(child: Text('조건을 만족하는 견적서가 없습니다.'));
-            }
-            return Row(
-              children: [
-                RecommendOutputListDisplay(),
-                Expanded(
-                  child: RecommendOutputDisplay(r[vmRead.viewIndex]),
-                ),
-              ],
-            );
-          });
+        if (snapshot.hasData) {
+          if (snapshot.requireData.isEmpty) {
+            return const Center(child: Text('조건을 만족하는 견적서가 없습니다.'));
+          }
+          return Row(
+            children: [
+              const RecommendOutputListDisplay(),
+              Expanded(
+                child: RecommendOutputDisplay(
+                    snapshot.requireData[vmRead.viewIndex]),
+              ),
+            ],
+          );
+        } else if (snapshot.hasError) {
+          return FailedWidget(
+              message: (snapshot.error as Failure).message,
+              child: Row(
+                children: const [
+                  RecommendOutputListDisplayLoading(play: false),
+                  Expanded(
+                    child: RecommendOutputDisplayLoading(play: false),
+                  ),
+                ],
+              ));
         }
         return Row(
-          children: [
+          children: const [
             RecommendOutputListDisplayLoading(),
             Expanded(
               child: RecommendOutputDisplayLoading(),

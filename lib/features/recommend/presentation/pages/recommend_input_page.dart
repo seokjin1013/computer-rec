@@ -1,14 +1,9 @@
-import '../../domain/entities/milestone.dart';
-import 'recommend_output_page.dart';
-import '../provider/main_provider.dart';
-import '../widgets/computer_item_display2.dart';
-import '../widgets/milestone_display.dart';
-import '../widgets/selection_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../injection_container.dart';
 import '../provider/recommend_input_provider.dart';
+import 'recommend_output_page.dart';
 
 class RecommendInputPage extends StatelessWidget {
   const RecommendInputPage({super.key});
@@ -119,7 +114,7 @@ class RecommendInputPage extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
                 Text('사용 목적 선택', style: Theme.of(context).textTheme.headline3),

@@ -1,6 +1,6 @@
-import '../../domain/entities/milestone.dart';
 import 'package:json_annotation/json_annotation.dart';
-import '../../domain/entities/computer_item.dart';
+
+import '../../domain/entities/milestone.dart';
 
 part 'milestone_model.g.dart';
 

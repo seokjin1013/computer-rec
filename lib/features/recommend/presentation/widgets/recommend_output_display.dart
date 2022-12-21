@@ -1,18 +1,13 @@
 import 'package:clean_architecture_flutter/core/utility/shimmer.dart';
-import 'package:clean_architecture_flutter/features/recommend/data/models/program_fit_model.dart';
 import 'package:clean_architecture_flutter/features/recommend/presentation/widgets/external_link_dialog.dart';
-
-import '../../domain/entities/recommend_output.dart';
-import '../../domain/entities/program_fit.dart';
-import '../../domain/usecases/get_computer_program_fit.dart';
-import 'computer_item_display3.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-import '../../domain/entities/recommend_input.dart';
+import '../../domain/entities/program_fit.dart';
+import '../../domain/entities/recommend_output.dart';
 import '../provider/recommend_output_provider.dart';
+import 'computer_item_display3.dart';
 
 class RecommendOutputDisplay extends StatelessWidget {
   final RecommendOutput recommendOutput;
@@ -68,13 +63,10 @@ class RecommendOutputDisplay extends StatelessWidget {
     return FutureBuilder(
       future: vmRead.bottleneck[vmWatch.viewIndex],
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return snapshot.data!.fold((l) => Container(), (r) {
-            if (100 - r == 0) {
-              return const NoBottleneckChart();
-            }
-            return BottleneckChart(100 - r);
-          });
+        if (snapshot.hasData) {
+          return BottleneckChart(100 - snapshot.requireData);
+        } else if (snapshot.hasError) {
+          return const NoBottleneckChart();
         }
         return Container();
       },
@@ -104,22 +96,21 @@ class RecommendOutputDisplay extends StatelessWidget {
     return FutureBuilder(
       future: vmRead.programFit[vmWatch.viewIndex],
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return snapshot.data!.fold(
-            (l) => Container(),
-            (r) => Expanded(
-              child: ListView.separated(
-                itemCount: r.length,
-                itemBuilder: (context, index) => ListTile(
-                  title: Text(r[index].name),
-                  subtitle: ProgramFitChart(r[index]),
-                ),
-                separatorBuilder: (context, index) {
-                  return const Divider();
-                },
+        if (snapshot.hasData) {
+          return Expanded(
+            child: ListView.separated(
+              itemCount: snapshot.requireData.length,
+              itemBuilder: (context, index) => ListTile(
+                title: Text(snapshot.requireData[index].name),
+                subtitle: ProgramFitChart(snapshot.requireData[index]),
               ),
+              separatorBuilder: (context, index) {
+                return const Divider();
+              },
             ),
           );
+        } else if (snapshot.hasError) {
+          return Container();
         }
         return Container();
       },
@@ -211,13 +202,12 @@ class RecommendOutputDisplay extends StatelessWidget {
           FutureBuilder(
             future: itemList[i],
             builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                return snapshot.data!.fold(
-                  (l) => Container(),
-                  (r) => ComputerItemDisplay3(r, itemNum[i]),
-                );
+              if (snapshot.hasData) {
+                return ComputerItemDisplay3(snapshot.requireData, itemNum[i]);
+              } else if (snapshot.hasError) {
+                return Container();
               }
-              return CircularProgressIndicator();
+              return const CircularProgressIndicator();
             },
           ),
       ]),
@@ -300,7 +290,8 @@ class RecommendOutputDisplayLoading extends StatelessWidget {
         itemCount: 5,
         itemBuilder: (context, index) => ListTile(
           title: ShimmerLoading(
-              play: play, child: TextSpaceRoundRect(text: Text('리그오브레전드'))),
+              play: play,
+              child: const TextSpaceRoundRect(child: Text('리그오브레전드'))),
           subtitle: ProgramFitChartLoading(play: play),
         ),
         separatorBuilder: (context, index) {
@@ -327,7 +318,7 @@ class RecommendOutputDisplayLoading extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: null,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text('구매링크',
@@ -338,7 +329,7 @@ class RecommendOutputDisplayLoading extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: null,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text('저장하기',

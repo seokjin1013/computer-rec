@@ -1,14 +1,30 @@
-import '../../../../core/utility/shimmer.dart';
-import '../../domain/entities/computer_item.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
+import '../../../../core/error/failures.dart';
+import '../../../../core/utility/future_widget.dart';
+import '../../../../core/utility/shimmer.dart';
+import '../../../../core/utility/state_widget.dart';
 import '../../../../core/utility/string.dart';
+import '../../domain/entities/computer_item.dart';
 
-class ComputerItemDisplay2 extends StatelessWidget {
+class ComputerItemDisplayHitBuilder extends StatelessWidget {
+  const ComputerItemDisplayHitBuilder(this.data, {super.key});
+  final Future<ComputerItem> data;
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureWidget(
+      data: data,
+      display: ((p0) => ComputerItemDisplayHit(p0)),
+      error: const ComputerItemDisplayHitLoading(play: false),
+      loading: const ComputerItemDisplayHitLoading(),
+    );
+  }
+}
+
+class ComputerItemDisplayHit extends StatelessWidget {
   final ComputerItem computerItem;
-  const ComputerItemDisplay2(this.computerItem, {super.key});
+  const ComputerItemDisplayHit(this.computerItem, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -81,8 +97,8 @@ class ComputerItemDisplay2 extends StatelessWidget {
   }
 }
 
-class ComputerItemDisplay2Loading extends StatelessWidget {
-  const ComputerItemDisplay2Loading({this.play = true, super.key});
+class ComputerItemDisplayHitLoading extends StatelessWidget {
+  const ComputerItemDisplayHitLoading({this.play = true, super.key});
   final bool play;
 
   @override
@@ -122,7 +138,7 @@ class ComputerItemDisplay2Loading extends StatelessWidget {
                       child: ShimmerLoading(
                         play: play,
                         child: TextSpaceRoundRect(
-                          text: Text(' ' * 50,
+                          child: Text(' ' * 50,
                               style: Theme.of(context).textTheme.headline4),
                         ),
                       ),
@@ -133,7 +149,7 @@ class ComputerItemDisplay2Loading extends StatelessWidget {
                         child: ShimmerLoading(
                           play: play,
                           child: TextSpaceRoundRect(
-                            text: Text(' ' * 30,
+                            child: Text(' ' * 30,
                                 style: Theme.of(context).textTheme.headline5),
                           ),
                         ),

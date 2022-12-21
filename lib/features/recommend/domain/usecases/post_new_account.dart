@@ -1,6 +1,3 @@
-import 'package:dartz/dartz.dart';
-
-import '../../../../core/error/failures.dart';
 import '../repositories/recommend_repository.dart';
 
 class PostNewAccount {
@@ -8,7 +5,7 @@ class PostNewAccount {
 
   PostNewAccount(this.recommendRepository);
 
-  Future<Either<Failure, bool>> call(String id, String pw) async {
-    return await recommendRepository.postNewAccount(id, pw);
+  Future<bool> call(String id, String pw) async {
+    return recommendRepository.postNewAccount(id, pw);
   }
 }

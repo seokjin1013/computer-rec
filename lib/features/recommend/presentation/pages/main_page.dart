@@ -1,19 +1,14 @@
 import 'dart:math';
-import 'dart:ui';
 
-import 'package:clean_architecture_flutter/core/utility/state_widget.dart';
-
-import '../../../../core/utility/shimmer.dart';
-import '../../domain/entities/milestone.dart';
-import 'recommend_input_page.dart';
-import '../provider/main_provider.dart';
-import '../widgets/computer_item_display2.dart';
-import '../widgets/milestone_display.dart';
-import '../widgets/text_theme_all_display.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../core/utility/shimmer.dart';
 import '../../../../injection_container.dart';
+import '../provider/main_provider.dart';
+import '../widgets/computer_item_display_hit.dart';
+import '../widgets/milestone_display.dart';
+import 'recommend_input_page.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
@@ -77,21 +72,7 @@ class MainPage extends StatelessWidget {
 
   Widget buildMilestone(BuildContext context) {
     final vmRead = context.read<MainProvider>();
-    final data = vmRead.getMileStone();
-    return FutureBuilder(
-      future: data,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return snapshot.data!.fold(
-            (l) => FailedWidget(
-                message: l.message,
-                child: const MilestoneDisplayLoading(play: false)),
-            (r) => MilestoneDisplay(r),
-          );
-        }
-        return const MilestoneDisplayLoading();
-      },
-    );
+    return MilestoneDisplayBuilder(vmRead.getMileStone());
   }
 
   Widget buildTodayTip(BuildContext context) {
@@ -139,20 +120,6 @@ class MainPage extends StatelessWidget {
 
   Widget buildRecentHotCPU(BuildContext context, int rank) {
     final vmRead = context.read<MainProvider>();
-    final data = vmRead.getComputerCPUHit(rank + 1);
-    return FutureBuilder(
-      future: data,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return snapshot.data!.fold(
-            (l) => FailedWidget(
-                message: l.message,
-                child: const ComputerItemDisplay2Loading(play: false)),
-            (r) => ComputerItemDisplay2(r),
-          );
-        }
-        return const ComputerItemDisplay2Loading();
-      },
-    );
+    return ComputerItemDisplayHitBuilder(vmRead.getComputerCPUHit(rank + 1));
   }
 }

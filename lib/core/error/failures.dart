@@ -5,7 +5,7 @@ abstract class Failure {
 
 class ServerFailure extends Failure {
   final int errorCode;
-  ServerFailure({this.errorCode = -1})
+  ServerFailure([this.errorCode = -1])
       : super('서버에서 정보를 읽어올 수 없습니다. 에러코드: $errorCode');
 }
 

@@ -6,6 +6,6 @@ class GetTodayTip {
   GetTodayTip(this.recommendRepository);
 
   Future<String> call(int num) async {
-    return await recommendRepository.getTodayTip(num);
+    return recommendRepository.getTodayTip(num);
   }
 }

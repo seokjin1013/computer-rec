@@ -17,8 +17,6 @@ dependencies:
   freezed: ^2.3.0
   # Value equality
   equatable: ^2.0.5
-  # Functional programming thingies
-  dartz: ^0.10.1
   # Remote API
   connectivity_plus: ^3.0.2
   http: ^0.13.5
@@ -29,7 +27,6 @@ dependencies:
   syncfusion_flutter_gauges: ^20.3.59
   syncfusion_flutter_charts: ^20.3.59
   url_launcher: ^6.1.7
-  shimmer: ^2.0.0
 
 dev_dependencies:
   flutter_test:

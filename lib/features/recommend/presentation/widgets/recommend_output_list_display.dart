@@ -1,19 +1,9 @@
 import 'package:clean_architecture_flutter/core/utility/shimmer.dart';
-
-import '../provider/recommend_output_provider.dart';
-import 'selection_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/utility/string.dart';
-import '../../domain/entities/recommend_output.dart';
-import '../../domain/entities/computer_item.dart';
-import '../../../../core/error/failures.dart';
-import '../../../../core/utility/dartz_x.dart';
-
-import '../pages/main_page.dart';
+import '../provider/recommend_output_provider.dart';
 
 class RecommendOutputListDisplay extends StatelessWidget {
   const RecommendOutputListDisplay({super.key});
@@ -38,18 +28,17 @@ class RecommendOutputListDisplay extends StatelessWidget {
     return FutureBuilder(
       future: vmRead.results,
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return snapshot.data!.fold(
-            (l) => Container(),
-            (r) => ListView(
-              children: [
-                for (int i = 0; i < r.length; ++i)
-                  buildRecommendOutputListTile(context, i),
-              ],
-            ),
+        if (snapshot.hasData) {
+          return ListView(
+            children: [
+              for (int i = 0; i < snapshot.requireData.length; ++i)
+                buildRecommendOutputListTile(context, i),
+            ],
           );
+        } else if (snapshot.hasError) {
+          return Container();
         }
-        return CircularProgressIndicator();
+        return const CircularProgressIndicator();
       },
     );
   }
@@ -128,13 +117,12 @@ class RecommendOutputListDisplay extends StatelessWidget {
     return FutureBuilder(
       future: vmRead.ccase[index],
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return snapshot.data!.fold(
-            (l) => Container(),
-            (r) => Image.network(r.image),
-          );
+        if (snapshot.hasData) {
+          return Image.network(snapshot.requireData.image);
+        } else if (snapshot.hasError) {
+          return Container();
         }
-        return CircularProgressIndicator();
+        return const CircularProgressIndicator();
       },
     );
   }
@@ -144,15 +132,14 @@ class RecommendOutputListDisplay extends StatelessWidget {
     return FutureBuilder(
       future: vmRead.results,
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return snapshot.data!.fold(
-            (l) => Container(),
-            (r) => Text(
-                '${getCommaSeperatedPrice(r[index].totalPrice.toString())}원',
-                style: Theme.of(context).textTheme.headline4),
-          );
+        if (snapshot.hasData) {
+          return Text(
+              '${getCommaSeperatedPrice(snapshot.requireData[index].totalPrice.toString())}원',
+              style: Theme.of(context).textTheme.headline4);
+        } else if (snapshot.hasError) {
+          return Container();
         }
-        return CircularProgressIndicator();
+        return const CircularProgressIndicator();
       },
     );
   }
@@ -162,13 +149,13 @@ class RecommendOutputListDisplay extends StatelessWidget {
     return FutureBuilder(
       future: vmRead.bottleneck[index],
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return snapshot.data!.fold(
-              (l) => Container(),
-              (r) => Text('호환성 ${100 - r}%',
-                  style: Theme.of(context).textTheme.headline5));
+        if (snapshot.hasData) {
+          return Text('호환성 ${100 - snapshot.requireData}%',
+              style: Theme.of(context).textTheme.headline5);
+        } else if (snapshot.hasError) {
+          return Container();
         }
-        return CircularProgressIndicator();
+        return const CircularProgressIndicator();
       },
     );
   }

@@ -1,6 +1,3 @@
-import 'package:dartz/dartz.dart';
-
-import '../../../../core/error/failures.dart';
 import '../entities/computer_item.dart';
 import '../repositories/recommend_repository.dart';
 
@@ -9,8 +6,8 @@ class GetComputerCPU {
 
   GetComputerCPU(this.recommendRepository);
 
-  Future<Either<Failure, ComputerCPU>> call(int id) async {
-    return await recommendRepository.getComputerCPU(id);
+  Future<ComputerCPU> call(int id) async {
+    return recommendRepository.getComputerCPU(id);
   }
 }
 
@@ -19,8 +16,8 @@ class GetComputerVGA {
 
   GetComputerVGA(this.recommendRepository);
 
-  Future<Either<Failure, ComputerVGA>> call(int id) async {
-    return await recommendRepository.getComputerVGA(id);
+  Future<ComputerVGA> call(int id) async {
+    return recommendRepository.getComputerVGA(id);
   }
 }
 
@@ -29,8 +26,8 @@ class GetComputerRAM {
 
   GetComputerRAM(this.recommendRepository);
 
-  Future<Either<Failure, ComputerRAM>> call(int id) async {
-    return await recommendRepository.getComputerRAM(id);
+  Future<ComputerRAM> call(int id) async {
+    return recommendRepository.getComputerRAM(id);
   }
 }
 
@@ -39,8 +36,8 @@ class GetComputerMainBoard {
 
   GetComputerMainBoard(this.recommendRepository);
 
-  Future<Either<Failure, ComputerMainBoard>> call(int id) async {
-    return await recommendRepository.getComputerMainBoard(id);
+  Future<ComputerMainBoard> call(int id) async {
+    return recommendRepository.getComputerMainBoard(id);
   }
 }
 
@@ -49,8 +46,8 @@ class GetComputerSSD {
 
   GetComputerSSD(this.recommendRepository);
 
-  Future<Either<Failure, ComputerSSD>> call(int id) async {
-    return await recommendRepository.getComputerSSD(id);
+  Future<ComputerSSD> call(int id) async {
+    return recommendRepository.getComputerSSD(id);
   }
 }
 
@@ -59,8 +56,8 @@ class GetComputerHDD {
 
   GetComputerHDD(this.recommendRepository);
 
-  Future<Either<Failure, ComputerHDD>> call(int id) async {
-    return await recommendRepository.getComputerHDD(id);
+  Future<ComputerHDD> call(int id) async {
+    return recommendRepository.getComputerHDD(id);
   }
 }
 
@@ -69,8 +66,8 @@ class GetComputerCooler {
 
   GetComputerCooler(this.recommendRepository);
 
-  Future<Either<Failure, ComputerCooler>> call(int id) async {
-    return await recommendRepository.getComputerCooler(id);
+  Future<ComputerCooler> call(int id) async {
+    return recommendRepository.getComputerCooler(id);
   }
 }
 
@@ -79,8 +76,8 @@ class GetComputerPower {
 
   GetComputerPower(this.recommendRepository);
 
-  Future<Either<Failure, ComputerPower>> call(int id) async {
-    return await recommendRepository.getComputerPower(id);
+  Future<ComputerPower> call(int id) async {
+    return recommendRepository.getComputerPower(id);
   }
 }
 
@@ -89,7 +86,7 @@ class GetComputerCase {
 
   GetComputerCase(this.recommendRepository);
 
-  Future<Either<Failure, ComputerCase>> call(int id) async {
-    return await recommendRepository.getComputerCase(id);
+  Future<ComputerCase> call(int id) async {
+    return recommendRepository.getComputerCase(id);
   }
 }

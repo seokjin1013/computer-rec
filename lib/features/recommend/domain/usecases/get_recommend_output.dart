@@ -1,10 +1,5 @@
-import '../entities/recommend_output.dart';
-import 'package:dartz/dartz.dart';
-
-import '../../../../core/error/failures.dart';
-
-import '../entities/computer_item.dart';
 import '../entities/recommend_input.dart';
+import '../entities/recommend_output.dart';
 import '../repositories/recommend_repository.dart';
 
 class GetRecommendOutput {
@@ -12,8 +7,7 @@ class GetRecommendOutput {
 
   GetRecommendOutput(this.recommendRepository);
 
-  Future<Either<Failure, List<RecommendOutput>>> call(
-      RecommendInput recommendInput) async {
-    return await recommendRepository.getRecommendOutput(recommendInput);
+  Future<List<RecommendOutput>> call(RecommendInput recommendInput) async {
+    return recommendRepository.getRecommendOutput(recommendInput);
   }
 }

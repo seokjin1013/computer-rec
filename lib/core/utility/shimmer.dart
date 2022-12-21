@@ -171,21 +171,21 @@ class _ShimmerLoadingState extends State<ShimmerLoading> {
 }
 
 class TextSpaceRoundRect extends StatelessWidget {
-  final Text text;
   const TextSpaceRoundRect({
-    required this.text,
+    required this.child,
     this.width,
     Key? key,
   }) : super(key: key);
+  final Text child;
   final double? width;
 
   @override
   Widget build(BuildContext context) {
     final TextPainter textPainter = TextPainter(
-      text: TextSpan(text: text.data, style: text.style),
-      textDirection: text.textDirection ?? Directionality.of(context),
+      text: TextSpan(text: child.data, style: child.style),
+      textDirection: child.textDirection ?? Directionality.of(context),
       textScaleFactor:
-          text.textScaleFactor ?? MediaQuery.of(context).textScaleFactor,
+          child.textScaleFactor ?? MediaQuery.of(context).textScaleFactor,
     )..layout(minWidth: 0, maxWidth: double.infinity);
     Size size = textPainter.size;
     return Container(

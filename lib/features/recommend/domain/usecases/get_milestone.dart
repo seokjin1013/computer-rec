@@ -1,6 +1,3 @@
-import 'package:dartz/dartz.dart';
-
-import '../../../../core/error/failures.dart';
 import '../entities/milestone.dart';
 import '../repositories/recommend_repository.dart';
 
@@ -9,7 +6,7 @@ class GetMilestone {
 
   GetMilestone(this.recommendRepository);
 
-  Future<Either<Failure, Milestone>> call() async {
-    return await recommendRepository.getMilestone();
+  Future<Milestone> call() async {
+    return recommendRepository.getMilestone();
   }
 }

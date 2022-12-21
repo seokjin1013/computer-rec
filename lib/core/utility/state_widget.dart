@@ -1,13 +1,6 @@
 import 'dart:ui';
-
-import 'package:clean_architecture_flutter/features/recommend/domain/entities/milestone.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-
-import '../../features/recommend/presentation/widgets/milestone_display.dart';
-import '../../injection_container.dart';
 
 class FailedWidget extends StatelessWidget {
   final String message;

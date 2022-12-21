@@ -354,7 +354,7 @@ class ComputerItemDisplay3Loading extends StatelessWidget {
                       ShimmerLoading(
                         play: play,
                         child: TextSpaceRoundRect(
-                          text: Text('CPU',
+                          child: Text('CPU',
                               style: Theme.of(context).textTheme.bodyLarge),
                         ),
                       ),
@@ -395,7 +395,7 @@ class ComputerItemDisplay3Loading extends StatelessWidget {
                     ShimmerLoading(
                       play: play,
                       child: TextSpaceRoundRect(
-                        text: Text('인텔 코어i5-12세대 12400F (엘더레이크) (정품)',
+                        child: Text('인텔 코어i5-12세대 12400F (엘더레이크) (정품)',
                             overflow: TextOverflow.fade,
                             style: Theme.of(context).textTheme.headline6),
                       ),
@@ -403,21 +403,21 @@ class ComputerItemDisplay3Loading extends StatelessWidget {
                     ShimmerLoading(
                       play: play,
                       child: TextSpaceRoundRect(
-                        text: Text('50000원',
+                        child: Text('50000원',
                             style: Theme.of(context).textTheme.bodyLarge),
                       ),
                     ),
                     ShimmerLoading(
                       play: play,
                       child: TextSpaceRoundRect(
-                        text: Text('⭐ 5.0 / 5.0',
+                        child: Text('⭐ 5.0 / 5.0',
                             style: Theme.of(context).textTheme.bodyLarge),
                       ),
                     ),
                     ShimmerLoading(
                       play: play,
                       child: TextSpaceRoundRect(
-                        text: Text('🔍 123',
+                        child: Text('🔍 123',
                             style: Theme.of(context).textTheme.bodyLarge),
                       ),
                     ),
@@ -429,7 +429,7 @@ class ComputerItemDisplay3Loading extends StatelessWidget {
                   child: ShimmerLoading(
                     play: play,
                     child: TextSpaceRoundRect(
-                      text: Text('X1',
+                      child: Text('X1',
                           style: Theme.of(context).textTheme.headline5),
                     ),
                   ),

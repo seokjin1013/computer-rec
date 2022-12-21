@@ -1,18 +1,12 @@
 import 'dart:convert';
 
-import '../models/computer_combine_model.dart';
-import '../models/milestone_model.dart';
-import '../../domain/entities/recommend_output.dart';
-import '../../domain/entities/milestone.dart';
-import '../../domain/usecases/get_computer_item_hit%20copy.dart';
-import '../../domain/usecases/get_computer_program_fit.dart';
-import '../../domain/usecases/get_recommend_output.dart';
+import 'package:clean_architecture_flutter/core/error/failures.dart';
 import 'package:http/http.dart' as http;
 
-import '../../../../core/error/exceptions.dart';
-import '../../domain/entities/program_fit.dart';
 import '../../domain/entities/recommend_input.dart';
+import '../models/computer_combine_model.dart';
 import '../models/computer_item_model.dart';
+import '../models/milestone_model.dart';
 import '../models/program_fit_model.dart';
 
 abstract class RecommendRemoteDataSource {
@@ -50,16 +44,15 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
         'Content-Type': 'application/json',
       },
     );
-    if (response.statusCode == 200) {
-      final List<dynamic> outputs =
-          json.decode(utf8.decode(response.bodyBytes));
-      final List<ProgramFitModel> programFitModels = [];
-      for (Map<String, dynamic> map in outputs) {
-        programFitModels.add(ProgramFitModel.fromJson(map));
-      }
-      return programFitModels;
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
     }
-    throw ServerException(response.statusCode);
+    final List<dynamic> outputs = json.decode(utf8.decode(response.bodyBytes));
+    final List<ProgramFitModel> programFitModels = [];
+    for (Map<String, dynamic> map in outputs) {
+      programFitModels.add(ProgramFitModel.fromJson(map));
+    }
+    return programFitModels;
   }
 
   @override
@@ -70,12 +63,12 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
         'Content-Type': 'application/json',
       },
     );
-    if (response.statusCode == 200) {
-      String result = response.body;
-      result = result.substring(0, result.length - 1);
-      return double.tryParse(result)!;
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
     }
-    throw ServerException(response.statusCode);
+    String result = response.body;
+    result = result.substring(0, result.length - 1);
+    return double.tryParse(result)!;
   }
 
   @override
@@ -98,42 +91,41 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
         'Content-Type': 'application/json',
       },
     );
-    if (response.statusCode == 200) {
-      final List<dynamic> outputs =
-          json.decode(utf8.decode(response.bodyBytes));
-      final List<RecommendOutputModel> recommendOutputModels = [];
-      Map<String, String> renamingMap = {
-        'cpu_id': 'cpuId',
-        'gpu_id': 'vgaId',
-        'ram_id': 'ramId',
-        'mainboard_id': 'mainboardId',
-        'ssd_id': 'ssdId',
-        'hdd_id': 'hddId',
-        'cooler_id': 'coolerId',
-        'power_id': 'powerId',
-        'case_id': 'caseId',
-        'cpu_count': 'numCpu',
-        'gpu_count': 'numVga',
-        'ram_count': 'numRam',
-        'mainboard_count': 'numMainboard',
-        'ssd_count': 'numSsd',
-        'hdd_count': 'numHdd',
-        'cooler_count': 'numCooler',
-        'power_count': 'numPower',
-        'case_count': 'numCase',
-        'total_price': 'totalPrice',
-        'total_link': 'totalLink',
-      };
-      for (Map<String, dynamic> map in outputs) {
-        final Map<String, dynamic> renamedMap = {
-          for (MapEntry<String, dynamic> e in map.entries)
-            renamingMap[e.key] ?? e.key: e.value
-        };
-        recommendOutputModels.add(RecommendOutputModel.fromJson(renamedMap));
-      }
-      return recommendOutputModels;
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
     }
-    throw ServerException(response.statusCode);
+    final List<dynamic> outputs = json.decode(utf8.decode(response.bodyBytes));
+    final List<RecommendOutputModel> recommendOutputModels = [];
+    Map<String, String> renamingMap = {
+      'cpu_id': 'cpuId',
+      'gpu_id': 'vgaId',
+      'ram_id': 'ramId',
+      'mainboard_id': 'mainboardId',
+      'ssd_id': 'ssdId',
+      'hdd_id': 'hddId',
+      'cooler_id': 'coolerId',
+      'power_id': 'powerId',
+      'case_id': 'caseId',
+      'cpu_count': 'numCpu',
+      'gpu_count': 'numVga',
+      'ram_count': 'numRam',
+      'mainboard_count': 'numMainboard',
+      'ssd_count': 'numSsd',
+      'hdd_count': 'numHdd',
+      'cooler_count': 'numCooler',
+      'power_count': 'numPower',
+      'case_count': 'numCase',
+      'total_price': 'totalPrice',
+      'total_link': 'totalLink',
+    };
+    for (Map<String, dynamic> map in outputs) {
+      final Map<String, dynamic> renamedMap = {
+        for (MapEntry<String, dynamic> e in map.entries)
+          renamingMap[e.key] ?? e.key: e.value
+      };
+      recommendOutputModels.add(RecommendOutputModel.fromJson(renamedMap));
+    }
+    return recommendOutputModels;
   }
 
   @override
@@ -144,19 +136,19 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
         'Content-Type': 'application/json',
       },
     );
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
     Map<String, String> renamingMap = {
       'user': 'numUser',
       'count': 'numUsage',
     };
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> map = json.decode(response.body);
-      final Map<String, dynamic> renamedMap = {
-        for (MapEntry<String, dynamic> e in map.entries)
-          renamingMap[e.key] ?? e.key: e.value
-      };
-      return MilestoneModel.fromJson(renamedMap);
-    }
-    throw ServerException(response.statusCode);
+    final Map<String, dynamic> map = json.decode(response.body);
+    final Map<String, dynamic> renamedMap = {
+      for (MapEntry<String, dynamic> e in map.entries)
+        renamingMap[e.key] ?? e.key: e.value
+    };
+    return MilestoneModel.fromJson(renamedMap);
   }
 
   @override
@@ -167,11 +159,11 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
         'Content-Type': 'application/json',
       },
     );
-    if (response.statusCode == 200) {
-      final int id = json.decode(response.body);
-      return id;
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
     }
-    throw ServerException(response.statusCode);
+    final int id = json.decode(response.body);
+    return id;
   }
 
   @override
@@ -182,11 +174,11 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
         'Content-Type': 'application/json',
       },
     );
-    if (response.statusCode == 200) {
-      final List<dynamic> ids = json.decode(utf8.decode(response.bodyBytes));
-      return ids.cast<int>();
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
     }
-    throw ServerException(response.statusCode);
+    final List<dynamic> ids = json.decode(utf8.decode(response.bodyBytes));
+    return ids.cast<int>();
   }
 
   @override
@@ -197,6 +189,9 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
         'Content-Type': 'application/json',
       },
     );
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
     Map<String, String> renamingMap = {
       'shop_link': 'shopLink',
       'shop_name': 'shopName',
@@ -211,12 +206,9 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
       '사양쓰레드 수': 'numThread',
       '메모리 사양메모리 규격': 'memoryType'
     };
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> map =
-          json.decode(utf8.decode(response.bodyBytes));
-      return ComputerCPUModel.fromJson(_getFactorizedMap(map, renamingMap));
-    }
-    throw ServerException(response.statusCode);
+    final Map<String, dynamic> map =
+        json.decode(utf8.decode(response.bodyBytes));
+    return ComputerCPUModel.fromJson(_getFactorizedMap(map, renamingMap));
   }
 
   @override
@@ -227,6 +219,9 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
         'Content-Type': 'application/json',
       },
     );
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
     Map<String, String> renamingMap = {
       'shop_link': 'shopLink',
       'shop_name': 'shopName',
@@ -244,12 +239,9 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
       '제품 외형가로(길이)': 'width',
       'total_rank': 'totalRank',
     };
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> map =
-          json.decode(utf8.decode(response.bodyBytes));
-      return ComputerVGAModel.fromJson(_getFactorizedMap(map, renamingMap));
-    }
-    throw ServerException(response.statusCode);
+    final Map<String, dynamic> map =
+        json.decode(utf8.decode(response.bodyBytes));
+    return ComputerVGAModel.fromJson(_getFactorizedMap(map, renamingMap));
   }
 
   @override
@@ -260,6 +252,9 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
         'Content-Type': 'application/json',
       },
     );
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
     Map<String, String> renamingMap = {
       'shop_link': 'shopLink',
       'shop_name': 'shopName',
@@ -271,12 +266,9 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
       '사용 장치': 'useDevice',
       '메모리 용량': 'memoryCapacity',
     };
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> map =
-          json.decode(utf8.decode(response.bodyBytes));
-      return ComputerRAMModel.fromJson(_getFactorizedMap(map, renamingMap));
-    }
-    throw ServerException(response.statusCode);
+    final Map<String, dynamic> map =
+        json.decode(utf8.decode(response.bodyBytes));
+    return ComputerRAMModel.fromJson(_getFactorizedMap(map, renamingMap));
   }
 
   @override
@@ -287,6 +279,9 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
         'Content-Type': 'application/json',
       },
     );
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
     Map<String, String> renamingMap = {
       'shop_link': 'shopLink',
       'shop_name': 'shopName',
@@ -301,13 +296,9 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
       '메모리메모리 슬롯': 'memorySlot',
       '메모리메모리 용량': 'memoryCapacity',
     };
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> map =
-          json.decode(utf8.decode(response.bodyBytes));
-      return ComputerMainBoardModel.fromJson(
-          _getFactorizedMap(map, renamingMap));
-    }
-    throw ServerException(response.statusCode);
+    final Map<String, dynamic> map =
+        json.decode(utf8.decode(response.bodyBytes));
+    return ComputerMainBoardModel.fromJson(_getFactorizedMap(map, renamingMap));
   }
 
   @override
@@ -318,6 +309,9 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
         'Content-Type': 'application/json',
       },
     );
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
     Map<String, String> renamingMap = {
       'shop_link': 'shopLink',
       'shop_name': 'shopName',
@@ -328,12 +322,9 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
       '제조회사': 'manufacturer',
       '[기본사양]폼팩터': 'formFactor',
     };
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> map =
-          json.decode(utf8.decode(response.bodyBytes));
-      return ComputerSSDModel.fromJson(_getFactorizedMap(map, renamingMap));
-    }
-    throw ServerException(response.statusCode);
+    final Map<String, dynamic> map =
+        json.decode(utf8.decode(response.bodyBytes));
+    return ComputerSSDModel.fromJson(_getFactorizedMap(map, renamingMap));
   }
 
   @override
@@ -344,6 +335,9 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
         'Content-Type': 'application/json',
       },
     );
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
     Map<String, String> renamingMap = {
       'shop_link': 'shopLink',
       'shop_name': 'shopName',
@@ -354,12 +348,9 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
       '제조회사': 'manufacturer',
       '제품 분류': 'category',
     };
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> map =
-          json.decode(utf8.decode(response.bodyBytes));
-      return ComputerHDDModel.fromJson(_getFactorizedMap(map, renamingMap));
-    }
-    throw ServerException(response.statusCode);
+    final Map<String, dynamic> map =
+        json.decode(utf8.decode(response.bodyBytes));
+    return ComputerHDDModel.fromJson(_getFactorizedMap(map, renamingMap));
   }
 
   @override
@@ -370,6 +361,9 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
         'Content-Type': 'application/json',
       },
     );
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
     Map<String, String> renamingMap = {
       'shop_link': 'shopLink',
       'shop_name': 'shopName',
@@ -380,12 +374,9 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
       '제조회사': 'manufacturer',
       '냉각 방식': 'coolingType',
     };
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> map =
-          json.decode(utf8.decode(response.bodyBytes));
-      return ComputerCoolerModel.fromJson(_getFactorizedMap(map, renamingMap));
-    }
-    throw ServerException(response.statusCode);
+    final Map<String, dynamic> map =
+        json.decode(utf8.decode(response.bodyBytes));
+    return ComputerCoolerModel.fromJson(_getFactorizedMap(map, renamingMap));
   }
 
   @override
@@ -396,6 +387,9 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
         'Content-Type': 'application/json',
       },
     );
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
     Map<String, String> renamingMap = {
       'shop_link': 'shopLink',
       'shop_name': 'shopName',
@@ -407,12 +401,9 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
       '제품 분류': 'category',
       '80PLUS인증': 'is80Plus',
     };
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> map =
-          json.decode(utf8.decode(response.bodyBytes));
-      return ComputerPowerModel.fromJson(_getFactorizedMap(map, renamingMap));
-    }
-    throw ServerException(response.statusCode);
+    final Map<String, dynamic> map =
+        json.decode(utf8.decode(response.bodyBytes));
+    return ComputerPowerModel.fromJson(_getFactorizedMap(map, renamingMap));
   }
 
   @override
@@ -423,6 +414,9 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
         'Content-Type': 'application/json',
       },
     );
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
     Map<String, String> renamingMap = {
       'shop_link': 'shopLink',
       'shop_name': 'shopName',
@@ -438,12 +432,9 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
       '크기깊이(D)': 'height',
       '크기높이(H)': 'depth',
     };
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> map =
-          json.decode(utf8.decode(response.bodyBytes));
-      return ComputerCaseModel.fromJson(_getFactorizedMap(map, renamingMap));
-    }
-    throw ServerException(response.statusCode);
+    final Map<String, dynamic> map =
+        json.decode(utf8.decode(response.bodyBytes));
+    return ComputerCaseModel.fromJson(_getFactorizedMap(map, renamingMap));
   }
 
   Map<String, dynamic> _getFactorizedMap(
@@ -470,11 +461,11 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
         'Content-Type': 'application/json',
       },
     );
-
-    if (response.statusCode == 200) {
-      return response.body == '1';
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
     }
-    throw ServerException(response.statusCode);
+
+    return response.body == '1';
   }
 
   @override
@@ -485,10 +476,9 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
         'Content-Type': 'application/json',
       },
     );
-
-    if (response.statusCode == 200) {
-      return response.body == '1';
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
     }
-    throw ServerException(response.statusCode);
+    return response.body == '1';
   }
 }

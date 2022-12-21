@@ -1,6 +1,5 @@
-import '../../domain/entities/milestone.dart';
 import 'package:json_annotation/json_annotation.dart';
-import '../../domain/entities/computer_item.dart';
+
 import '../../domain/entities/program_fit.dart';
 
 part 'program_fit_model.g.dart';
