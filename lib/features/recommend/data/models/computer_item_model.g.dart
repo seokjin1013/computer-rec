@@ -66,6 +66,7 @@ ComputerVGAModel _$ComputerVGAModelFromJson(Map<String, dynamic> json) =>
       isSupport8K: json['isSupport8K'] as String,
       isSupport4K: json['isSupport4K'] as String,
       width: json['width'] as String,
+      requiredPower: json['requiredPower'] as int,
       id: json['id'] as int,
       price: json['price'] as int,
       happyId: json['happyId'] as int,
@@ -107,6 +108,7 @@ Map<String, dynamic> _$ComputerVGAModelToJson(ComputerVGAModel instance) =>
       'isSupport8K': instance.isSupport8K,
       'isSupport4K': instance.isSupport4K,
       'width': instance.width,
+      'requiredPower': instance.requiredPower,
       'totalRank': instance.totalRank,
     };
 
@@ -114,6 +116,7 @@ ComputerRAMModel _$ComputerRAMModelFromJson(Map<String, dynamic> json) =>
     ComputerRAMModel(
       manufacturer: json['manufacturer'] as String,
       useDevice: json['useDevice'] as String,
+      category: json['category'] as String,
       memoryCapacity: json['memoryCapacity'] as String,
       id: json['id'] as int,
       price: json['price'] as int,
@@ -149,6 +152,7 @@ Map<String, dynamic> _$ComputerRAMModelToJson(ComputerRAMModel instance) =>
       'manufacturer': instance.manufacturer,
       'hits': instance.hits,
       'useDevice': instance.useDevice,
+      'category': instance.category,
       'memoryCapacity': instance.memoryCapacity,
     };
 
@@ -157,8 +161,10 @@ ComputerMainBoardModel _$ComputerMainBoardModelFromJson(
     ComputerMainBoardModel(
       manufacturer: json['manufacturer'] as String,
       category: json['category'] as String,
+      cpuSocket: json['cpuSocket'] as String,
       detailChipset: json['detailChipset'] as String,
       formFactor: json['formFactor'] as String,
+      memoryType: json['memoryType'] as String,
       memorySlot: json['memorySlot'] as String,
       memoryCapacity: json['memoryCapacity'] as String,
       id: json['id'] as int,
@@ -196,8 +202,10 @@ Map<String, dynamic> _$ComputerMainBoardModelToJson(
       'manufacturer': instance.manufacturer,
       'hits': instance.hits,
       'category': instance.category,
+      'cpuSocket': instance.cpuSocket,
       'detailChipset': instance.detailChipset,
       'formFactor': instance.formFactor,
+      'memoryType': instance.memoryType,
       'memorySlot': instance.memorySlot,
       'memoryCapacity': instance.memoryCapacity,
     };
@@ -327,6 +335,7 @@ ComputerPowerModel _$ComputerPowerModelFromJson(Map<String, dynamic> json) =>
     ComputerPowerModel(
       manufacturer: json['manufacturer'] as String,
       category: json['category'] as String,
+      staticPower: json['staticPower'] as int,
       is80Plus: json['is80Plus'] as String,
       id: json['id'] as int,
       price: json['price'] as int,
@@ -362,6 +371,7 @@ Map<String, dynamic> _$ComputerPowerModelToJson(ComputerPowerModel instance) =>
       'manufacturer': instance.manufacturer,
       'hits': instance.hits,
       'category': instance.category,
+      'staticPower': instance.staticPower,
       'is80Plus': instance.is80Plus,
     };
 

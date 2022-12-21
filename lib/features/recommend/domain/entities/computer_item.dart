@@ -98,7 +98,7 @@ class ComputerVGA extends ComputerItem {
   // final String numFan;
   final String width;
   // final String height;
-  // final String requiredPower;
+  final int requiredPower;
   final int totalRank;
 
   ComputerVGA(
@@ -111,7 +111,7 @@ class ComputerVGA extends ComputerItem {
       // required this.numFan,
       required this.width,
       // required this.height,
-      // required this.requiredPower,
+      required this.requiredPower,
       required super.id,
       required super.price,
       required super.happyId,
@@ -135,13 +135,13 @@ class ComputerVGA extends ComputerItem {
 
 class ComputerRAM extends ComputerItem {
   final String useDevice;
-  // final String category;
+  final String category;
   final String memoryCapacity;
   // final String clock;
 
   ComputerRAM(
       {required this.useDevice,
-      // required this.category,
+      required this.category,
       required this.memoryCapacity,
       // required this.clock,
       required super.id,
@@ -166,20 +166,20 @@ class ComputerRAM extends ComputerItem {
 
 class ComputerMainBoard extends ComputerItem {
   final String category;
-  // final String cpuSocket;
+  final String cpuSocket;
   final String detailChipset;
   final String formFactor;
-  // final String memoryType;
+  final String memoryType;
   final String memorySlot;
   final String memoryCapacity;
   // final String isM2;
 
   ComputerMainBoard(
       {required this.category,
-      // required this.cpuSocket,
+      required this.cpuSocket,
       required this.detailChipset,
       required this.formFactor,
-      // required this.memoryType,
+      required this.memoryType,
       required this.memorySlot,
       required this.memoryCapacity,
       // required this.isM2,
@@ -289,13 +289,13 @@ class ComputerCooler extends ComputerItem {
 
 class ComputerPower extends ComputerItem {
   final String category;
-  // final String staticPower;
+  final int staticPower;
   final String is80Plus;
   // final String cableConnection;
 
   ComputerPower(
       {required this.category,
-      // required this.staticPower,
+      required this.staticPower,
       required this.is80Plus,
       // required this.cableConnection,
       required super.id,

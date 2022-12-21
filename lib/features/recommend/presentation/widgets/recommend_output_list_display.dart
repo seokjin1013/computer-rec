@@ -123,9 +123,25 @@ class RecommendOutputListDisplay extends StatelessWidget {
         if (snapshot.hasData) {
           return Image.network(snapshot.requireData.image);
         } else if (snapshot.hasError) {
-          return Container();
+          return const ShimmerLoading(
+            play: false,
+            child: AspectRatio(
+              aspectRatio: 1,
+              child: ColoredBox(
+                color: Colors.black,
+              ),
+            ),
+          );
         }
-        return const CircularProgressIndicator();
+        return const ShimmerLoading(
+          play: true,
+          child: AspectRatio(
+            aspectRatio: 1,
+            child: ColoredBox(
+              color: Colors.black,
+            ),
+          ),
+        );
       },
     );
   }
@@ -140,9 +156,19 @@ class RecommendOutputListDisplay extends StatelessWidget {
               '${getCommaSeperatedPrice(snapshot.requireData.toString())}원',
               style: Theme.of(context).textTheme.headline4);
         } else if (snapshot.hasError) {
-          return Container();
+          return ShimmerLoading(
+              play: false,
+              child: TextSpaceRoundRect(
+                child: Text('1000000원',
+                    style: Theme.of(context).textTheme.headline4),
+              ));
         }
-        return const CircularProgressIndicator();
+        return ShimmerLoading(
+            play: true,
+            child: TextSpaceRoundRect(
+              child: Text('1000000원',
+                  style: Theme.of(context).textTheme.headline4),
+            ));
       },
     );
   }
@@ -156,9 +182,19 @@ class RecommendOutputListDisplay extends StatelessWidget {
           return Text('호환성 ${100 - snapshot.requireData}%',
               style: Theme.of(context).textTheme.headline5);
         } else if (snapshot.hasError) {
-          return Container();
+          return ShimmerLoading(
+              play: false,
+              child: TextSpaceRoundRect(
+                child: Text('호환성 100%',
+                    style: Theme.of(context).textTheme.headline5),
+              ));
         }
-        return const CircularProgressIndicator();
+        return ShimmerLoading(
+            play: true,
+            child: TextSpaceRoundRect(
+              child: Text('호환성 100%',
+                  style: Theme.of(context).textTheme.headline5),
+            ));
       },
     );
   }

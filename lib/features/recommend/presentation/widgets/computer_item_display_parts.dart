@@ -9,16 +9,14 @@ import 'package:flutter/material.dart';
 import '../../../../core/utility/string.dart';
 
 class ComputerItemDisplayPartsBuilder extends StatelessWidget {
-  const ComputerItemDisplayPartsBuilder(this.data, this.count, {super.key});
+  const ComputerItemDisplayPartsBuilder(this.data, {super.key});
   final Future<ComputerItem> data;
-  final int count;
 
   @override
   Widget build(BuildContext context) {
     return FutureWidget(
-      data: Future.wait([data, Future.value(count)]),
-      display: ((p0) =>
-          ComputerItemDisplayParts(p0[0] as ComputerItem, p0[1] as int)),
+      data: data,
+      display: ((p0) => ComputerItemDisplayParts(p0)),
       error: const ComputerItemDisplayPartsLoading(play: false),
       loading: const ComputerItemDisplayPartsLoading(),
     );
@@ -27,8 +25,7 @@ class ComputerItemDisplayPartsBuilder extends StatelessWidget {
 
 class ComputerItemDisplayParts extends StatelessWidget {
   final ComputerItem computerItem;
-  final int num;
-  const ComputerItemDisplayParts(this.computerItem, this.num, {super.key});
+  const ComputerItemDisplayParts(this.computerItem, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -43,24 +40,6 @@ class ComputerItemDisplayParts extends StatelessWidget {
             SizedBox(
               height: 100,
               child: Center(child: Text("${computerItem.partName} 부품이 없습니다.")),
-            ),
-            Positioned.fill(
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(12),
-                  onTap: () => Navigator.push(
-                    context,
-                    HeroDialogRoute(
-                      builder: (BuildContext context) {
-                        return Center(
-                          child: buildDetailsDialog(context),
-                        );
-                      },
-                    ),
-                  ),
-                ),
-              ),
             ),
           ],
         ),
@@ -92,7 +71,7 @@ class ComputerItemDisplayParts extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Hero(
-                    tag: 'image${computerItem.partName}',
+                    tag: 'image$hashCode',
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Image.network(
@@ -117,12 +96,6 @@ class ComputerItemDisplayParts extends StatelessWidget {
                     Text('🔍 ${computerItem.hits}',
                         style: Theme.of(context).textTheme.bodyLarge),
                   ],
-                ),
-                const Spacer(),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text('X$num',
-                      style: Theme.of(context).textTheme.headline5),
                 ),
               ],
             ),
@@ -159,7 +132,7 @@ class ComputerItemDisplayParts extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Hero(
-              tag: 'image${computerItem.partName}',
+              tag: 'image$hashCode',
               child: SizedBox.square(
                 dimension: 300,
                 child: ClipRRect(
@@ -369,14 +342,14 @@ class ComputerItemDisplayPartsLoading extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: FittedBox(
-                    fit: BoxFit.fitHeight,
-                    child: Card(
-                      elevation: 10,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                  child: ShimmerLoading(
+                    play: play,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: const AspectRatio(
+                        aspectRatio: 1,
+                        child: ColoredBox(color: Colors.black),
                       ),
-                      color: Colors.black,
                     ),
                   ),
                 ),
@@ -414,17 +387,6 @@ class ComputerItemDisplayPartsLoading extends StatelessWidget {
                       ),
                     ),
                   ],
-                ),
-                const Spacer(),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ShimmerLoading(
-                    play: play,
-                    child: TextSpaceRoundRect(
-                      child: Text('X1',
-                          style: Theme.of(context).textTheme.headline5),
-                    ),
-                  ),
                 ),
               ],
             ),

@@ -59,10 +59,10 @@ class RecommendOutputPage extends StatelessWidget {
           return const Center(child: Text('조건을 만족하는 견적서가 없습니다.'));
         }
         return Row(
-          children: [
-            const RecommendOutputListDisplay(),
+          children: const [
+            RecommendOutputListDisplay(),
             Expanded(
-              child: RecommendOutputDisplay(p0[vmRead.viewIndex]),
+              child: RecommendOutputDisplay(),
             ),
           ],
         );

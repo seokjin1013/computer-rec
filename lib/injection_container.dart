@@ -1,3 +1,4 @@
+import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_item_replacable.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
@@ -27,8 +28,34 @@ final sl = GetIt.instance;
 Future<void> init() async {
   sl.registerFactory(() => MainProvider(sl(), sl(), sl(), sl()));
   sl.registerFactory(() => RecommendInputProvider());
-  sl.registerFactory(() => RecommendOutputProvider(sl(), sl(), sl(), sl(), sl(),
-      sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl()));
+  sl.registerFactory(() => RecommendOutputProvider(
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl()));
   sl.registerLazySingleton(() => GetTodayTip(sl()));
   sl.registerLazySingleton(() => GetComputerProgramFit(sl()));
   sl.registerLazySingleton(() => GetBottleneckCPUVGA(sl()));
@@ -36,6 +63,18 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetMilestone(sl()));
   sl.registerLazySingleton(() => GetComputerCPUIdHit(sl()));
   sl.registerLazySingleton(() => GetComputerCPUIdBestRange(sl()));
+  sl.registerLazySingleton(() => GetComputerCPUReplacable(sl()));
+  sl.registerLazySingleton(() => GetComputerVGAReplacable(sl()));
+  sl.registerLazySingleton(() => GetComputerRAMReplacable(sl()));
+  sl.registerLazySingleton(() => GetComputerMainBoardReplacable(sl()));
+  sl.registerLazySingleton(() => GetComputerSSDReplacable(sl()));
+  sl.registerLazySingleton(() => GetComputerHDDReplacable(sl()));
+  sl.registerLazySingleton(() => GetComputerCoolerReplacable(sl()));
+  sl.registerLazySingleton(() => GetComputerPowerReplacable(sl()));
+  sl.registerLazySingleton(() => GetComputerCaseReplacable(sl()));
+  sl.registerLazySingleton(() => GetComputerMonitorReplacable(sl()));
+  sl.registerLazySingleton(() => GetComputerKeyboardReplacable(sl()));
+  sl.registerLazySingleton(() => GetComputerMouseReplacable(sl()));
   sl.registerLazySingleton(() => GetComputerCPU(sl()));
   sl.registerLazySingleton(() => GetComputerVGA(sl()));
   sl.registerLazySingleton(() => GetComputerRAM(sl()));

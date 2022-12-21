@@ -17,6 +17,19 @@ abstract class RecommendRemoteDataSource {
   Future<MilestoneModel> getMilestone();
   Future<int> getComputerCPUIdHit(int rank);
   Future<List<int>> getComputerCPUIdBestRange(int start, int end);
+  Future<List<int>> getComputerCPUReplacable(String socket);
+  Future<List<int>> getComputerVGAReplacable(int power);
+  Future<List<int>> getComputerRAMReplacable(String memory);
+  Future<List<int>> getComputerMainBoardReplacable(
+      String socket, String memory);
+  Future<List<int>> getComputerSSDReplacable();
+  Future<List<int>> getComputerHDDReplacable();
+  Future<List<int>> getComputerCoolerReplacable();
+  Future<List<int>> getComputerPowerReplacable(int power);
+  Future<List<int>> getComputerCaseReplacable();
+  Future<List<int>> getComputerMonitorReplacable();
+  Future<List<int>> getComputerKeyboardReplacable();
+  Future<List<int>> getComputerMouseReplacable();
   Future<ComputerCPUModel> getComputerCPU(int id);
   Future<ComputerVGAModel> getComputerVGA(int id);
   Future<ComputerRAMModel> getComputerRAM(int id);
@@ -191,6 +204,173 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
   }
 
   @override
+  Future<List<int>> getComputerCPUReplacable(String socket) async {
+    final response = await client.get(
+        Uri.parse('http://175.196.11.206:8080/cpu/replacable/$socket'),
+        headers: {
+          'Content-Type': 'application/json',
+        });
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
+    final List<dynamic> ids = json.decode(utf8.decode(response.bodyBytes));
+    return ids.cast<int>();
+  }
+
+  @override
+  Future<List<int>> getComputerVGAReplacable(int power) async {
+    final response = await client.get(
+        Uri.parse('http://175.196.11.206:8080/gpu/replacable/$power'),
+        headers: {
+          'Content-Type': 'application/json',
+        });
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
+    final List<dynamic> ids = json.decode(utf8.decode(response.bodyBytes));
+    return ids.cast<int>();
+  }
+
+  @override
+  Future<List<int>> getComputerRAMReplacable(String memory) async {
+    final response = await client.get(
+        Uri.parse('http://175.196.11.206:8080/ram/replacable/$memory'),
+        headers: {
+          'Content-Type': 'application/json',
+        });
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
+    final List<dynamic> ids = json.decode(utf8.decode(response.bodyBytes));
+    return ids.cast<int>();
+  }
+
+  @override
+  Future<List<int>> getComputerMainBoardReplacable(
+      String socket, String memory) async {
+    final response = await client.get(
+        Uri.parse(
+            'http://175.196.11.206:8080/mainboard/replacable/$socket/$memory'),
+        headers: {
+          'Content-Type': 'application/json',
+        });
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
+    final List<dynamic> ids = json.decode(utf8.decode(response.bodyBytes));
+    return ids.cast<int>();
+  }
+
+  @override
+  Future<List<int>> getComputerSSDReplacable() async {
+    final response = await client
+        .get(Uri.parse('http://175.196.11.206:8080/ssd/replacable'), headers: {
+      'Content-Type': 'application/json',
+    });
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
+    final List<dynamic> ids = json.decode(utf8.decode(response.bodyBytes));
+    return ids.cast<int>();
+  }
+
+  @override
+  Future<List<int>> getComputerHDDReplacable() async {
+    final response = await client
+        .get(Uri.parse('http://175.196.11.206:8080/hdd/replacable'), headers: {
+      'Content-Type': 'application/json',
+    });
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
+    final List<dynamic> ids = json.decode(utf8.decode(response.bodyBytes));
+    return ids.cast<int>();
+  }
+
+  @override
+  Future<List<int>> getComputerCoolerReplacable() async {
+    final response = await client.get(
+        Uri.parse('http://175.196.11.206:8080/cooler/replacable'),
+        headers: {
+          'Content-Type': 'application/json',
+        });
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
+    final List<dynamic> ids = json.decode(utf8.decode(response.bodyBytes));
+    return ids.cast<int>();
+  }
+
+  @override
+  Future<List<int>> getComputerPowerReplacable(int power) async {
+    final response = await client.get(
+        Uri.parse('http://175.196.11.206:8080/power/replacable/$power'),
+        headers: {
+          'Content-Type': 'application/json',
+        });
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
+    final List<dynamic> ids = json.decode(utf8.decode(response.bodyBytes));
+    return ids.cast<int>();
+  }
+
+  @override
+  Future<List<int>> getComputerCaseReplacable() async {
+    final response = await client
+        .get(Uri.parse('http://175.196.11.206:8080/case/replacable'), headers: {
+      'Content-Type': 'application/json',
+    });
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
+    final List<dynamic> ids = json.decode(utf8.decode(response.bodyBytes));
+    return ids.cast<int>();
+  }
+
+  @override
+  Future<List<int>> getComputerMonitorReplacable() async {
+    final response = await client.get(
+        Uri.parse('http://175.196.11.206:8080/monitor/replacable'),
+        headers: {
+          'Content-Type': 'application/json',
+        });
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
+    final List<dynamic> ids = json.decode(utf8.decode(response.bodyBytes));
+    return ids.cast<int>();
+  }
+
+  @override
+  Future<List<int>> getComputerKeyboardReplacable() async {
+    final response = await client.get(
+        Uri.parse('http://175.196.11.206:8080/keyboard/replacable'),
+        headers: {
+          'Content-Type': 'application/json',
+        });
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
+    final List<dynamic> ids = json.decode(utf8.decode(response.bodyBytes));
+    return ids.cast<int>();
+  }
+
+  @override
+  Future<List<int>> getComputerMouseReplacable() async {
+    final response = await client.get(
+        Uri.parse('http://175.196.11.206:8080/mouse/replacable'),
+        headers: {
+          'Content-Type': 'application/json',
+        });
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
+    final List<dynamic> ids = json.decode(utf8.decode(response.bodyBytes));
+    return ids.cast<int>();
+  }
+
+  @override
   Future<ComputerCPUModel> getComputerCPU(int id) async {
     final response = await client.get(
       Uri.parse('http://175.196.11.206:8080/cpu/model/$id'),
@@ -247,6 +427,7 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
       '부가기능4K 해상도 지원': 'isSupport4K',
       '제품 외형가로(길이)': 'width',
       'total_rank': 'totalRank',
+      'power': 'requiredPower'
     };
     final Map<String, dynamic> map =
         json.decode(utf8.decode(response.bodyBytes));
@@ -271,6 +452,7 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
       'total_score': 'totalScore',
       'happy_id': 'happyId',
       'happy_price': 'happyPrice',
+      'section': 'category',
       '제조회사': 'manufacturer',
       '사용 장치': 'useDevice',
       '메모리 용량': 'memoryCapacity',
@@ -298,6 +480,8 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
       'total_score': 'totalScore',
       'happy_id': 'happyId',
       'happy_price': 'happyPrice',
+      'socket': 'cpuSocket',
+      'memory': 'memoryType',
       '제조회사': 'manufacturer',
       '기본 사양제품 분류': 'category',
       '기본 사양세부 칩셋': 'detailChipset',
@@ -406,6 +590,7 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
       'total_score': 'totalScore',
       'happy_id': 'happyId',
       'happy_price': 'happyPrice',
+      'power': 'staticPower',
       '제조회사': 'manufacturer',
       '제품 분류': 'category',
       '80PLUS인증': 'is80Plus',

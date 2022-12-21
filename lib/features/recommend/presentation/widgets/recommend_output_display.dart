@@ -1,3 +1,4 @@
+import 'package:clean_architecture_flutter/core/utility/future_widget.dart';
 import 'package:clean_architecture_flutter/core/utility/shimmer.dart';
 import 'package:clean_architecture_flutter/features/recommend/domain/entities/no_item.dart';
 import 'package:clean_architecture_flutter/features/recommend/presentation/widgets/computer_item_display_parts.dart';
@@ -6,13 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
+import '../../domain/entities/computer_item.dart';
 import '../../domain/entities/program_fit.dart';
 import '../../domain/entities/recommend_output.dart';
 import '../provider/recommend_output_provider.dart';
 
 class RecommendOutputDisplay extends StatelessWidget {
-  final RecommendOutput recommendOutput;
-  const RecommendOutputDisplay(this.recommendOutput, {super.key});
+  const RecommendOutputDisplay({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -61,16 +62,12 @@ class RecommendOutputDisplay extends StatelessWidget {
   Widget buildBottleneckChart(BuildContext context) {
     final vmRead = context.read<RecommendOutputProvider>();
     final vmWatch = context.watch<RecommendOutputProvider>();
-    return FutureBuilder(
-      future: vmRead.bottleneck[vmWatch.viewIndex],
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return BottleneckChart(100 - snapshot.requireData);
-        } else if (snapshot.hasError) {
-          return const NoBottleneckChart();
-        }
-        return Container();
-      },
+    return FutureWidget(
+      data: vmRead.bottleneck[vmWatch.viewIndex],
+      display: ((p0) =>
+          100 - p0 > 0 ? BottleneckChart(100 - p0) : const NoBottleneckChart()),
+      error: Container(),
+      loading: Container(),
     );
   }
 
@@ -94,31 +91,28 @@ class RecommendOutputDisplay extends StatelessWidget {
   Widget buildProgramFitList(BuildContext context) {
     final vmRead = context.read<RecommendOutputProvider>();
     final vmWatch = context.watch<RecommendOutputProvider>();
-    return FutureBuilder(
-      future: vmRead.programFit[vmWatch.viewIndex],
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return Expanded(
+    return FutureWidget(
+      data: vmRead.programFit[vmWatch.viewIndex],
+      display: ((p0) => Expanded(
             child: ListView.separated(
-              itemCount: snapshot.requireData.length,
+              itemCount: p0.length,
               itemBuilder: (context, index) => ListTile(
-                title: Text(snapshot.requireData[index].name),
-                subtitle: ProgramFitChart(snapshot.requireData[index]),
+                title: Text(p0[index].name),
+                subtitle: ProgramFitChart(p0[index]),
               ),
               separatorBuilder: (context, index) {
                 return const Divider();
               },
             ),
-          );
-        } else if (snapshot.hasError) {
-          return Container();
-        }
-        return Container();
-      },
+          )),
+      error: Container(),
+      loading: Container(),
     );
   }
 
   Widget buildParts(BuildContext context) {
+    final vmRead = context.read<RecommendOutputProvider>();
+    final vmWatch = context.watch<RecommendOutputProvider>();
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card(
@@ -137,8 +131,8 @@ class RecommendOutputDisplay extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () => showDialog<String>(
                       context: context,
-                      builder: ((context) =>
-                          ExternalLinkDialog(link: recommendOutput.totalLink)),
+                      builder: ((context) => ExternalLinkDialog(
+                          link: vmRead.totalLink[vmWatch.viewIndex])),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -190,18 +184,18 @@ class RecommendOutputDisplay extends StatelessWidget {
       vmRead.mouse[vmWatch.viewIndex],
     ];
     final itemNum = [
-      recommendOutput.numCpu,
-      recommendOutput.numVga,
-      recommendOutput.numRam,
-      recommendOutput.numMainboard,
-      recommendOutput.numSsd,
-      recommendOutput.numHdd,
-      recommendOutput.numCooler,
-      recommendOutput.numPower,
-      recommendOutput.numCase,
-      recommendOutput.numMonitor,
-      recommendOutput.numKeyboard,
-      recommendOutput.numMouse,
+      vmRead.numCpu[vmWatch.viewIndex],
+      vmRead.numVga[vmWatch.viewIndex],
+      vmRead.numRam[vmWatch.viewIndex],
+      vmRead.numMainboard[vmWatch.viewIndex],
+      vmRead.numSsd[vmWatch.viewIndex],
+      vmRead.numHdd[vmWatch.viewIndex],
+      vmRead.numCooler[vmWatch.viewIndex],
+      vmRead.numPower[vmWatch.viewIndex],
+      vmRead.numCase[vmWatch.viewIndex],
+      vmRead.numMonitor[vmWatch.viewIndex],
+      vmRead.numKeyboard[vmWatch.viewIndex],
+      vmRead.numMouse[vmWatch.viewIndex],
     ];
     final setNumFunc = [
       vmRead.setPartsCPUNum,
@@ -217,22 +211,46 @@ class RecommendOutputDisplay extends StatelessWidget {
       vmRead.setPartsKeyboardNum,
       vmRead.setPartsMouseNum,
     ];
+    List<Widget> changeDialog = [
+      buildChangeDialog(
+          context, vmRead.getCPUReplacable(), (p0) => vmRead.setCPU(p0)),
+      buildChangeDialog(
+          context, vmRead.getVGAReplacable(), (p0) => vmRead.setVGA(p0)),
+      buildChangeDialog(
+          context, vmRead.getRAMReplacable(), (p0) => vmRead.setRAM(p0)),
+      buildChangeDialog(context, vmRead.getMainboardReplacable(),
+          (p0) => vmRead.setMainboard(p0)),
+      buildChangeDialog(
+          context, vmRead.getSSDReplacable(), (p0) => vmRead.setSSD(p0)),
+      buildChangeDialog(
+          context, vmRead.getHDDReplacable(), (p0) => vmRead.setHDD(p0)),
+      buildChangeDialog(
+          context, vmRead.getCoolerReplacable(), (p0) => vmRead.setCooler(p0)),
+      buildChangeDialog(
+          context, vmRead.getPowerReplacable(), (p0) => vmRead.setPower(p0)),
+      buildChangeDialog(
+          context, vmRead.getCaseReplacable(), (p0) => vmRead.setCase(p0)),
+      buildChangeDialog(context, vmRead.getMonitorReplacable(),
+          (p0) => vmRead.setMonitor(p0)),
+      buildChangeDialog(context, vmRead.getKeyboardReplacable(),
+          (p0) => vmRead.setKeyboard(p0)),
+      buildChangeDialog(
+          context, vmRead.getMouseReplacable(), (p0) => vmRead.setMouse(p0)),
+    ];
     return Expanded(
       child: ListView(children: [
         for (int i = 0; i < itemList.length; ++i)
           Row(
             children: [
-              Expanded(
-                  child:
-                      ComputerItemDisplayPartsBuilder(itemList[i], itemNum[i])),
-              if (itemNum[i] > 0)
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text('바꾸기'),
-                  ),
+              Expanded(child: ComputerItemDisplayPartsBuilder(itemList[i])),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  onPressed: () => showDialog(
+                      context: context, builder: ((_) => changeDialog[i])),
+                  child: Text(itemNum[i] > 0 ? '바꾸기' : '추가'),
                 ),
+              ),
               if (itemNum[i] > 0)
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -240,12 +258,50 @@ class RecommendOutputDisplay extends StatelessWidget {
                     onPressed: () {
                       setNumFunc[i](0);
                     },
-                    child: Text('삭제'),
+                    child: const Text('삭제'),
                   ),
                 ),
             ],
           ),
       ]),
+    );
+  }
+
+  Widget buildChangeDialog<T extends ComputerItem>(
+      BuildContext context,
+      Future<List<Future<T>>> replacable,
+      void Function(Future<T>) setFunction) {
+    return Shimmer(
+      child: AlertDialog(
+        title: Text('부품 선택하기', style: Theme.of(context).textTheme.headline4),
+        content: FutureWidget(
+          data: replacable,
+          display: ((p0) => SingleChildScrollView(
+                child: Column(
+                  children: [
+                    for (Future<T> p in p0)
+                      Row(
+                        children: [
+                          Expanded(child: ComputerItemDisplayPartsBuilder(p)),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                setFunction(p);
+                                Navigator.pop(context);
+                              },
+                              child: const Text('선택'),
+                            ),
+                          ),
+                        ],
+                      ),
+                  ],
+                ),
+              )),
+          error: Container(),
+          loading: const Center(child: CircularProgressIndicator()),
+        ),
+      ),
     );
   }
 }

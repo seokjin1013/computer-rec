@@ -1,3 +1,4 @@
+import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_item_replacable.dart';
 import 'package:flutter/material.dart';
 
 import '../../domain/entities/computer_item.dart';
@@ -26,6 +27,18 @@ class RecommendOutputProvider with ChangeNotifier {
   final GetComputerMonitor getComputerMonitor;
   final GetComputerKeyboard getComputerKeyboard;
   final GetComputerMouse getComputerMouse;
+  final GetComputerCPUReplacable getComputerCPUReplacable;
+  final GetComputerVGAReplacable getComputerVGAReplacable;
+  final GetComputerRAMReplacable getComputerRAMReplacable;
+  final GetComputerMainBoardReplacable getComputerMainBoardReplacable;
+  final GetComputerSSDReplacable getComputerSSDReplacable;
+  final GetComputerHDDReplacable getComputerHDDReplacable;
+  final GetComputerCoolerReplacable getComputerCoolerReplacable;
+  final GetComputerPowerReplacable getComputerPowerReplacable;
+  final GetComputerCaseReplacable getComputerCaseReplacable;
+  final GetComputerMonitorReplacable getComputerMonitorReplacable;
+  final GetComputerKeyboardReplacable getComputerKeyboardReplacable;
+  final GetComputerMouseReplacable getComputerMouseReplacable;
 
   RecommendOutputProvider(
       this.getComputerProgramFit,
@@ -42,9 +55,22 @@ class RecommendOutputProvider with ChangeNotifier {
       this.getComputerCase,
       this.getComputerMonitor,
       this.getComputerKeyboard,
-      this.getComputerMouse);
+      this.getComputerMouse,
+      this.getComputerCPUReplacable,
+      this.getComputerVGAReplacable,
+      this.getComputerRAMReplacable,
+      this.getComputerMainBoardReplacable,
+      this.getComputerSSDReplacable,
+      this.getComputerHDDReplacable,
+      this.getComputerCoolerReplacable,
+      this.getComputerPowerReplacable,
+      this.getComputerCaseReplacable,
+      this.getComputerMonitorReplacable,
+      this.getComputerKeyboardReplacable,
+      this.getComputerMouseReplacable);
 
   late Future<List<RecommendOutput>> results;
+  late int purpose;
   List<Future<ComputerCPU>> cpu = [];
   List<Future<ComputerVGA>> vga = [];
   List<Future<ComputerRAM>> ram = [];
@@ -60,8 +86,22 @@ class RecommendOutputProvider with ChangeNotifier {
   List<Future<double>> bottleneck = [];
   List<Future<List<ProgramFit>>> programFit = [];
   List<Future<int>> totalPrice = [];
+  List<String> totalLink = [];
+  List<int> numCpu = [];
+  List<int> numVga = [];
+  List<int> numRam = [];
+  List<int> numMainboard = [];
+  List<int> numSsd = [];
+  List<int> numHdd = [];
+  List<int> numCooler = [];
+  List<int> numPower = [];
+  List<int> numCase = [];
+  List<int> numMonitor = [];
+  List<int> numKeyboard = [];
+  List<int> numMouse = [];
 
   void setRecommendOutputList(RecommendInput recommendInput) async {
+    purpose = recommendInput.purpose;
     results = getRecommendOutput(recommendInput);
     results.then((value) {
       List<RecommendOutput> r = value;
@@ -102,32 +142,25 @@ class RecommendOutputProvider with ChangeNotifier {
         mouse.add(r[i].numMouse > 0
             ? getComputerMouse(r[i].mouseId)
             : Future.value(NoMouse()));
-        bottleneck.add(Future.wait([cpu.last, vga.last]).then((value) {
-          return getBottleneckCPUVGA(value[0].id, value[1].id);
-        }));
-        programFit.add(vga.last.then((value) {
-          return getComputerProgramFit(value.id, recommendInput.purpose);
-        }));
-        totalPrice.add(Future.wait([
-          cpu.last,
-          vga.last,
-          ram.last,
-          mainboard.last,
-          ssd.last,
-          hdd.last,
-          cooler.last,
-          power.last,
-          ccase.last,
-          monitor.last,
-          keyboard.last,
-          mouse.last
-        ]).then(((value) {
-          int total = 0;
-          for (ComputerItem e in value) {
-            total += e.cheapPrice;
-          }
-          return total;
-        })));
+        totalLink.add(r[i].totalLink);
+        numCpu.add(r[i].numCpu);
+        numVga.add(r[i].numVga);
+        numRam.add(r[i].numRam);
+        numMainboard.add(r[i].numMainboard);
+        numSsd.add(r[i].numSsd);
+        numHdd.add(r[i].numHdd);
+        numCooler.add(r[i].numCooler);
+        numPower.add(r[i].numPower);
+        numCase.add(r[i].numCase);
+        numMonitor.add(r[i].numMonitor);
+        numKeyboard.add(r[i].numKeyboard);
+        numMouse.add(r[i].numMouse);
+        totalPrice.add(Future.value(0));
+        setTotalPrice(i);
+        bottleneck.add(Future.value(0));
+        setBottleneck(i);
+        programFit.add(Future.value([]));
+        setProgramFit(i);
       }
     });
   }
@@ -139,14 +172,21 @@ class RecommendOutputProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void setPartsCPUNum(int cnt) {
-    results.then((value) {
-      value[viewIndex].numCpu = cnt;
-      if (cnt == 0) {
-        value[viewIndex].cpuId = 0;
-        cpu[viewIndex] = Future.value(NoCPU());
-      }
-    });
+  void setTotalPrice(int viewIndex) {
+    List<int> numItem = [
+      numCpu[viewIndex],
+      numVga[viewIndex],
+      numRam[viewIndex],
+      numMainboard[viewIndex],
+      numSsd[viewIndex],
+      numHdd[viewIndex],
+      numCooler[viewIndex],
+      numPower[viewIndex],
+      numCase[viewIndex],
+      numMonitor[viewIndex],
+      numKeyboard[viewIndex],
+      numMouse[viewIndex],
+    ];
     totalPrice[viewIndex] = Future.wait([
       cpu[viewIndex],
       vga[viewIndex],
@@ -162,132 +202,399 @@ class RecommendOutputProvider with ChangeNotifier {
       mouse[viewIndex],
     ]).then(((value) {
       int total = 0;
+      int idx = 0;
       for (ComputerItem e in value) {
-        total += e.cheapPrice;
+        total += e.cheapPrice * numItem[idx++];
       }
       return total;
     }));
+  }
+
+  void setBottleneck(int viewIndex) {
+    bottleneck[viewIndex] =
+        Future.wait([cpu[viewIndex], vga[viewIndex]]).then((value) {
+      return getBottleneckCPUVGA(value[0].id, value[1].id);
+    });
+  }
+
+  void setProgramFit(int viewIndex) {
+    programFit[viewIndex] = vga[viewIndex].then((value) {
+      return getComputerProgramFit(value.id, purpose);
+    });
+  }
+
+  void setPartsCPUNum(int cnt) {
+    numCpu[viewIndex] = cnt;
+    if (cnt == 0) {
+      cpu[viewIndex] = Future.value(NoCPU());
+    }
+    setTotalPrice(viewIndex);
     notifyListeners();
   }
 
   void setPartsVGANum(int cnt) {
-    results.then((value) {
-      value[viewIndex].numVga = cnt;
-      if (cnt == 0) {
-        value[viewIndex].vgaId = 0;
-        vga[viewIndex] = Future.value(NoVGA());
-      }
-    });
+    numVga[viewIndex] = cnt;
+    if (cnt == 0) {
+      vga[viewIndex] = Future.value(NoVGA());
+    }
+    setTotalPrice(viewIndex);
     notifyListeners();
   }
 
   void setPartsRAMNum(int cnt) {
-    results.then((value) {
-      value[viewIndex].numRam = cnt;
-      if (cnt == 0) {
-        value[viewIndex].ramId = 0;
-        ram[viewIndex] = Future.value(NoRAM());
-      }
-    });
+    numRam[viewIndex] = cnt;
+    if (cnt == 0) {
+      ram[viewIndex] = Future.value(NoRAM());
+    }
+    setTotalPrice(viewIndex);
     notifyListeners();
   }
 
   void setPartsMainboardNum(int cnt) {
-    results.then((value) {
-      value[viewIndex].numMainboard = cnt;
-      if (cnt == 0) {
-        value[viewIndex].mainboardId = 0;
-        mainboard[viewIndex] = Future.value(NoMainBoard());
-      }
-    });
+    numMainboard[viewIndex] = cnt;
+    if (cnt == 0) {
+      mainboard[viewIndex] = Future.value(NoMainBoard());
+    }
+    setTotalPrice(viewIndex);
     notifyListeners();
   }
 
   void setPartsSSDNum(int cnt) {
-    results.then((value) {
-      value[viewIndex].numSsd = cnt;
-      if (cnt == 0) {
-        value[viewIndex].ssdId = 0;
-        ssd[viewIndex] = Future.value(NoSSD());
-      }
-    });
+    numSsd[viewIndex] = cnt;
+    if (cnt == 0) {
+      ssd[viewIndex] = Future.value(NoSSD());
+    }
+    setTotalPrice(viewIndex);
     notifyListeners();
   }
 
   void setPartsHDDNum(int cnt) {
-    results.then((value) {
-      value[viewIndex].numHdd = cnt;
-      if (cnt == 0) {
-        value[viewIndex].hddId = 0;
-        hdd[viewIndex] = Future.value(NoHDD());
-      }
-    });
+    numHdd[viewIndex] = cnt;
+    if (cnt == 0) {
+      hdd[viewIndex] = Future.value(NoHDD());
+    }
+    setTotalPrice(viewIndex);
     notifyListeners();
   }
 
   void setPartsCoolerNum(int cnt) {
-    results.then((value) {
-      value[viewIndex].numCooler = cnt;
-      if (cnt == 0) {
-        value[viewIndex].coolerId = 0;
-        cooler[viewIndex] = Future.value(NoCooler());
-      }
-    });
+    numCooler[viewIndex] = cnt;
+    if (cnt == 0) {
+      cooler[viewIndex] = Future.value(NoCooler());
+    }
+    setTotalPrice(viewIndex);
     notifyListeners();
   }
 
   void setPartsPowerNum(int cnt) {
-    results.then((value) {
-      value[viewIndex].numPower = cnt;
-      if (cnt == 0) {
-        value[viewIndex].powerId = 0;
-        power[viewIndex] = Future.value(NoPower());
-      }
-    });
+    numPower[viewIndex] = cnt;
+    if (cnt == 0) {
+      power[viewIndex] = Future.value(NoPower());
+    }
+    setTotalPrice(viewIndex);
     notifyListeners();
   }
 
   void setPartsCaseNum(int cnt) {
-    results.then((value) {
-      value[viewIndex].numCase = cnt;
-      if (cnt == 0) {
-        value[viewIndex].caseId = 0;
-        ccase[viewIndex] = Future.value(NoCase());
-      }
-    });
+    numCase[viewIndex] = cnt;
+    if (cnt == 0) {
+      ccase[viewIndex] = Future.value(NoCase());
+    }
+    setTotalPrice(viewIndex);
     notifyListeners();
   }
 
   void setPartsMonitorNum(int cnt) {
-    results.then((value) {
-      value[viewIndex].numMonitor = cnt;
-      if (cnt == 0) {
-        value[viewIndex].monitorId = 0;
-        monitor[viewIndex] = Future.value(NoMonitor());
-      }
-    });
+    numMonitor[viewIndex] = cnt;
+    if (cnt == 0) {
+      monitor[viewIndex] = Future.value(NoMonitor());
+    }
+    setTotalPrice(viewIndex);
     notifyListeners();
   }
 
   void setPartsKeyboardNum(int cnt) {
-    results.then((value) {
-      value[viewIndex].numKeyboard = cnt;
-      if (cnt == 0) {
-        value[viewIndex].keyboardId = 0;
-        keyboard[viewIndex] = Future.value(NoKeyboard());
-      }
-    });
+    numKeyboard[viewIndex] = cnt;
+    if (cnt == 0) {
+      keyboard[viewIndex] = Future.value(NoKeyboard());
+    }
+    setTotalPrice(viewIndex);
     notifyListeners();
   }
 
   void setPartsMouseNum(int cnt) {
-    results.then((value) {
-      value[viewIndex].numMouse = cnt;
-      if (cnt == 0) {
-        value[viewIndex].mouseId = 0;
-        mouse[viewIndex] = Future.value(NoMouse());
-      }
-    });
+    numMouse[viewIndex] = cnt;
+    if (cnt == 0) {
+      mouse[viewIndex] = Future.value(NoMouse());
+    }
+    setTotalPrice(viewIndex);
     notifyListeners();
+  }
+
+  void setCPU(Future<ComputerCPU> item) {
+    cpu[viewIndex] = item;
+    numCpu[viewIndex] = 1;
+    setTotalPrice(viewIndex);
+    setBottleneck(viewIndex);
+    notifyListeners();
+  }
+
+  void setVGA(Future<ComputerVGA> item) {
+    vga[viewIndex] = item;
+    numVga[viewIndex] = 1;
+    setTotalPrice(viewIndex);
+    setBottleneck(viewIndex);
+    setProgramFit(viewIndex);
+    notifyListeners();
+  }
+
+  void setRAM(Future<ComputerRAM> item) {
+    ram[viewIndex] = item;
+    numRam[viewIndex] = 1;
+    setTotalPrice(viewIndex);
+    notifyListeners();
+  }
+
+  void setMainboard(Future<ComputerMainBoard> item) {
+    mainboard[viewIndex] = item;
+    numMainboard[viewIndex] = 1;
+    setTotalPrice(viewIndex);
+    notifyListeners();
+  }
+
+  void setSSD(Future<ComputerSSD> item) {
+    ssd[viewIndex] = item;
+    numSsd[viewIndex] = 1;
+    setTotalPrice(viewIndex);
+    notifyListeners();
+  }
+
+  void setHDD(Future<ComputerHDD> item) {
+    hdd[viewIndex] = item;
+    numHdd[viewIndex] = 1;
+    setTotalPrice(viewIndex);
+    notifyListeners();
+  }
+
+  void setCooler(Future<ComputerCooler> item) {
+    cooler[viewIndex] = item;
+    numCooler[viewIndex] = 1;
+    setTotalPrice(viewIndex);
+    notifyListeners();
+  }
+
+  void setPower(Future<ComputerPower> item) {
+    power[viewIndex] = item;
+    numPower[viewIndex] = 1;
+    setTotalPrice(viewIndex);
+    notifyListeners();
+  }
+
+  void setCase(Future<ComputerCase> item) {
+    ccase[viewIndex] = item;
+    numCase[viewIndex] = 1;
+    setTotalPrice(viewIndex);
+    notifyListeners();
+  }
+
+  void setMonitor(Future<ComputerMonitor> item) {
+    monitor[viewIndex] = item;
+    numMonitor[viewIndex] = 1;
+    setTotalPrice(viewIndex);
+    notifyListeners();
+  }
+
+  void setKeyboard(Future<ComputerKeyboard> item) {
+    keyboard[viewIndex] = item;
+    numKeyboard[viewIndex] = 1;
+    setTotalPrice(viewIndex);
+    notifyListeners();
+  }
+
+  void setMouse(Future<ComputerMouse> item) {
+    mouse[viewIndex] = item;
+    numMouse[viewIndex] = 1;
+    setTotalPrice(viewIndex);
+    notifyListeners();
+  }
+
+  Future<List<Future<ComputerCPU>>> getCPUReplacable() {
+    Future<List<Future<ComputerCPU>>> result =
+        mainboard[viewIndex].then((value) {
+      Future<List<int>> ids = getComputerCPUReplacable(
+          value is! NoMainBoard ? value.cpuSocket : "");
+      return ids.then(
+        (value) {
+          List<Future<ComputerCPU>> items = [];
+          for (int id in value) {
+            items.add(getComputerCPU(id));
+          }
+          return items;
+        },
+      );
+    });
+    return result;
+  }
+
+  Future<List<Future<ComputerVGA>>> getVGAReplacable() {
+    Future<List<Future<ComputerVGA>>> result = power[viewIndex].then((value) {
+      Future<List<int>> ids =
+          getComputerVGAReplacable(value is! NoPower ? value.staticPower : 0);
+      return ids.then(
+        (value) {
+          List<Future<ComputerVGA>> items = [];
+          for (int id in value) {
+            items.add(getComputerVGA(id));
+          }
+          return items;
+        },
+      );
+    });
+    return result;
+  }
+
+  Future<List<Future<ComputerRAM>>> getRAMReplacable() {
+    Future<List<Future<ComputerRAM>>> result =
+        mainboard[viewIndex].then((value) {
+      Future<List<int>> ids = getComputerRAMReplacable(
+          value is! NoMainBoard ? value.memoryType : "");
+      return ids.then(
+        (value) {
+          List<Future<ComputerRAM>> items = [];
+          for (int id in value) {
+            items.add(getComputerRAM(id));
+          }
+          return items;
+        },
+      );
+    });
+    return result;
+  }
+
+  Future<List<Future<ComputerMainBoard>>> getMainboardReplacable() {
+    Future<List<Future<ComputerMainBoard>>> result =
+        Future.wait([cpu[viewIndex], ram[viewIndex]]).then((value) {
+      Future<List<int>> ids = getComputerMainBoardReplacable(
+          value[0] is! NoCPU ? (value[0] as ComputerCPU).socket : "",
+          value[1] is! NoRAM ? (value[1] as ComputerRAM).category : "");
+      return ids.then(
+        (value) {
+          List<Future<ComputerMainBoard>> items = [];
+          for (int id in value) {
+            items.add(getComputerMainBoard(id));
+          }
+          return items;
+        },
+      );
+    });
+    return result;
+  }
+
+  Future<List<Future<ComputerSSD>>> getSSDReplacable() {
+    Future<List<int>> ids = getComputerSSDReplacable();
+    return ids.then(
+      (value) {
+        List<Future<ComputerSSD>> items = [];
+        for (int id in value) {
+          items.add(getComputerSSD(id));
+        }
+        return items;
+      },
+    );
+  }
+
+  Future<List<Future<ComputerHDD>>> getHDDReplacable() {
+    Future<List<int>> ids = getComputerHDDReplacable();
+    return ids.then(
+      (value) {
+        List<Future<ComputerHDD>> items = [];
+        for (int id in value) {
+          items.add(getComputerHDD(id));
+        }
+        return items;
+      },
+    );
+  }
+
+  Future<List<Future<ComputerCooler>>> getCoolerReplacable() {
+    Future<List<int>> ids = getComputerCoolerReplacable();
+    return ids.then(
+      (value) {
+        List<Future<ComputerCooler>> items = [];
+        for (int id in value) {
+          items.add(getComputerCooler(id));
+        }
+        return items;
+      },
+    );
+  }
+
+  Future<List<Future<ComputerPower>>> getPowerReplacable() {
+    Future<List<Future<ComputerPower>>> result = vga[viewIndex].then((value) {
+      Future<List<int>> ids =
+          getComputerPowerReplacable(value is! NoVGA ? value.requiredPower : 0);
+      return ids.then(
+        (value) {
+          List<Future<ComputerPower>> items = [];
+          for (int id in value) {
+            items.add(getComputerPower(id));
+          }
+          return items;
+        },
+      );
+    });
+    return result;
+  }
+
+  Future<List<Future<ComputerCase>>> getCaseReplacable() {
+    Future<List<int>> ids = getComputerCaseReplacable();
+    return ids.then(
+      (value) {
+        List<Future<ComputerCase>> items = [];
+        for (int id in value) {
+          items.add(getComputerCase(id));
+        }
+        return items;
+      },
+    );
+  }
+
+  Future<List<Future<ComputerMonitor>>> getMonitorReplacable() {
+    Future<List<int>> ids = getComputerMonitorReplacable();
+    return ids.then(
+      (value) {
+        List<Future<ComputerMonitor>> items = [];
+        for (int id in value) {
+          items.add(getComputerMonitor(id));
+        }
+        return items;
+      },
+    );
+  }
+
+  Future<List<Future<ComputerKeyboard>>> getKeyboardReplacable() {
+    Future<List<int>> ids = getComputerKeyboardReplacable();
+    return ids.then(
+      (value) {
+        List<Future<ComputerKeyboard>> items = [];
+        for (int id in value) {
+          items.add(getComputerKeyboard(id));
+        }
+        return items;
+      },
+    );
+  }
+
+  Future<List<Future<ComputerMouse>>> getMouseReplacable() {
+    Future<List<int>> ids = getComputerMouseReplacable();
+    return ids.then(
+      (value) {
+        List<Future<ComputerMouse>> items = [];
+        for (int id in value) {
+          items.add(getComputerMouse(id));
+        }
+        return items;
+      },
+    );
   }
 }

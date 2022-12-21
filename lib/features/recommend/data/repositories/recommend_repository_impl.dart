@@ -1,3 +1,4 @@
+import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_item_replacable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 
@@ -112,6 +113,187 @@ class RecommendRepositoryImpl implements RecommendRepository {
     }
     try {
       return remoteDataSource.getComputerCPUIdBestRange(start, end);
+    } on ClientException {
+      return Future.error(ClientFailure());
+    } catch (e) {
+      return Future.error(UnknownFailure());
+    }
+  }
+
+  @override
+  Future<List<int>> getComputerCPUReplacable(String socket) async {
+    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (!await networkInfo.isConnected) {
+      return Future.error(ConnectionFailure());
+    }
+    try {
+      return remoteDataSource.getComputerCPUReplacable(socket);
+    } on ClientException {
+      return Future.error(ClientFailure());
+    } catch (e) {
+      return Future.error(UnknownFailure());
+    }
+  }
+
+  @override
+  Future<List<int>> getComputerVGAReplacable(int power) async {
+    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (!await networkInfo.isConnected) {
+      return Future.error(ConnectionFailure());
+    }
+    try {
+      return remoteDataSource.getComputerVGAReplacable(power);
+    } on ClientException {
+      return Future.error(ClientFailure());
+    } catch (e) {
+      return Future.error(UnknownFailure());
+    }
+  }
+
+  @override
+  Future<List<int>> getComputerRAMReplacable(String memory) async {
+    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (!await networkInfo.isConnected) {
+      return Future.error(ConnectionFailure());
+    }
+    try {
+      return remoteDataSource.getComputerRAMReplacable(memory);
+    } on ClientException {
+      return Future.error(ClientFailure());
+    } catch (e) {
+      return Future.error(UnknownFailure());
+    }
+  }
+
+  @override
+  Future<List<int>> getComputerMainBoardReplacable(
+      String socket, String memory) async {
+    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (!await networkInfo.isConnected) {
+      return Future.error(ConnectionFailure());
+    }
+    try {
+      return remoteDataSource.getComputerMainBoardReplacable(socket, memory);
+    } on ClientException {
+      return Future.error(ClientFailure());
+    } catch (e) {
+      return Future.error(UnknownFailure());
+    }
+  }
+
+  @override
+  Future<List<int>> getComputerSSDReplacable() async {
+    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (!await networkInfo.isConnected) {
+      return Future.error(ConnectionFailure());
+    }
+    try {
+      return remoteDataSource.getComputerSSDReplacable();
+    } on ClientException {
+      return Future.error(ClientFailure());
+    } catch (e) {
+      return Future.error(UnknownFailure());
+    }
+  }
+
+  @override
+  Future<List<int>> getComputerHDDReplacable() async {
+    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (!await networkInfo.isConnected) {
+      return Future.error(ConnectionFailure());
+    }
+    try {
+      return remoteDataSource.getComputerHDDReplacable();
+    } on ClientException {
+      return Future.error(ClientFailure());
+    } catch (e) {
+      return Future.error(UnknownFailure());
+    }
+  }
+
+  @override
+  Future<List<int>> getComputerCoolerReplacable() async {
+    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (!await networkInfo.isConnected) {
+      return Future.error(ConnectionFailure());
+    }
+    try {
+      return remoteDataSource.getComputerCoolerReplacable();
+    } on ClientException {
+      return Future.error(ClientFailure());
+    } catch (e) {
+      return Future.error(UnknownFailure());
+    }
+  }
+
+  @override
+  Future<List<int>> getComputerPowerReplacable(int power) async {
+    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (!await networkInfo.isConnected) {
+      return Future.error(ConnectionFailure());
+    }
+    try {
+      return remoteDataSource.getComputerPowerReplacable(power);
+    } on ClientException {
+      return Future.error(ClientFailure());
+    } catch (e) {
+      return Future.error(UnknownFailure());
+    }
+  }
+
+  @override
+  Future<List<int>> getComputerCaseReplacable() async {
+    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (!await networkInfo.isConnected) {
+      return Future.error(ConnectionFailure());
+    }
+    try {
+      return remoteDataSource.getComputerCaseReplacable();
+    } on ClientException {
+      return Future.error(ClientFailure());
+    } catch (e) {
+      return Future.error(UnknownFailure());
+    }
+  }
+
+  @override
+  Future<List<int>> getComputerMonitorReplacable() async {
+    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (!await networkInfo.isConnected) {
+      return Future.error(ConnectionFailure());
+    }
+    try {
+      return remoteDataSource.getComputerMonitorReplacable();
+    } on ClientException {
+      return Future.error(ClientFailure());
+    } catch (e) {
+      return Future.error(UnknownFailure());
+    }
+  }
+
+  @override
+  Future<List<int>> getComputerKeyboardReplacable() async {
+    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (!await networkInfo.isConnected) {
+      return Future.error(ConnectionFailure());
+    }
+    try {
+      return remoteDataSource.getComputerKeyboardReplacable();
+    } on ClientException {
+      return Future.error(ClientFailure());
+    } catch (e) {
+      return Future.error(UnknownFailure());
+    }
+  }
+
+  @override
+  Future<List<int>> getComputerMouseReplacable() async {
+    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (!await networkInfo.isConnected) {
+      return Future.error(ConnectionFailure());
+    }
+    try {
+      return remoteDataSource.getComputerMouseReplacable();
     } on ClientException {
       return Future.error(ClientFailure());
     } catch (e) {
