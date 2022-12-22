@@ -1,4 +1,5 @@
 import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_item_replacable.dart';
+import 'package:clean_architecture_flutter/features/recommend/presentation/provider/computer_item_list_provider.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
@@ -13,6 +14,7 @@ import 'features/recommend/domain/usecases/get_bottleneck_cpu_vga.dart';
 import 'features/recommend/domain/usecases/get_computer_item.dart';
 import 'features/recommend/domain/usecases/get_computer_item_best_range.dart';
 import 'features/recommend/domain/usecases/get_computer_item_hit.dart';
+import 'features/recommend/domain/usecases/get_computer_item_ranking.dart';
 import 'features/recommend/domain/usecases/get_computer_program_fit.dart';
 import 'features/recommend/domain/usecases/get_milestone.dart';
 import 'features/recommend/domain/usecases/get_recommend_output.dart';
@@ -56,6 +58,31 @@ Future<void> init() async {
       sl(),
       sl(),
       sl()));
+  sl.registerFactory(() => ComputerItemListProvider(
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl()));
   sl.registerLazySingleton(() => GetTodayTip(sl()));
   sl.registerLazySingleton(() => GetComputerProgramFit(sl()));
   sl.registerLazySingleton(() => GetBottleneckCPUVGA(sl()));
@@ -63,6 +90,18 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetMilestone(sl()));
   sl.registerLazySingleton(() => GetComputerCPUIdHit(sl()));
   sl.registerLazySingleton(() => GetComputerCPUIdBestRange(sl()));
+  sl.registerLazySingleton(() => GetComputerCPURanking(sl()));
+  sl.registerLazySingleton(() => GetComputerVGARanking(sl()));
+  sl.registerLazySingleton(() => GetComputerRAMRanking(sl()));
+  sl.registerLazySingleton(() => GetComputerMainBoardRanking(sl()));
+  sl.registerLazySingleton(() => GetComputerSSDRanking(sl()));
+  sl.registerLazySingleton(() => GetComputerHDDRanking(sl()));
+  sl.registerLazySingleton(() => GetComputerCoolerRanking(sl()));
+  sl.registerLazySingleton(() => GetComputerPowerRanking(sl()));
+  sl.registerLazySingleton(() => GetComputerCaseRanking(sl()));
+  sl.registerLazySingleton(() => GetComputerMonitorRanking(sl()));
+  sl.registerLazySingleton(() => GetComputerKeyboardRanking(sl()));
+  sl.registerLazySingleton(() => GetComputerMouseRanking(sl()));
   sl.registerLazySingleton(() => GetComputerCPUReplacable(sl()));
   sl.registerLazySingleton(() => GetComputerVGAReplacable(sl()));
   sl.registerLazySingleton(() => GetComputerRAMReplacable(sl()));

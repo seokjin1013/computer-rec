@@ -1,4 +1,3 @@
-import '../entities/computer_item.dart';
 import '../repositories/recommend_repository.dart';
 
 class GetComputerCPUReplacable {

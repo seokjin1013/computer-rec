@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:clean_architecture_flutter/features/recommend/presentation/pages/computer_item_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -21,6 +22,7 @@ class MainPage extends StatelessWidget {
         actions: [
           TextButton(
               onPressed: () {
+                Navigator.of(context).popUntil((route) => route.isFirst);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -35,7 +37,15 @@ class MainPage extends StatelessWidget {
               child:
                   Text('이전 기록', style: Theme.of(context).textTheme.headline6)),
           TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).popUntil((route) => route.isFirst);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ComputerItemListPage(),
+                  ),
+                );
+              },
               child:
                   Text('부품 목록', style: Theme.of(context).textTheme.headline6)),
         ],

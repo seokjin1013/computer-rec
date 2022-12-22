@@ -1,16 +1,15 @@
-import 'package:clean_architecture_flutter/core/utility/state_widget.dart';
-
-import '../../../../core/error/failures.dart';
-import '../../../../core/utility/future_widget.dart';
-import '../../../../core/utility/shimmer.dart';
-import '../../domain/entities/recommend_input.dart';
-import '../widgets/recommend_output_display.dart';
-import '../widgets/recommend_output_list_display.dart';
+import 'package:clean_architecture_flutter/features/recommend/presentation/pages/recommend_input_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../core/utility/future_widget.dart';
+import '../../../../core/utility/shimmer.dart';
 import '../../../../injection_container.dart';
+import '../../domain/entities/recommend_input.dart';
 import '../provider/recommend_output_provider.dart';
+import '../widgets/recommend_output_display.dart';
+import '../widgets/recommend_output_list_display.dart';
+import 'computer_item_list_page.dart';
 
 class RecommendOutputPage extends StatelessWidget {
   final RecommendInput recommendInput;
@@ -23,7 +22,15 @@ class RecommendOutputPage extends StatelessWidget {
         title: const Text("컴퓨터 견적 추천 서비스"),
         actions: [
           TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).popUntil((route) => route.isFirst);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const RecommendInputPage(),
+                  ),
+                );
+              },
               child:
                   Text('견적 추천', style: Theme.of(context).textTheme.headline6)),
           TextButton(
@@ -31,7 +38,15 @@ class RecommendOutputPage extends StatelessWidget {
               child:
                   Text('이전 기록', style: Theme.of(context).textTheme.headline6)),
           TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).popUntil((route) => route.isFirst);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ComputerItemListPage(),
+                  ),
+                );
+              },
               child:
                   Text('부품 목록', style: Theme.of(context).textTheme.headline6)),
         ],

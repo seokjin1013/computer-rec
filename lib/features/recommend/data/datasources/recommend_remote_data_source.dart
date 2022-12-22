@@ -17,6 +17,18 @@ abstract class RecommendRemoteDataSource {
   Future<MilestoneModel> getMilestone();
   Future<int> getComputerCPUIdHit(int rank);
   Future<List<int>> getComputerCPUIdBestRange(int start, int end);
+  Future<List<int>> getComputerCPURanking();
+  Future<List<int>> getComputerVGARanking();
+  Future<List<int>> getComputerRAMRanking();
+  Future<List<int>> getComputerMainBoardRanking();
+  Future<List<int>> getComputerSSDRanking();
+  Future<List<int>> getComputerHDDRanking();
+  Future<List<int>> getComputerCoolerRanking();
+  Future<List<int>> getComputerPowerRanking();
+  Future<List<int>> getComputerCaseRanking();
+  Future<List<int>> getComputerMonitorRanking();
+  Future<List<int>> getComputerKeyboardRanking();
+  Future<List<int>> getComputerMouseRanking();
   Future<List<int>> getComputerCPUReplacable(String socket);
   Future<List<int>> getComputerVGAReplacable(int power);
   Future<List<int>> getComputerRAMReplacable(String memory);
@@ -196,6 +208,165 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
         'Content-Type': 'application/json',
       },
     );
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
+    final List<dynamic> ids = json.decode(utf8.decode(response.bodyBytes));
+    return ids.cast<int>();
+  }
+
+  @override
+  Future<List<int>> getComputerCPURanking() async {
+    final response = await client
+        .get(Uri.parse('http://175.196.11.206:8080/cpu/rank/all'), headers: {
+      'Content-Type': 'application/json',
+    });
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
+    final List<dynamic> ids = json.decode(utf8.decode(response.bodyBytes));
+    return ids.cast<int>();
+  }
+
+  @override
+  Future<List<int>> getComputerVGARanking() async {
+    final response = await client
+        .get(Uri.parse('http://175.196.11.206:8080/gpu/rank/all'), headers: {
+      'Content-Type': 'application/json',
+    });
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
+    final List<dynamic> ids = json.decode(utf8.decode(response.bodyBytes));
+    return ids.cast<int>();
+  }
+
+  @override
+  Future<List<int>> getComputerRAMRanking() async {
+    final response = await client
+        .get(Uri.parse('http://175.196.11.206:8080/ram/rank/all'), headers: {
+      'Content-Type': 'application/json',
+    });
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
+    final List<dynamic> ids = json.decode(utf8.decode(response.bodyBytes));
+    return ids.cast<int>();
+  }
+
+  @override
+  Future<List<int>> getComputerMainBoardRanking() async {
+    final response = await client.get(
+        Uri.parse('http://175.196.11.206:8080/mainboard/rank/all'),
+        headers: {
+          'Content-Type': 'application/json',
+        });
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
+    final List<dynamic> ids = json.decode(utf8.decode(response.bodyBytes));
+    return ids.cast<int>();
+  }
+
+  @override
+  Future<List<int>> getComputerSSDRanking() async {
+    final response = await client
+        .get(Uri.parse('http://175.196.11.206:8080/ssd/rank/all'), headers: {
+      'Content-Type': 'application/json',
+    });
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
+    final List<dynamic> ids = json.decode(utf8.decode(response.bodyBytes));
+    return ids.cast<int>();
+  }
+
+  @override
+  Future<List<int>> getComputerHDDRanking() async {
+    final response = await client
+        .get(Uri.parse('http://175.196.11.206:8080/hdd/rank/all'), headers: {
+      'Content-Type': 'application/json',
+    });
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
+    final List<dynamic> ids = json.decode(utf8.decode(response.bodyBytes));
+    return ids.cast<int>();
+  }
+
+  @override
+  Future<List<int>> getComputerCoolerRanking() async {
+    final response = await client
+        .get(Uri.parse('http://175.196.11.206:8080/cooler/rank/all'), headers: {
+      'Content-Type': 'application/json',
+    });
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
+    final List<dynamic> ids = json.decode(utf8.decode(response.bodyBytes));
+    return ids.cast<int>();
+  }
+
+  @override
+  Future<List<int>> getComputerPowerRanking() async {
+    final response = await client
+        .get(Uri.parse('http://175.196.11.206:8080/power/rank/all'), headers: {
+      'Content-Type': 'application/json',
+    });
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
+    final List<dynamic> ids = json.decode(utf8.decode(response.bodyBytes));
+    return ids.cast<int>();
+  }
+
+  @override
+  Future<List<int>> getComputerCaseRanking() async {
+    final response = await client
+        .get(Uri.parse('http://175.196.11.206:8080/case/rank/all'), headers: {
+      'Content-Type': 'application/json',
+    });
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
+    final List<dynamic> ids = json.decode(utf8.decode(response.bodyBytes));
+    return ids.cast<int>();
+  }
+
+  @override
+  Future<List<int>> getComputerMonitorRanking() async {
+    final response = await client.get(
+        Uri.parse('http://175.196.11.206:8080/monitor/rank/all'),
+        headers: {
+          'Content-Type': 'application/json',
+        });
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
+    final List<dynamic> ids = json.decode(utf8.decode(response.bodyBytes));
+    return ids.cast<int>();
+  }
+
+  @override
+  Future<List<int>> getComputerKeyboardRanking() async {
+    final response = await client.get(
+        Uri.parse('http://175.196.11.206:8080/keyboard/rank/all'),
+        headers: {
+          'Content-Type': 'application/json',
+        });
+    if (response.statusCode != 200) {
+      return Future.error(ServerFailure(response.statusCode));
+    }
+    final List<dynamic> ids = json.decode(utf8.decode(response.bodyBytes));
+    return ids.cast<int>();
+  }
+
+  @override
+  Future<List<int>> getComputerMouseRanking() async {
+    final response = await client
+        .get(Uri.parse('http://175.196.11.206:8080/mouse/rank/all'), headers: {
+      'Content-Type': 'application/json',
+    });
     if (response.statusCode != 200) {
       return Future.error(ServerFailure(response.statusCode));
     }

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../injection_container.dart';
 import '../provider/recommend_input_provider.dart';
+import 'computer_item_list_page.dart';
 import 'recommend_output_page.dart';
 
 class RecommendInputPage extends StatelessWidget {
@@ -15,7 +16,15 @@ class RecommendInputPage extends StatelessWidget {
         title: const Text("컴퓨터 견적 추천 서비스"),
         actions: [
           TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).popUntil((route) => route.isFirst);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const RecommendInputPage(),
+                  ),
+                );
+              },
               child:
                   Text('견적 추천', style: Theme.of(context).textTheme.headline6)),
           TextButton(
@@ -23,7 +32,15 @@ class RecommendInputPage extends StatelessWidget {
               child:
                   Text('이전 기록', style: Theme.of(context).textTheme.headline6)),
           TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).popUntil((route) => route.isFirst);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ComputerItemListPage(),
+                  ),
+                );
+              },
               child:
                   Text('부품 목록', style: Theme.of(context).textTheme.headline6)),
         ],

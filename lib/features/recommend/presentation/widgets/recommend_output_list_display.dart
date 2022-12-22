@@ -2,11 +2,8 @@ import 'package:clean_architecture_flutter/core/utility/shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../core/utility/future_widget.dart';
 import '../../../../core/utility/string.dart';
-import '../../domain/entities/recommend_output.dart';
 import '../provider/recommend_output_provider.dart';
-import 'computer_item_display_parts.dart';
 
 class RecommendOutputListDisplay extends StatelessWidget {
   const RecommendOutputListDisplay({super.key});

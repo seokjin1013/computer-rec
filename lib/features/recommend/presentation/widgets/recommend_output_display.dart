@@ -1,6 +1,5 @@
 import 'package:clean_architecture_flutter/core/utility/future_widget.dart';
 import 'package:clean_architecture_flutter/core/utility/shimmer.dart';
-import 'package:clean_architecture_flutter/features/recommend/domain/entities/no_item.dart';
 import 'package:clean_architecture_flutter/features/recommend/presentation/widgets/computer_item_display_parts.dart';
 import 'package:clean_architecture_flutter/features/recommend/presentation/widgets/external_link_dialog.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,6 @@ import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 import '../../domain/entities/computer_item.dart';
 import '../../domain/entities/program_fit.dart';
-import '../../domain/entities/recommend_output.dart';
 import '../provider/recommend_output_provider.dart';
 
 class RecommendOutputDisplay extends StatelessWidget {

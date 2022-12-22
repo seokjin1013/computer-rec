@@ -1,5 +1,3 @@
-import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_item_replacable.dart';
-
 import '../entities/computer_item.dart';
 import '../entities/milestone.dart';
 import '../entities/program_fit.dart';
@@ -14,6 +12,18 @@ abstract class RecommendRepository {
       RecommendInput recommendInput);
   Future<Milestone> getMilestone();
   Future<int> getComputerCPUIdHit(int rank);
+  Future<List<int>> getComputerCPURanking();
+  Future<List<int>> getComputerVGARanking();
+  Future<List<int>> getComputerRAMRanking();
+  Future<List<int>> getComputerMainBoardRanking();
+  Future<List<int>> getComputerSSDRanking();
+  Future<List<int>> getComputerHDDRanking();
+  Future<List<int>> getComputerCoolerRanking();
+  Future<List<int>> getComputerPowerRanking();
+  Future<List<int>> getComputerCaseRanking();
+  Future<List<int>> getComputerMonitorRanking();
+  Future<List<int>> getComputerKeyboardRanking();
+  Future<List<int>> getComputerMouseRanking();
   Future<List<int>> getComputerCPUIdBestRange(int start, int end);
   Future<List<int>> getComputerCPUReplacable(String socket);
   Future<List<int>> getComputerVGAReplacable(int power);

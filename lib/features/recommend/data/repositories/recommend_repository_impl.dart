@@ -1,4 +1,5 @@
-import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_item_replacable.dart';
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 
@@ -13,6 +14,9 @@ import '../../domain/repositories/recommend_repository.dart';
 import '../datasources/recommend_local_data_source.dart';
 import '../datasources/recommend_remote_data_source.dart';
 
+Duration Function() delayedTime =
+    () => Duration(milliseconds: Random().nextInt(400) + 800);
+
 class RecommendRepositoryImpl implements RecommendRepository {
   final RecommendLocalDataSource localDataSource;
   final RecommendRemoteDataSource remoteDataSource;
@@ -25,13 +29,13 @@ class RecommendRepositoryImpl implements RecommendRepository {
 
   @override
   Future<String> getTodayTip(int num) async {
-    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (kDebugMode) await Future.delayed(delayedTime());
     return localDataSource.getTodayTip(num);
   }
 
   @override
   Future<List<ProgramFit>> getComputerProgramFit(int vgaId, int purpose) async {
-    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (kDebugMode) await Future.delayed(delayedTime());
     if (!await networkInfo.isConnected) {
       return Future.error(ConnectionFailure());
     }
@@ -46,7 +50,7 @@ class RecommendRepositoryImpl implements RecommendRepository {
 
   @override
   Future<double> getBottleneckCPUVGA(int cpuId, int vgaId) async {
-    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (kDebugMode) await Future.delayed(delayedTime());
     if (!await networkInfo.isConnected) {
       return Future.error(ConnectionFailure());
     }
@@ -62,7 +66,7 @@ class RecommendRepositoryImpl implements RecommendRepository {
   @override
   Future<List<RecommendOutput>> getRecommendOutput(
       RecommendInput recommendInput) async {
-    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (kDebugMode) await Future.delayed(delayedTime());
     if (!await networkInfo.isConnected) {
       return Future.error(ConnectionFailure());
     }
@@ -77,7 +81,7 @@ class RecommendRepositoryImpl implements RecommendRepository {
 
   @override
   Future<Milestone> getMilestone() async {
-    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (kDebugMode) await Future.delayed(delayedTime());
     if (!await networkInfo.isConnected) {
       return Future.error(ConnectionFailure());
     }
@@ -92,7 +96,7 @@ class RecommendRepositoryImpl implements RecommendRepository {
 
   @override
   Future<int> getComputerCPUIdHit(int rank) async {
-    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (kDebugMode) await Future.delayed(delayedTime());
     if (!await networkInfo.isConnected) {
       return Future.error(ConnectionFailure());
     }
@@ -107,7 +111,7 @@ class RecommendRepositoryImpl implements RecommendRepository {
 
   @override
   Future<List<int>> getComputerCPUIdBestRange(int start, int end) async {
-    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (kDebugMode) await Future.delayed(delayedTime());
     if (!await networkInfo.isConnected) {
       return Future.error(ConnectionFailure());
     }
@@ -121,8 +125,188 @@ class RecommendRepositoryImpl implements RecommendRepository {
   }
 
   @override
+  Future<List<int>> getComputerCPURanking() async {
+    if (kDebugMode) await Future.delayed(delayedTime());
+    if (!await networkInfo.isConnected) {
+      return Future.error(ConnectionFailure());
+    }
+    try {
+      return remoteDataSource.getComputerCPURanking();
+    } on ClientException {
+      return Future.error(ClientFailure());
+    } catch (e) {
+      return Future.error(UnknownFailure());
+    }
+  }
+
+  @override
+  Future<List<int>> getComputerVGARanking() async {
+    if (kDebugMode) await Future.delayed(delayedTime());
+    if (!await networkInfo.isConnected) {
+      return Future.error(ConnectionFailure());
+    }
+    try {
+      return remoteDataSource.getComputerVGARanking();
+    } on ClientException {
+      return Future.error(ClientFailure());
+    } catch (e) {
+      return Future.error(UnknownFailure());
+    }
+  }
+
+  @override
+  Future<List<int>> getComputerRAMRanking() async {
+    if (kDebugMode) await Future.delayed(delayedTime());
+    if (!await networkInfo.isConnected) {
+      return Future.error(ConnectionFailure());
+    }
+    try {
+      return remoteDataSource.getComputerRAMRanking();
+    } on ClientException {
+      return Future.error(ClientFailure());
+    } catch (e) {
+      return Future.error(UnknownFailure());
+    }
+  }
+
+  @override
+  Future<List<int>> getComputerMainBoardRanking() async {
+    if (kDebugMode) await Future.delayed(delayedTime());
+    if (!await networkInfo.isConnected) {
+      return Future.error(ConnectionFailure());
+    }
+    try {
+      return remoteDataSource.getComputerMainBoardRanking();
+    } on ClientException {
+      return Future.error(ClientFailure());
+    } catch (e) {
+      return Future.error(UnknownFailure());
+    }
+  }
+
+  @override
+  Future<List<int>> getComputerSSDRanking() async {
+    if (kDebugMode) await Future.delayed(delayedTime());
+    if (!await networkInfo.isConnected) {
+      return Future.error(ConnectionFailure());
+    }
+    try {
+      return remoteDataSource.getComputerSSDRanking();
+    } on ClientException {
+      return Future.error(ClientFailure());
+    } catch (e) {
+      return Future.error(UnknownFailure());
+    }
+  }
+
+  @override
+  Future<List<int>> getComputerHDDRanking() async {
+    if (kDebugMode) await Future.delayed(delayedTime());
+    if (!await networkInfo.isConnected) {
+      return Future.error(ConnectionFailure());
+    }
+    try {
+      return remoteDataSource.getComputerHDDRanking();
+    } on ClientException {
+      return Future.error(ClientFailure());
+    } catch (e) {
+      return Future.error(UnknownFailure());
+    }
+  }
+
+  @override
+  Future<List<int>> getComputerCoolerRanking() async {
+    if (kDebugMode) await Future.delayed(delayedTime());
+    if (!await networkInfo.isConnected) {
+      return Future.error(ConnectionFailure());
+    }
+    try {
+      return remoteDataSource.getComputerCoolerRanking();
+    } on ClientException {
+      return Future.error(ClientFailure());
+    } catch (e) {
+      return Future.error(UnknownFailure());
+    }
+  }
+
+  @override
+  Future<List<int>> getComputerPowerRanking() async {
+    if (kDebugMode) await Future.delayed(delayedTime());
+    if (!await networkInfo.isConnected) {
+      return Future.error(ConnectionFailure());
+    }
+    try {
+      return remoteDataSource.getComputerPowerRanking();
+    } on ClientException {
+      return Future.error(ClientFailure());
+    } catch (e) {
+      return Future.error(UnknownFailure());
+    }
+  }
+
+  @override
+  Future<List<int>> getComputerCaseRanking() async {
+    if (kDebugMode) await Future.delayed(delayedTime());
+    if (!await networkInfo.isConnected) {
+      return Future.error(ConnectionFailure());
+    }
+    try {
+      return remoteDataSource.getComputerCaseRanking();
+    } on ClientException {
+      return Future.error(ClientFailure());
+    } catch (e) {
+      return Future.error(UnknownFailure());
+    }
+  }
+
+  @override
+  Future<List<int>> getComputerMonitorRanking() async {
+    if (kDebugMode) await Future.delayed(delayedTime());
+    if (!await networkInfo.isConnected) {
+      return Future.error(ConnectionFailure());
+    }
+    try {
+      return remoteDataSource.getComputerMonitorRanking();
+    } on ClientException {
+      return Future.error(ClientFailure());
+    } catch (e) {
+      return Future.error(UnknownFailure());
+    }
+  }
+
+  @override
+  Future<List<int>> getComputerKeyboardRanking() async {
+    if (kDebugMode) await Future.delayed(delayedTime());
+    if (!await networkInfo.isConnected) {
+      return Future.error(ConnectionFailure());
+    }
+    try {
+      return remoteDataSource.getComputerKeyboardRanking();
+    } on ClientException {
+      return Future.error(ClientFailure());
+    } catch (e) {
+      return Future.error(UnknownFailure());
+    }
+  }
+
+  @override
+  Future<List<int>> getComputerMouseRanking() async {
+    if (kDebugMode) await Future.delayed(delayedTime());
+    if (!await networkInfo.isConnected) {
+      return Future.error(ConnectionFailure());
+    }
+    try {
+      return remoteDataSource.getComputerMouseRanking();
+    } on ClientException {
+      return Future.error(ClientFailure());
+    } catch (e) {
+      return Future.error(UnknownFailure());
+    }
+  }
+
+  @override
   Future<List<int>> getComputerCPUReplacable(String socket) async {
-    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (kDebugMode) await Future.delayed(delayedTime());
     if (!await networkInfo.isConnected) {
       return Future.error(ConnectionFailure());
     }
@@ -137,7 +321,7 @@ class RecommendRepositoryImpl implements RecommendRepository {
 
   @override
   Future<List<int>> getComputerVGAReplacable(int power) async {
-    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (kDebugMode) await Future.delayed(delayedTime());
     if (!await networkInfo.isConnected) {
       return Future.error(ConnectionFailure());
     }
@@ -152,7 +336,7 @@ class RecommendRepositoryImpl implements RecommendRepository {
 
   @override
   Future<List<int>> getComputerRAMReplacable(String memory) async {
-    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (kDebugMode) await Future.delayed(delayedTime());
     if (!await networkInfo.isConnected) {
       return Future.error(ConnectionFailure());
     }
@@ -168,7 +352,7 @@ class RecommendRepositoryImpl implements RecommendRepository {
   @override
   Future<List<int>> getComputerMainBoardReplacable(
       String socket, String memory) async {
-    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (kDebugMode) await Future.delayed(delayedTime());
     if (!await networkInfo.isConnected) {
       return Future.error(ConnectionFailure());
     }
@@ -183,7 +367,7 @@ class RecommendRepositoryImpl implements RecommendRepository {
 
   @override
   Future<List<int>> getComputerSSDReplacable() async {
-    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (kDebugMode) await Future.delayed(delayedTime());
     if (!await networkInfo.isConnected) {
       return Future.error(ConnectionFailure());
     }
@@ -198,7 +382,7 @@ class RecommendRepositoryImpl implements RecommendRepository {
 
   @override
   Future<List<int>> getComputerHDDReplacable() async {
-    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (kDebugMode) await Future.delayed(delayedTime());
     if (!await networkInfo.isConnected) {
       return Future.error(ConnectionFailure());
     }
@@ -213,7 +397,7 @@ class RecommendRepositoryImpl implements RecommendRepository {
 
   @override
   Future<List<int>> getComputerCoolerReplacable() async {
-    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (kDebugMode) await Future.delayed(delayedTime());
     if (!await networkInfo.isConnected) {
       return Future.error(ConnectionFailure());
     }
@@ -228,7 +412,7 @@ class RecommendRepositoryImpl implements RecommendRepository {
 
   @override
   Future<List<int>> getComputerPowerReplacable(int power) async {
-    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (kDebugMode) await Future.delayed(delayedTime());
     if (!await networkInfo.isConnected) {
       return Future.error(ConnectionFailure());
     }
@@ -243,7 +427,7 @@ class RecommendRepositoryImpl implements RecommendRepository {
 
   @override
   Future<List<int>> getComputerCaseReplacable() async {
-    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (kDebugMode) await Future.delayed(delayedTime());
     if (!await networkInfo.isConnected) {
       return Future.error(ConnectionFailure());
     }
@@ -258,7 +442,7 @@ class RecommendRepositoryImpl implements RecommendRepository {
 
   @override
   Future<List<int>> getComputerMonitorReplacable() async {
-    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (kDebugMode) await Future.delayed(delayedTime());
     if (!await networkInfo.isConnected) {
       return Future.error(ConnectionFailure());
     }
@@ -273,7 +457,7 @@ class RecommendRepositoryImpl implements RecommendRepository {
 
   @override
   Future<List<int>> getComputerKeyboardReplacable() async {
-    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (kDebugMode) await Future.delayed(delayedTime());
     if (!await networkInfo.isConnected) {
       return Future.error(ConnectionFailure());
     }
@@ -288,7 +472,7 @@ class RecommendRepositoryImpl implements RecommendRepository {
 
   @override
   Future<List<int>> getComputerMouseReplacable() async {
-    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (kDebugMode) await Future.delayed(delayedTime());
     if (!await networkInfo.isConnected) {
       return Future.error(ConnectionFailure());
     }
@@ -303,7 +487,7 @@ class RecommendRepositoryImpl implements RecommendRepository {
 
   @override
   Future<ComputerCPU> getComputerCPU(int id) async {
-    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (kDebugMode) await Future.delayed(delayedTime());
     if (!await networkInfo.isConnected) {
       return Future.error(ConnectionFailure());
     }
@@ -318,7 +502,7 @@ class RecommendRepositoryImpl implements RecommendRepository {
 
   @override
   Future<ComputerVGA> getComputerVGA(int id) async {
-    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (kDebugMode) await Future.delayed(delayedTime());
     if (!await networkInfo.isConnected) {
       return Future.error(ConnectionFailure());
     }
@@ -333,7 +517,7 @@ class RecommendRepositoryImpl implements RecommendRepository {
 
   @override
   Future<ComputerRAM> getComputerRAM(int id) async {
-    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (kDebugMode) await Future.delayed(delayedTime());
     if (!await networkInfo.isConnected) {
       return Future.error(ConnectionFailure());
     }
@@ -348,7 +532,7 @@ class RecommendRepositoryImpl implements RecommendRepository {
 
   @override
   Future<ComputerMainBoard> getComputerMainBoard(int id) async {
-    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (kDebugMode) await Future.delayed(delayedTime());
     if (!await networkInfo.isConnected) {
       return Future.error(ConnectionFailure());
     }
@@ -363,7 +547,7 @@ class RecommendRepositoryImpl implements RecommendRepository {
 
   @override
   Future<ComputerSSD> getComputerSSD(int id) async {
-    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (kDebugMode) await Future.delayed(delayedTime());
     if (!await networkInfo.isConnected) {
       return Future.error(ConnectionFailure());
     }
@@ -378,7 +562,7 @@ class RecommendRepositoryImpl implements RecommendRepository {
 
   @override
   Future<ComputerHDD> getComputerHDD(int id) async {
-    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (kDebugMode) await Future.delayed(delayedTime());
     if (!await networkInfo.isConnected) {
       return Future.error(ConnectionFailure());
     }
@@ -393,7 +577,7 @@ class RecommendRepositoryImpl implements RecommendRepository {
 
   @override
   Future<ComputerCooler> getComputerCooler(int id) async {
-    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (kDebugMode) await Future.delayed(delayedTime());
     if (!await networkInfo.isConnected) {
       return Future.error(ConnectionFailure());
     }
@@ -408,7 +592,7 @@ class RecommendRepositoryImpl implements RecommendRepository {
 
   @override
   Future<ComputerPower> getComputerPower(int id) async {
-    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (kDebugMode) await Future.delayed(delayedTime());
     if (!await networkInfo.isConnected) {
       return Future.error(ConnectionFailure());
     }
@@ -423,7 +607,7 @@ class RecommendRepositoryImpl implements RecommendRepository {
 
   @override
   Future<ComputerCase> getComputerCase(int id) async {
-    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (kDebugMode) await Future.delayed(delayedTime());
     if (!await networkInfo.isConnected) {
       return Future.error(ConnectionFailure());
     }
@@ -438,7 +622,7 @@ class RecommendRepositoryImpl implements RecommendRepository {
 
   @override
   Future<ComputerMonitor> getComputerMonitor(int id) async {
-    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (kDebugMode) await Future.delayed(delayedTime());
     if (!await networkInfo.isConnected) {
       return Future.error(ConnectionFailure());
     }
@@ -453,7 +637,7 @@ class RecommendRepositoryImpl implements RecommendRepository {
 
   @override
   Future<ComputerKeyboard> getComputerKeyboard(int id) async {
-    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (kDebugMode) await Future.delayed(delayedTime());
     if (!await networkInfo.isConnected) {
       return Future.error(ConnectionFailure());
     }
@@ -468,7 +652,7 @@ class RecommendRepositoryImpl implements RecommendRepository {
 
   @override
   Future<ComputerMouse> getComputerMouse(int id) async {
-    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (kDebugMode) await Future.delayed(delayedTime());
     if (!await networkInfo.isConnected) {
       return Future.error(ConnectionFailure());
     }
@@ -483,7 +667,7 @@ class RecommendRepositoryImpl implements RecommendRepository {
 
   @override
   Future<bool> isExistAccount(String id, String pw) async {
-    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (kDebugMode) await Future.delayed(delayedTime());
     if (!await networkInfo.isConnected) {
       return Future.error(ConnectionFailure());
     }
@@ -498,7 +682,7 @@ class RecommendRepositoryImpl implements RecommendRepository {
 
   @override
   Future<bool> postNewAccount(String id, String pw) async {
-    if (kDebugMode) await Future.delayed(Duration(seconds: 3));
+    if (kDebugMode) await Future.delayed(delayedTime());
     if (!await networkInfo.isConnected) {
       return Future.error(ConnectionFailure());
     }
