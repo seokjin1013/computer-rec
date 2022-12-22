@@ -105,6 +105,7 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
     int start = recommendInput.priceLow;
     int end = recommendInput.priceHigh;
     String cpu = '';
+    int purpose = recommendInput.purpose;
     if (recommendInput.priorIntelCPU && recommendInput.priorAMDCPU) {
       cpu = 'ANY';
     } else if (recommendInput.priorIntelCPU) {
@@ -114,7 +115,8 @@ class RecommendRemoteDataSourceImpl implements RecommendRemoteDataSource {
     }
 
     final response = await client.get(
-      Uri.parse('http://175.196.11.206:8080/combine/csv/$start/$end/$cpu'),
+      Uri.parse(
+          'http://175.196.11.206:8080/combine/csv/$start/$end/$cpu/$purpose'),
       headers: {
         'Content-Type': 'application/json',
       },

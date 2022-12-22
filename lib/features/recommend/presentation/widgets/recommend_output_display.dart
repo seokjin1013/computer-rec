@@ -195,6 +195,20 @@ class RecommendOutputDisplay extends StatelessWidget {
       vmRead.numKeyboard[vmWatch.viewIndex],
       vmRead.numMouse[vmWatch.viewIndex],
     ];
+    final capacity = [
+      1,
+      1,
+      4,
+      1,
+      2,
+      4,
+      1,
+      1,
+      1,
+      99,
+      99,
+      99,
+    ];
     final setNumFunc = [
       vmRead.setPartsCPUNum,
       vmRead.setPartsVGANum,
@@ -241,6 +255,33 @@ class RecommendOutputDisplay extends StatelessWidget {
           Row(
             children: [
               Expanded(child: ComputerItemDisplayPartsBuilder(itemList[i])),
+              if (itemNum[i] > 0)
+                Column(children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      onPressed: capacity[i] > itemNum[i]
+                          ? () {
+                              setNumFunc[i](itemNum[i] + 1);
+                            }
+                          : null,
+                      child: const Text('+1'),
+                    ),
+                  ),
+                  Text(itemNum[i].toString(),
+                      style: Theme.of(context).textTheme.headline6),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      onPressed: itemNum[i] > 1
+                          ? () {
+                              setNumFunc[i](itemNum[i] - 1);
+                            }
+                          : null,
+                      child: const Text('-1'),
+                    ),
+                  ),
+                ]),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(

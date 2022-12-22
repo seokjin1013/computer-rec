@@ -1,10 +1,18 @@
 import 'package:clean_architecture_flutter/features/recommend/presentation/pages/main_page.dart';
 import 'package:flutter/material.dart';
 
+import 'features/recommend/domain/entities/recommend_input.dart';
+import 'features/recommend/presentation/pages/recommend_output_page.dart';
 import 'injection_container.dart' as di;
+import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await di.init();
   runApp(const MyApp());
 }
@@ -14,13 +22,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // RecommendInput recommendInput = RecommendInput(
-    //   priorIntelCPU: true,
-    //   priorAMDCPU: false,
-    //   priceLow: 500000,
-    //   priceHigh: 700000,
-    //   purpose: 2,
-    // );
+    RecommendInput recommendInput = RecommendInput(
+      priorIntelCPU: true,
+      priorAMDCPU: false,
+      priceLow: 500000,
+      priceHigh: 700000,
+      purpose: 2,
+    );
     // GetComputerSSD getComputerItem = sl();
     return MaterialApp(
       title: '컴퓨터 견적 추천 시스템',
@@ -45,8 +53,8 @@ class MyApp extends StatelessWidget {
         ),
       ),
       // home: ComputerItemListPage(),
-      // home: RecommendOutputPage(recommendInput: recommendInput),
-      home: const MainPage(),
+      home: RecommendOutputPage(recommendInput: recommendInput),
+      // home: const MainPage(),
       // home: Center(
       //   child: FutureBuilder(
       //     future: getComputerItem(17000984),

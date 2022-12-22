@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/utility/string.dart';
 
+import 'package:provider/provider.dart';
+
 class ComputerItemDisplayPartsBuilder extends StatelessWidget {
   const ComputerItemDisplayPartsBuilder(this.data, {super.key});
   final Future<ComputerItem> data;

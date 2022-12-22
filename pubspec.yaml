@@ -27,6 +27,7 @@ dependencies:
   syncfusion_flutter_gauges: ^20.3.59
   syncfusion_flutter_charts: ^20.3.59
   url_launcher: ^6.1.7
+  firebase_core: ^2.4.0
 
 dev_dependencies:
   flutter_test:

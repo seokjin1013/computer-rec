@@ -142,7 +142,6 @@ class RecommendOutputProvider with ChangeNotifier {
         mouse.add(r[i].numMouse > 0
             ? getComputerMouse(r[i].mouseId)
             : Future.value(NoMouse()));
-        totalLink.add(r[i].totalLink);
         numCpu.add(r[i].numCpu);
         numVga.add(r[i].numVga);
         numRam.add(r[i].numRam);
@@ -161,6 +160,8 @@ class RecommendOutputProvider with ChangeNotifier {
         setBottleneck(i);
         programFit.add(Future.value([]));
         setProgramFit(i);
+        totalLink.add("");
+        setTotalLink(i);
       }
     });
   }
@@ -223,12 +224,58 @@ class RecommendOutputProvider with ChangeNotifier {
     });
   }
 
+  void setTotalLink(int viewIndex) {
+    List<int> itemNum = [
+      numCpu[viewIndex],
+      numVga[viewIndex],
+      numRam[viewIndex],
+      numMainboard[viewIndex],
+      numSsd[viewIndex],
+      numHdd[viewIndex],
+      numCooler[viewIndex],
+      numPower[viewIndex],
+      numCase[viewIndex],
+      numMonitor[viewIndex],
+      numKeyboard[viewIndex],
+      numMouse[viewIndex],
+    ];
+    Future.wait([
+      cpu[viewIndex],
+      vga[viewIndex],
+      ram[viewIndex],
+      mainboard[viewIndex],
+      ssd[viewIndex],
+      hdd[viewIndex],
+      cooler[viewIndex],
+      power[viewIndex],
+      ccase[viewIndex],
+      monitor[viewIndex],
+      keyboard[viewIndex],
+      mouse[viewIndex]
+    ]).then((value) {
+      String map1 =
+          "https://shop.danawa.com/virtualestimate/?controller=estimateMain&methods=index&marketPlaceSeq=16&logger_kw=dnw_gnb_esti";
+      String map2 = "&productSeqList=";
+      String map3 = "&quantityList=";
+      int i = 0;
+      for (ComputerItem e in value) {
+        if (e is! NoComputerItem) {
+          map2 += "${e.id},";
+          map3 += "${itemNum[i]},";
+        }
+        ++i;
+      }
+      totalLink[viewIndex] = map1 + map2 + map3;
+    });
+  }
+
   void setPartsCPUNum(int cnt) {
     numCpu[viewIndex] = cnt;
     if (cnt == 0) {
       cpu[viewIndex] = Future.value(NoCPU());
     }
     setTotalPrice(viewIndex);
+    setTotalLink(viewIndex);
     notifyListeners();
   }
 
@@ -238,6 +285,7 @@ class RecommendOutputProvider with ChangeNotifier {
       vga[viewIndex] = Future.value(NoVGA());
     }
     setTotalPrice(viewIndex);
+    setTotalLink(viewIndex);
     notifyListeners();
   }
 
@@ -247,6 +295,7 @@ class RecommendOutputProvider with ChangeNotifier {
       ram[viewIndex] = Future.value(NoRAM());
     }
     setTotalPrice(viewIndex);
+    setTotalLink(viewIndex);
     notifyListeners();
   }
 
@@ -256,6 +305,7 @@ class RecommendOutputProvider with ChangeNotifier {
       mainboard[viewIndex] = Future.value(NoMainBoard());
     }
     setTotalPrice(viewIndex);
+    setTotalLink(viewIndex);
     notifyListeners();
   }
 
@@ -265,6 +315,7 @@ class RecommendOutputProvider with ChangeNotifier {
       ssd[viewIndex] = Future.value(NoSSD());
     }
     setTotalPrice(viewIndex);
+    setTotalLink(viewIndex);
     notifyListeners();
   }
 
@@ -274,6 +325,7 @@ class RecommendOutputProvider with ChangeNotifier {
       hdd[viewIndex] = Future.value(NoHDD());
     }
     setTotalPrice(viewIndex);
+    setTotalLink(viewIndex);
     notifyListeners();
   }
 
@@ -283,6 +335,7 @@ class RecommendOutputProvider with ChangeNotifier {
       cooler[viewIndex] = Future.value(NoCooler());
     }
     setTotalPrice(viewIndex);
+    setTotalLink(viewIndex);
     notifyListeners();
   }
 
@@ -292,6 +345,7 @@ class RecommendOutputProvider with ChangeNotifier {
       power[viewIndex] = Future.value(NoPower());
     }
     setTotalPrice(viewIndex);
+    setTotalLink(viewIndex);
     notifyListeners();
   }
 
@@ -301,6 +355,7 @@ class RecommendOutputProvider with ChangeNotifier {
       ccase[viewIndex] = Future.value(NoCase());
     }
     setTotalPrice(viewIndex);
+    setTotalLink(viewIndex);
     notifyListeners();
   }
 
@@ -310,6 +365,7 @@ class RecommendOutputProvider with ChangeNotifier {
       monitor[viewIndex] = Future.value(NoMonitor());
     }
     setTotalPrice(viewIndex);
+    setTotalLink(viewIndex);
     notifyListeners();
   }
 
@@ -319,6 +375,7 @@ class RecommendOutputProvider with ChangeNotifier {
       keyboard[viewIndex] = Future.value(NoKeyboard());
     }
     setTotalPrice(viewIndex);
+    setTotalLink(viewIndex);
     notifyListeners();
   }
 
@@ -328,6 +385,7 @@ class RecommendOutputProvider with ChangeNotifier {
       mouse[viewIndex] = Future.value(NoMouse());
     }
     setTotalPrice(viewIndex);
+    setTotalLink(viewIndex);
     notifyListeners();
   }
 
@@ -336,6 +394,7 @@ class RecommendOutputProvider with ChangeNotifier {
     numCpu[viewIndex] = 1;
     setTotalPrice(viewIndex);
     setBottleneck(viewIndex);
+    setTotalLink(viewIndex);
     notifyListeners();
   }
 
@@ -345,6 +404,7 @@ class RecommendOutputProvider with ChangeNotifier {
     setTotalPrice(viewIndex);
     setBottleneck(viewIndex);
     setProgramFit(viewIndex);
+    setTotalLink(viewIndex);
     notifyListeners();
   }
 
@@ -352,6 +412,7 @@ class RecommendOutputProvider with ChangeNotifier {
     ram[viewIndex] = item;
     numRam[viewIndex] = 1;
     setTotalPrice(viewIndex);
+    setTotalLink(viewIndex);
     notifyListeners();
   }
 
@@ -359,6 +420,7 @@ class RecommendOutputProvider with ChangeNotifier {
     mainboard[viewIndex] = item;
     numMainboard[viewIndex] = 1;
     setTotalPrice(viewIndex);
+    setTotalLink(viewIndex);
     notifyListeners();
   }
 
@@ -366,6 +428,7 @@ class RecommendOutputProvider with ChangeNotifier {
     ssd[viewIndex] = item;
     numSsd[viewIndex] = 1;
     setTotalPrice(viewIndex);
+    setTotalLink(viewIndex);
     notifyListeners();
   }
 
@@ -373,6 +436,7 @@ class RecommendOutputProvider with ChangeNotifier {
     hdd[viewIndex] = item;
     numHdd[viewIndex] = 1;
     setTotalPrice(viewIndex);
+    setTotalLink(viewIndex);
     notifyListeners();
   }
 
@@ -380,6 +444,7 @@ class RecommendOutputProvider with ChangeNotifier {
     cooler[viewIndex] = item;
     numCooler[viewIndex] = 1;
     setTotalPrice(viewIndex);
+    setTotalLink(viewIndex);
     notifyListeners();
   }
 
@@ -387,6 +452,7 @@ class RecommendOutputProvider with ChangeNotifier {
     power[viewIndex] = item;
     numPower[viewIndex] = 1;
     setTotalPrice(viewIndex);
+    setTotalLink(viewIndex);
     notifyListeners();
   }
 
@@ -394,6 +460,7 @@ class RecommendOutputProvider with ChangeNotifier {
     ccase[viewIndex] = item;
     numCase[viewIndex] = 1;
     setTotalPrice(viewIndex);
+    setTotalLink(viewIndex);
     notifyListeners();
   }
 
@@ -401,6 +468,7 @@ class RecommendOutputProvider with ChangeNotifier {
     monitor[viewIndex] = item;
     numMonitor[viewIndex] = 1;
     setTotalPrice(viewIndex);
+    setTotalLink(viewIndex);
     notifyListeners();
   }
 
@@ -408,6 +476,7 @@ class RecommendOutputProvider with ChangeNotifier {
     keyboard[viewIndex] = item;
     numKeyboard[viewIndex] = 1;
     setTotalPrice(viewIndex);
+    setTotalLink(viewIndex);
     notifyListeners();
   }
 
@@ -415,6 +484,7 @@ class RecommendOutputProvider with ChangeNotifier {
     mouse[viewIndex] = item;
     numMouse[viewIndex] = 1;
     setTotalPrice(viewIndex);
+    setTotalLink(viewIndex);
     notifyListeners();
   }
 
@@ -422,7 +492,7 @@ class RecommendOutputProvider with ChangeNotifier {
     Future<List<Future<ComputerCPU>>> result =
         mainboard[viewIndex].then((value) {
       Future<List<int>> ids = getComputerCPUReplacable(
-          value is! NoMainBoard ? value.cpuSocket : "");
+          value is! NoMainBoard ? value.cpuSocket : "a");
       return ids.then(
         (value) {
           List<Future<ComputerCPU>> items = [];
@@ -457,7 +527,7 @@ class RecommendOutputProvider with ChangeNotifier {
     Future<List<Future<ComputerRAM>>> result =
         mainboard[viewIndex].then((value) {
       Future<List<int>> ids = getComputerRAMReplacable(
-          value is! NoMainBoard ? value.memoryType : "");
+          value is! NoMainBoard ? value.memoryType : "a");
       return ids.then(
         (value) {
           List<Future<ComputerRAM>> items = [];
@@ -475,8 +545,8 @@ class RecommendOutputProvider with ChangeNotifier {
     Future<List<Future<ComputerMainBoard>>> result =
         Future.wait([cpu[viewIndex], ram[viewIndex]]).then((value) {
       Future<List<int>> ids = getComputerMainBoardReplacable(
-          value[0] is! NoCPU ? (value[0] as ComputerCPU).socket : "",
-          value[1] is! NoRAM ? (value[1] as ComputerRAM).category : "");
+          value[0] is! NoCPU ? (value[0] as ComputerCPU).socket : "a",
+          value[1] is! NoRAM ? (value[1] as ComputerRAM).category : "a");
       return ids.then(
         (value) {
           List<Future<ComputerMainBoard>> items = [];
