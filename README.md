@@ -1,6 +1,6 @@
 # Computer Recommendation System Frontend
 
-![실제 구현한 서비스](https://github.com/seokjin1013/computer-rec/assets/63408412/faf2ab86-0bfb-438b-93de-3eefa59cb4a5)
+![실제 구현한 서비스](https://github.com/seokjin1013/computer-rec/assets/63408412/08ed066f-f748-4109-9edf-95e3e454969f)
 
 ### Service
 
