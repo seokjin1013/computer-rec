@@ -1,16 +1,11 @@
-# computer_rec
+# Computer Recommendation System Frontend
 
-A new Flutter project.
+![실제 구현한 서비스](https://github.com/seokjin1013/computer-rec/assets/63408412/faf2ab86-0bfb-438b-93de-3eefa59cb4a5)
 
-## Getting Started
+### Service
 
-This project is a starting point for a Flutter application.
+https://computer-recommendation-2d53a.web.app/#/
 
-A few resources to get you started if this is your first Flutter project:
+* Its server has expired.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Even for those who are not familiar with computer components, there is a service that allows you to easily receive computer price quotes. This service takes into account various factors such as the desired price range, brand of components, and usage purposes, and recommends quotes that have minimal bottlenecks and excellent performance.
