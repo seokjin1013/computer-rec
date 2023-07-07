@@ -1,4 +1,7 @@
-class ComputerItem {
+import 'dart:convert';
+import 'dart:math';
+
+abstract class ComputerItem {
   final int id;
   final int price;
   final int happyId;
@@ -12,6 +15,8 @@ class ComputerItem {
   final String shopLink;
   final String shopLogo;
   final String shopName;
+  final String manufacturer;
+  final int hits;
 
   const ComputerItem(
       {required this.id,
@@ -26,11 +31,27 @@ class ComputerItem {
       required this.totalScore,
       required this.shopLink,
       required this.shopLogo,
-      required this.shopName});
+      required this.shopName,
+      required this.manufacturer,
+      required this.hits});
+
+  String get partName;
+  String get cheapLink {
+    if (price < happyPrice) {
+      return shopLink;
+    }
+    return 'https://shopping.pping.kr/detail/$happyId';
+  }
+
+  int get cheapPrice {
+    return min(price, happyPrice);
+  }
+
+  Map<String, String> get detailsMap =>
+      (json.decode(details) as Map<String, dynamic>).cast<String, String>();
 }
 
 class ComputerCPU extends ComputerItem {
-  final String manufacturer;
   final String socket;
   final String tcp;
   final String maxClock;
@@ -40,8 +61,7 @@ class ComputerCPU extends ComputerItem {
   // final String memoryClock;
 
   ComputerCPU(
-      {required this.manufacturer,
-      required this.socket,
+      {required this.socket,
       required this.tcp,
       required this.maxClock,
       required this.numCore,
@@ -60,11 +80,15 @@ class ComputerCPU extends ComputerItem {
       required super.totalScore,
       required super.shopLink,
       required super.shopLogo,
-      required super.shopName});
+      required super.shopName,
+      required super.manufacturer,
+      required super.hits});
+
+  @override
+  String get partName => 'CPU';
 }
 
 class ComputerVGA extends ComputerItem {
-  final String manufacturer;
   final String chipsetManufacturer;
   final String memoryCapacity;
   final String hdmi;
@@ -74,12 +98,11 @@ class ComputerVGA extends ComputerItem {
   // final String numFan;
   final String width;
   // final String height;
-  // final String requiredPower;
+  final int requiredPower;
   final int totalRank;
 
   ComputerVGA(
-      {required this.manufacturer,
-      required this.chipsetManufacturer,
+      {required this.chipsetManufacturer,
       required this.memoryCapacity,
       required this.hdmi,
       required this.displayPort,
@@ -88,7 +111,7 @@ class ComputerVGA extends ComputerItem {
       // required this.numFan,
       required this.width,
       // required this.height,
-      // required this.requiredPower,
+      required this.requiredPower,
       required super.id,
       required super.price,
       required super.happyId,
@@ -102,20 +125,23 @@ class ComputerVGA extends ComputerItem {
       required super.totalScore,
       required super.shopLink,
       required super.shopLogo,
-      required super.shopName});
+      required super.shopName,
+      required super.manufacturer,
+      required super.hits});
+
+  @override
+  String get partName => 'GPU';
 }
 
 class ComputerRAM extends ComputerItem {
-  final String manufacturer;
   final String useDevice;
-  // final String category;
+  final String category;
   final String memoryCapacity;
   // final String clock;
 
   ComputerRAM(
-      {required this.manufacturer,
-      required this.useDevice,
-      // required this.category,
+      {required this.useDevice,
+      required this.category,
       required this.memoryCapacity,
       // required this.clock,
       required super.id,
@@ -130,27 +156,30 @@ class ComputerRAM extends ComputerItem {
       required super.totalScore,
       required super.shopLink,
       required super.shopLogo,
-      required super.shopName});
+      required super.shopName,
+      required super.manufacturer,
+      required super.hits});
+
+  @override
+  String get partName => 'RAM';
 }
 
 class ComputerMainBoard extends ComputerItem {
-  final String manufacturer;
   final String category;
-  // final String cpuSocket;
+  final String cpuSocket;
   final String detailChipset;
   final String formFactor;
-  // final String memoryType;
+  final String memoryType;
   final String memorySlot;
   final String memoryCapacity;
   // final String isM2;
 
   ComputerMainBoard(
-      {required this.manufacturer,
-      required this.category,
-      // required this.cpuSocket,
+      {required this.category,
+      required this.cpuSocket,
       required this.detailChipset,
       required this.formFactor,
-      // required this.memoryType,
+      required this.memoryType,
       required this.memorySlot,
       required this.memoryCapacity,
       // required this.isM2,
@@ -166,17 +195,21 @@ class ComputerMainBoard extends ComputerItem {
       required super.totalScore,
       required super.shopLink,
       required super.shopLogo,
-      required super.shopName});
+      required super.shopName,
+      required super.manufacturer,
+      required super.hits});
+
+  @override
+  String get partName => 'MainBoard';
 }
 
 class ComputerSSD extends ComputerItem {
-  final String manufacturer;
   // final String category;
   final String formFactor;
   // final String memoryCapacity;
 
   ComputerSSD(
-      {required this.manufacturer,
+      {
       // required this.category,
       required this.formFactor,
       // required this.memoryCapacity,
@@ -192,17 +225,20 @@ class ComputerSSD extends ComputerItem {
       required super.totalScore,
       required super.shopLink,
       required super.shopLogo,
-      required super.shopName});
+      required super.shopName,
+      required super.manufacturer,
+      required super.hits});
+
+  @override
+  String get partName => 'SSD';
 }
 
 class ComputerHDD extends ComputerItem {
-  final String manufacturer;
   final String category;
   // final String memoryCapacity;
 
   ComputerHDD(
-      {required this.manufacturer,
-      required this.category,
+      {required this.category,
       // required this.memoryCapacity,
       required super.id,
       required super.price,
@@ -216,17 +252,20 @@ class ComputerHDD extends ComputerItem {
       required super.totalScore,
       required super.shopLink,
       required super.shopLogo,
-      required super.shopName});
+      required super.shopName,
+      required super.manufacturer,
+      required super.hits});
+
+  @override
+  String get partName => 'HDD';
 }
 
 class ComputerCooler extends ComputerItem {
-  final String manufacturer;
   final String coolingType;
   // final String fanSize;
 
   ComputerCooler(
-      {required this.manufacturer,
-      required this.coolingType,
+      {required this.coolingType,
       // required this.fanSize,
       required super.id,
       required super.price,
@@ -240,20 +279,23 @@ class ComputerCooler extends ComputerItem {
       required super.totalScore,
       required super.shopLink,
       required super.shopLogo,
-      required super.shopName});
+      required super.shopName,
+      required super.manufacturer,
+      required super.hits});
+
+  @override
+  String get partName => 'Cooler';
 }
 
 class ComputerPower extends ComputerItem {
-  final String manufacturer;
   final String category;
-  // final String staticPower;
+  final int staticPower;
   final String is80Plus;
   // final String cableConnection;
 
   ComputerPower(
-      {required this.manufacturer,
-      required this.category,
-      // required this.staticPower,
+      {required this.category,
+      required this.staticPower,
       required this.is80Plus,
       // required this.cableConnection,
       required super.id,
@@ -268,11 +310,15 @@ class ComputerPower extends ComputerItem {
       required super.totalScore,
       required super.shopLink,
       required super.shopLogo,
-      required super.shopName});
+      required super.shopName,
+      required super.manufacturer,
+      required super.hits});
+
+  @override
+  String get partName => 'Power';
 }
 
 class ComputerCase extends ComputerItem {
-  final String manufacturer;
   final String category;
   final String size;
   final String supportPowerType;
@@ -285,8 +331,7 @@ class ComputerCase extends ComputerItem {
   // final String forwardRadiator;
 
   ComputerCase(
-      {required this.manufacturer,
-      required this.category,
+      {required this.category,
       required this.size,
       required this.supportPowerType,
       required this.width,
@@ -308,5 +353,99 @@ class ComputerCase extends ComputerItem {
       required super.totalScore,
       required super.shopLink,
       required super.shopLogo,
-      required super.shopName});
+      required super.shopName,
+      required super.manufacturer,
+      required super.hits});
+
+  @override
+  String get partName => 'Case';
+}
+
+class ComputerMonitor extends ComputerItem {
+  final String displaySize;
+  final String displayRatio;
+  final String panelShape;
+  final String resolution;
+  final String refreshRate;
+
+  ComputerMonitor(
+      {required this.displaySize,
+      required this.displayRatio,
+      required this.panelShape,
+      required this.resolution,
+      required this.refreshRate,
+      required super.id,
+      required super.price,
+      required super.happyId,
+      required super.happyPrice,
+      required super.image,
+      required super.name,
+      required super.details,
+      required super.rank,
+      required super.score,
+      required super.totalScore,
+      required super.shopLink,
+      required super.shopLogo,
+      required super.shopName,
+      required super.manufacturer,
+      required super.hits});
+
+  @override
+  String get partName => 'Monitor';
+}
+
+class ComputerKeyboard extends ComputerItem {
+  final String connectionType;
+  final String isGaming;
+
+  ComputerKeyboard(
+      {required this.connectionType,
+      required this.isGaming,
+      required super.id,
+      required super.price,
+      required super.happyId,
+      required super.happyPrice,
+      required super.image,
+      required super.name,
+      required super.details,
+      required super.rank,
+      required super.score,
+      required super.totalScore,
+      required super.shopLink,
+      required super.shopLogo,
+      required super.shopName,
+      required super.manufacturer,
+      required super.hits});
+
+  @override
+  String get partName => 'Keyboard';
+}
+
+class ComputerMouse extends ComputerItem {
+  final String connectionType;
+  final String maxSensitivity;
+  final String dpiModification;
+
+  ComputerMouse(
+      {required this.connectionType,
+      required this.maxSensitivity,
+      required this.dpiModification,
+      required super.id,
+      required super.price,
+      required super.happyId,
+      required super.happyPrice,
+      required super.image,
+      required super.name,
+      required super.details,
+      required super.rank,
+      required super.score,
+      required super.totalScore,
+      required super.shopLink,
+      required super.shopLogo,
+      required super.shopName,
+      required super.manufacturer,
+      required super.hits});
+
+  @override
+  String get partName => 'Mouse';
 }

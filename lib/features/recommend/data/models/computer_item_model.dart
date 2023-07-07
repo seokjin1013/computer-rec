@@ -27,6 +27,7 @@ class ComputerCPUModel extends ComputerCPU {
     required super.shopLink,
     required super.shopLogo,
     required super.shopName,
+    required super.hits,
   });
 
   factory ComputerCPUModel.fromJson(Map<String, dynamic> json) =>
@@ -47,7 +48,7 @@ class ComputerVGAModel extends ComputerVGA {
     // required super.numFan,
     required super.width,
     // required super.height,
-    // required super.requiredPower,
+    required super.requiredPower,
     required super.id,
     required super.price,
     required super.happyId,
@@ -62,6 +63,7 @@ class ComputerVGAModel extends ComputerVGA {
     required super.shopLink,
     required super.shopLogo,
     required super.shopName,
+    required super.hits,
   });
 
   factory ComputerVGAModel.fromJson(Map<String, dynamic> json) =>
@@ -74,7 +76,7 @@ class ComputerRAMModel extends ComputerRAM {
   ComputerRAMModel({
     required super.manufacturer,
     required super.useDevice,
-    // required super.category,
+    required super.category,
     required super.memoryCapacity,
     // required super.clock,
     required super.id,
@@ -90,6 +92,7 @@ class ComputerRAMModel extends ComputerRAM {
     required super.shopLink,
     required super.shopLogo,
     required super.shopName,
+    required super.hits,
   });
 
   factory ComputerRAMModel.fromJson(Map<String, dynamic> json) =>
@@ -102,10 +105,10 @@ class ComputerMainBoardModel extends ComputerMainBoard {
   ComputerMainBoardModel({
     required super.manufacturer,
     required super.category,
-    // required super.cpuSocket,
+    required super.cpuSocket,
     required super.detailChipset,
     required super.formFactor,
-    // required super.memoryType,
+    required super.memoryType,
     required super.memorySlot,
     required super.memoryCapacity,
     // required super.isM2,
@@ -122,6 +125,7 @@ class ComputerMainBoardModel extends ComputerMainBoard {
     required super.shopLink,
     required super.shopLogo,
     required super.shopName,
+    required super.hits,
   });
 
   factory ComputerMainBoardModel.fromJson(Map<String, dynamic> json) =>
@@ -149,6 +153,7 @@ class ComputerSSDModel extends ComputerSSD {
     required super.shopLink,
     required super.shopLogo,
     required super.shopName,
+    required super.hits,
   });
 
   factory ComputerSSDModel.fromJson(Map<String, dynamic> json) =>
@@ -175,6 +180,7 @@ class ComputerHDDModel extends ComputerHDD {
     required super.shopLink,
     required super.shopLogo,
     required super.shopName,
+    required super.hits,
   });
 
   factory ComputerHDDModel.fromJson(Map<String, dynamic> json) =>
@@ -201,6 +207,7 @@ class ComputerCoolerModel extends ComputerCooler {
     required super.shopLink,
     required super.shopLogo,
     required super.shopName,
+    required super.hits,
   });
 
   factory ComputerCoolerModel.fromJson(Map<String, dynamic> json) =>
@@ -213,7 +220,7 @@ class ComputerPowerModel extends ComputerPower {
   ComputerPowerModel({
     required super.manufacturer,
     required super.category,
-    // required super.staticPower,
+    required super.staticPower,
     required super.is80Plus,
     // required super.cableConnection,
     required super.id,
@@ -229,6 +236,7 @@ class ComputerPowerModel extends ComputerPower {
     required super.shopLink,
     required super.shopLogo,
     required super.shopName,
+    required super.hits,
   });
 
   factory ComputerPowerModel.fromJson(Map<String, dynamic> json) =>
@@ -263,9 +271,95 @@ class ComputerCaseModel extends ComputerCase {
     required super.shopLink,
     required super.shopLogo,
     required super.shopName,
+    required super.hits,
   });
 
   factory ComputerCaseModel.fromJson(Map<String, dynamic> json) =>
       _$ComputerCaseModelFromJson(json);
   Map<String, dynamic> toJson() => _$ComputerCaseModelToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class ComputerMonitorModel extends ComputerMonitor {
+  ComputerMonitorModel({
+    required super.manufacturer,
+    required super.displaySize,
+    required super.displayRatio,
+    required super.panelShape,
+    required super.resolution,
+    required super.refreshRate,
+    required super.id,
+    required super.price,
+    required super.happyId,
+    required super.happyPrice,
+    required super.image,
+    required super.name,
+    required super.details,
+    required super.rank,
+    required super.score,
+    required super.totalScore,
+    required super.shopLink,
+    required super.shopLogo,
+    required super.shopName,
+    required super.hits,
+  });
+
+  factory ComputerMonitorModel.fromJson(Map<String, dynamic> json) =>
+      _$ComputerMonitorModelFromJson(json);
+  Map<String, dynamic> toJson() => _$ComputerMonitorModelToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class ComputerKeyboardModel extends ComputerKeyboard {
+  ComputerKeyboardModel({
+    required super.manufacturer,
+    required super.connectionType,
+    required super.isGaming,
+    required super.id,
+    required super.price,
+    required super.happyId,
+    required super.happyPrice,
+    required super.image,
+    required super.name,
+    required super.details,
+    required super.rank,
+    required super.score,
+    required super.totalScore,
+    required super.shopLink,
+    required super.shopLogo,
+    required super.shopName,
+    required super.hits,
+  });
+
+  factory ComputerKeyboardModel.fromJson(Map<String, dynamic> json) =>
+      _$ComputerKeyboardModelFromJson(json);
+  Map<String, dynamic> toJson() => _$ComputerKeyboardModelToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class ComputerMouseModel extends ComputerMouse {
+  ComputerMouseModel({
+    required super.manufacturer,
+    required super.connectionType,
+    required super.maxSensitivity,
+    required super.dpiModification,
+    required super.id,
+    required super.price,
+    required super.happyId,
+    required super.happyPrice,
+    required super.image,
+    required super.name,
+    required super.details,
+    required super.rank,
+    required super.score,
+    required super.totalScore,
+    required super.shopLink,
+    required super.shopLogo,
+    required super.shopName,
+    required super.hits,
+  });
+
+  factory ComputerMouseModel.fromJson(Map<String, dynamic> json) =>
+      _$ComputerMouseModelFromJson(json);
+  Map<String, dynamic> toJson() => _$ComputerMouseModelToJson(this);
 }

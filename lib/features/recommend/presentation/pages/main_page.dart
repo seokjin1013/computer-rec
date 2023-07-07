@@ -1,13 +1,15 @@
-import 'dart:convert';
+import 'dart:math';
 
-import 'package:clean_architecture_flutter/features/recommend/domain/entities/computer_item.dart';
-import 'package:clean_architecture_flutter/features/recommend/domain/usecases/get_computer_item.dart';
+import 'package:clean_architecture_flutter/features/recommend/presentation/pages/computer_item_list_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:provider/provider.dart';
 
+import '../../../../core/utility/shimmer.dart';
 import '../../../../injection_container.dart';
-import 'package:http/http.dart' as http;
+import '../provider/main_provider.dart';
+import '../widgets/computer_item_display_hit.dart';
+import '../widgets/milestone_display.dart';
+import 'recommend_input_page.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
@@ -15,69 +17,119 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("컴퓨터 견적 추천 서비스"),
-          actions: [
-            TextButton(
-                onPressed: () async {
-                  // for (int i = 20; i < 21; ++i)
-                  {
-                    final http.Client client = sl();
-                    int start = 1100000;
-                    int end = 1500000;
-                    String cpu = '인텔';
-                    int purpose = 2;
-                    final response = await client.get(
-                      Uri.parse(
-                          'http://175.196.11.206:8080/combine/$start/$end/$cpu'),
-                      headers: {
-                        'Content-Type': 'application/json',
-                      },
-                    );
-                    if (response.statusCode == 200) {
-                      print(response.body);
-                      // print(
-                      //     '$start - $end : ${jsonDecode(response.body).length}');
-                    } else {
-                      print('error');
-                    }
-                  }
-                },
-                child: Text('견적 추천')),
-            TextButton(
-                onPressed: () async {
-                  GetComputerCase getComputerItem = sl();
-                  final result = await getComputerItem(10423167);
-                  print(result);
-                },
-                child: Text('이전 기록')),
-            TextButton(
-                onPressed: () async {
-                  final http.Client client = sl();
-                  int id = 10423167;
-                  final response = await client.get(
-                    Uri.parse('http://175.196.11.206:8080/case/model/$id'),
-                    headers: {
-                      'Content-Type': 'application/json',
-                    },
-                  );
-                  print(utf8.decode(response.bodyBytes));
-                  if (response.statusCode == 200) {
-                    Map map = jsonDecode(utf8.decode(response.bodyBytes));
-                    for (var key in map.keys) print(key);
-                    String str =
-                        (map['details'] as String).replaceAll("'", '"');
-                    for (var elem in jsonDecode(str)) {
-                      print((elem as Map).entries.first.key);
-                    }
-                    // print(jsonDecode(str)[1]);
-                  } else {
-                    print('error');
-                  }
-                },
-                child: Text('부품 목록')),
-          ],
+      appBar: AppBar(
+        title: const Text("컴퓨터 견적 추천 서비스"),
+        actions: [
+          TextButton(
+              onPressed: () {
+                Navigator.of(context).popUntil((route) => route.isFirst);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const RecommendInputPage(),
+                  ),
+                );
+              },
+              child:
+                  Text('견적 추천', style: Theme.of(context).textTheme.headline6)),
+          TextButton(
+              onPressed: () {},
+              child:
+                  Text('이전 기록', style: Theme.of(context).textTheme.headline6)),
+          TextButton(
+              onPressed: () {
+                Navigator.of(context).popUntil((route) => route.isFirst);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ComputerItemListPage(),
+                  ),
+                );
+              },
+              child:
+                  Text('부품 목록', style: Theme.of(context).textTheme.headline6)),
+        ],
+      ),
+      body: Shimmer(child: buildBody(context)),
+    );
+  }
+
+  Widget buildBody(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => sl<MainProvider>(),
+      builder: (context, child) {
+        return buildContent(context);
+      },
+    );
+  }
+
+  Widget buildContent(BuildContext context) {
+    return SingleChildScrollView(
+      child: Center(
+        child: SizedBox(
+          width: 1200,
+          child: Column(
+            children: [
+              buildMilestone(context),
+              buildTodayTip(context),
+              buildRecentHotCPUList(context),
+            ],
+          ),
         ),
-        body: Container());
+      ),
+    );
+  }
+
+  Widget buildMilestone(BuildContext context) {
+    final vmRead = context.read<MainProvider>();
+    return MilestoneDisplayBuilder(vmRead.getMileStone());
+  }
+
+  Widget buildTodayTip(BuildContext context) {
+    final vmRead = context.read<MainProvider>();
+    int randomNumber = Random().nextInt(16);
+    randomNumber = 0;
+    Future<String> tip = vmRead.getTodayTip(randomNumber);
+    return FutureBuilder(
+      future: tip,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          return Center(
+            child: Text('💡오늘의 팁\n${snapshot.data}',
+                style: Theme.of(context).textTheme.headline4),
+          );
+        }
+        return Center(
+          child: Text('💡오늘의 팁', style: Theme.of(context).textTheme.headline4),
+        );
+      },
+    );
+  }
+
+  Widget buildRecentHotCPUList(BuildContext context) {
+    return Card(
+      color: const Color(0xFF2E3945),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(0),
+      ),
+      child: Column(
+        children: [
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text('최근 🔥한 CPU', style: TextStyle(fontSize: 40)),
+          ),
+          for (int i = 0; i < 3; ++i)
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: buildRecentHotCPU(context, i),
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildRecentHotCPU(BuildContext context, int rank) {
+    final vmRead = context.read<MainProvider>();
+    return ComputerItemDisplayHitBuilder(vmRead.getComputerCPUHit(rank + 1));
   }
 }

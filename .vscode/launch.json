@@ -5,9 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Dart: Run all Tests",
+            "request": "launch",
+            "type": "dart",
+            "program": "./test/"
+        },
+        {
             "name": "computer_rec",
             "request": "launch",
             "type": "dart",
+            "args": [
+                // "--web-renderer=html"
+            ]
         },
         {
             "name": "computer_rec (profile mode)",

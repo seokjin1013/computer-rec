@@ -1,18 +1,55 @@
-import 'package:dartz/dartz.dart';
-
-import '../../../../core/error/failures.dart';
 import '../entities/computer_item.dart';
+import '../entities/milestone.dart';
+import '../entities/program_fit.dart';
+import '../entities/recommend_input.dart';
+import '../entities/recommend_output.dart';
 
 abstract class RecommendRepository {
-  Future<Either<Failure, ComputerCPU>> getComputerCPU(int id);
-  Future<Either<Failure, ComputerVGA>> getComputerVGA(int id);
-  Future<Either<Failure, ComputerRAM>> getComputerRAM(int id);
-  Future<Either<Failure, ComputerMainBoard>> getComputerMainBoard(int id);
-  Future<Either<Failure, ComputerSSD>> getComputerSSD(int id);
-  Future<Either<Failure, ComputerHDD>> getComputerHDD(int id);
-  Future<Either<Failure, ComputerCooler>> getComputerCooler(int id);
-  Future<Either<Failure, ComputerPower>> getComputerPower(int id);
-  Future<Either<Failure, ComputerCase>> getComputerCase(int id);
-  Future<Either<Failure, bool>> isExistAccount(String id, String pw);
-  Future<Either<Failure, bool>> postNewAccount(String id, String pw);
+  Future<String> getTodayTip(int num);
+  Future<List<ProgramFit>> getComputerProgramFit(int vgaId, int purpose);
+  Future<double> getBottleneckCPUVGA(int cpuId, int vgaId);
+  Future<List<RecommendOutput>> getRecommendOutput(
+      RecommendInput recommendInput);
+  Future<Milestone> getMilestone();
+  Future<int> getComputerCPUIdHit(int rank);
+  Future<List<int>> getComputerCPURanking();
+  Future<List<int>> getComputerVGARanking();
+  Future<List<int>> getComputerRAMRanking();
+  Future<List<int>> getComputerMainBoardRanking();
+  Future<List<int>> getComputerSSDRanking();
+  Future<List<int>> getComputerHDDRanking();
+  Future<List<int>> getComputerCoolerRanking();
+  Future<List<int>> getComputerPowerRanking();
+  Future<List<int>> getComputerCaseRanking();
+  Future<List<int>> getComputerMonitorRanking();
+  Future<List<int>> getComputerKeyboardRanking();
+  Future<List<int>> getComputerMouseRanking();
+  Future<List<int>> getComputerCPUIdBestRange(int start, int end);
+  Future<List<int>> getComputerCPUReplacable(String socket);
+  Future<List<int>> getComputerVGAReplacable(int power);
+  Future<List<int>> getComputerRAMReplacable(String memory);
+  Future<List<int>> getComputerMainBoardReplacable(
+      String socket, String memory);
+  Future<List<int>> getComputerSSDReplacable();
+  Future<List<int>> getComputerHDDReplacable();
+  Future<List<int>> getComputerCoolerReplacable();
+  Future<List<int>> getComputerPowerReplacable(int power);
+  Future<List<int>> getComputerCaseReplacable();
+  Future<List<int>> getComputerMonitorReplacable();
+  Future<List<int>> getComputerKeyboardReplacable();
+  Future<List<int>> getComputerMouseReplacable();
+  Future<ComputerCPU> getComputerCPU(int id);
+  Future<ComputerVGA> getComputerVGA(int id);
+  Future<ComputerRAM> getComputerRAM(int id);
+  Future<ComputerMainBoard> getComputerMainBoard(int id);
+  Future<ComputerSSD> getComputerSSD(int id);
+  Future<ComputerHDD> getComputerHDD(int id);
+  Future<ComputerCooler> getComputerCooler(int id);
+  Future<ComputerPower> getComputerPower(int id);
+  Future<ComputerCase> getComputerCase(int id);
+  Future<ComputerMonitor> getComputerMonitor(int id);
+  Future<ComputerKeyboard> getComputerKeyboard(int id);
+  Future<ComputerMouse> getComputerMouse(int id);
+  Future<bool> isExistAccount(String id, String pw);
+  Future<bool> postNewAccount(String id, String pw);
 }

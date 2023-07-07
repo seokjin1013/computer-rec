@@ -1,1 +1,0 @@
-mixin RecommendList implements Map {}
